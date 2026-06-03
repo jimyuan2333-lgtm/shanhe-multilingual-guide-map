@@ -26,7 +26,6 @@ import {
   hydrateSvgMapData,
   legacyRouteIdMap,
   parseSvgMapMetadata,
-  SVG_DATA_ASSET,
   SVG_MAP_ASSET,
   SVG_MAP_SIZE
 } from "./data/svgMap.js";
@@ -107,7 +106,7 @@ export default function App() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch(SVG_DATA_ASSET)
+    fetch(SVG_MAP_ASSET)
       .then((response) => {
         if (!response.ok) throw new Error(`Failed to load SVG map: ${response.status}`);
         return response.text();
@@ -307,7 +306,6 @@ export default function App() {
             mapAsset={mapData.mapAsset}
             mapSize={mapData.mapSize}
             zones={mapData.zones}
-            annotatedBase
           />
           <div className="bottom-dock">
             <Legend labels={labels} />

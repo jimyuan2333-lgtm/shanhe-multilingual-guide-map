@@ -1167,13 +1167,6 @@ button {
   stroke-width: 8;
 }
 
-.annotated-base .route-path.active {
-  opacity: 0.82;
-  stroke-width: 5;
-  stroke-dasharray: 9 8;
-  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.85)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-}
-
 .endpoint-marker {
   position: absolute;
   z-index: 5;
@@ -1249,52 +1242,6 @@ button {
   border: 2px solid rgba(200, 63, 51, 0.55);
   animation: mapPulse 1.3s ease-out infinite;
   pointer-events: none;
-}
-
-.annotated-base .map-hit-marker {
-  width: 34px;
-  height: 34px;
-  min-width: 34px;
-  min-height: 34px;
-  padding: 0;
-  color: transparent;
-  background: transparent;
-  border-color: transparent;
-  box-shadow: none;
-  opacity: 1;
-}
-
-.annotated-base .map-hit-marker svg,
-.annotated-base .map-hit-marker .route-node-number,
-.annotated-base .map-hit-marker span {
-  display: none;
-}
-
-.annotated-base .map-hit-marker.selected,
-.annotated-base .map-hit-marker.search-match,
-.annotated-base .map-hit-marker.navigation-target {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  border: 3px solid #fff;
-  background: rgba(211, 70, 43, 0.9);
-  box-shadow: 0 0 0 5px rgba(255, 202, 77, 0.34), 0 12px 24px rgba(30, 43, 39, 0.25);
-}
-
-.annotated-base .map-hit-marker.search-match {
-  background: rgba(247, 181, 41, 0.94);
-}
-
-.annotated-base .map-hit-marker.navigation-target {
-  background: rgba(42, 121, 191, 0.94);
-}
-
-.annotated-base .map-hit-marker.selected svg,
-.annotated-base .map-hit-marker.search-match svg,
-.annotated-base .map-hit-marker.navigation-target svg {
-  display: block;
-  color: #fff;
 }
 
 .poi-marker.navigation-target {

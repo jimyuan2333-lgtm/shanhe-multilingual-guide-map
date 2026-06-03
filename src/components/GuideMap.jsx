@@ -106,8 +106,7 @@ export default function GuideMap({
   onToggleFullscreen,
   mapAsset,
   mapSize = DEFAULT_MAP_SIZE,
-  zones = [],
-  annotatedBase = false
+  zones = []
 }) {
   const viewportRef = useRef(null);
   const dragRef = useRef(null);
@@ -318,14 +317,13 @@ export default function GuideMap({
 
   const visiblePois = pois.filter((poi) => {
     const forced = selectedPoi?.id === poi.id || searchMatches.has(poi.id) || navigationTarget?.toId === poi.id;
-    if (annotatedBase) return categoryFilter(poi) && (forced || !poi.distance);
     const routeKeyNode = activeRouteIds.has(poi.id) && (poi.level <= 2 || zoom > 1.35);
     const visibility = smooth(getThreshold(poi) - 0.2, getThreshold(poi) + 0.28, zoom);
     return categoryFilter(poi) && (forced || routeKeyNode || visibility >= 0.62);
   });
 
   return (
-    <section className={`map-shell ${isFullscreen ? "fullscreen-map" : ""} ${annotatedBase ? "annotated-base" : ""}`}>
+    <section className={`map-shell ${isFullscreen ? "fullscreen-map" : ""}`}>
       <div className="map-toolbar">
         <button onClick={() => zoomBy(0.22)} title="Zoom in"><Plus size={17} /></button>
         <button onClick={() => zoomBy(-0.22)} title="Zoom out"><Minus size={17} /></button>
@@ -371,7 +369,7 @@ export default function GuideMap({
             />
           </svg>
 
-          {!annotatedBase && zones.map((zone) => {
+          {zones.map((zone) => {
             const opacity = Math.max(0, 0.92 - smooth(0.72, 1.42, zoom));
             return (
               <div
@@ -420,7 +418,6 @@ export default function GuideMap({
                 key={poi.id}
                 className={[
                   "poi-marker",
-                  annotatedBase ? "map-hit-marker" : "",
                   poi.distance ? "facility" : "place",
                   poi.type.split(/[\/_]/)[0],
                   isSelected ? "selected" : "",
