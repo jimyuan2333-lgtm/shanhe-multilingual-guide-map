@@ -47,7 +47,7 @@ export default function DetailPanel({
   return (
     <section className="detail-panel">
       <div className="detail-hero">
-        <span className={`detail-type ${isFacility ? selectedPoi.type : selectedPoi.type.split("/")[0]}`}>
+        <span className={`detail-type ${isFacility ? selectedPoi.type : selectedPoi.type.split(/[\/_]/)[0]}`}>
           {getReadableType(selectedPoi, lang, facilityTypeLabels)}
         </span>
         <h2>{selectedPoi.name[lang]}</h2>

@@ -1,0 +1,3304 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" role="img" aria-label="山河古镇导航风格SVG地图">
+<title>山河古镇导航风格地图 / Shanhe Ancient Town Navigation Map</title>
+<desc>Layered SVG map with zones, non-walkable river/mountain/building layers, road network, bridges, POI anchors, facilities, and route templates.</desc>
+<metadata id="shanhe-map-data"><![CDATA[
+{
+  "coordinateSystem": "percentage_0_100",
+  "zones": [
+    {
+      "id": "entry",
+      "nameZh": "入口服务区",
+      "nameEn": "Visitor Service District",
+      "center": [
+        18,
+        82
+      ],
+      "polygon": [
+        [
+          8,
+          76
+        ],
+        [
+          25,
+          72
+        ],
+        [
+          34,
+          82
+        ],
+        [
+          28,
+          94
+        ],
+        [
+          9,
+          94
+        ]
+      ]
+    },
+    {
+      "id": "culture",
+      "nameZh": "古镇文化区",
+      "nameEn": "Old Town Heritage District",
+      "center": [
+        38,
+        58
+      ],
+      "polygon": [
+        [
+          22,
+          48
+        ],
+        [
+          45,
+          42
+        ],
+        [
+          58,
+          55
+        ],
+        [
+          50,
+          72
+        ],
+        [
+          27,
+          72
+        ],
+        [
+          18,
+          60
+        ]
+      ]
+    },
+    {
+      "id": "performance",
+      "nameZh": "非遗演艺区",
+      "nameEn": "Performance &amp; Heritage District",
+      "center": [
+        50,
+        57
+      ],
+      "polygon": [
+        [
+          43,
+          48
+        ],
+        [
+          58,
+          48
+        ],
+        [
+          64,
+          61
+        ],
+        [
+          55,
+          68
+        ],
+        [
+          45,
+          63
+        ]
+      ]
+    },
+    {
+      "id": "waterfront",
+      "nameZh": "滨水夜游区",
+      "nameEn": "Riverside Night District",
+      "center": [
+        58,
+        68
+      ],
+      "polygon": [
+        [
+          42,
+          64
+        ],
+        [
+          72,
+          62
+        ],
+        [
+          83,
+          76
+        ],
+        [
+          64,
+          86
+        ],
+        [
+          42,
+          80
+        ]
+      ]
+    },
+    {
+      "id": "eastmarket",
+      "nameZh": "东岸休闲区",
+      "nameEn": "East Market District",
+      "center": [
+        72,
+        56
+      ],
+      "polygon": [
+        [
+          62,
+          47
+        ],
+        [
+          82,
+          44
+        ],
+        [
+          92,
+          58
+        ],
+        [
+          82,
+          72
+        ],
+        [
+          64,
+          68
+        ]
+      ]
+    },
+    {
+      "id": "mountain",
+      "nameZh": "山地观景区",
+      "nameEn": "Mountain Scenic District",
+      "center": [
+        55,
+        18
+      ],
+      "polygon": [
+        [
+          36,
+          5
+        ],
+        [
+          77,
+          2
+        ],
+        [
+          95,
+          24
+        ],
+        [
+          78,
+          42
+        ],
+        [
+          48,
+          38
+        ],
+        [
+          32,
+          25
+        ]
+      ]
+    },
+    {
+      "id": "tea",
+      "nameZh": "茶山花谷区",
+      "nameEn": "Tea Valley District",
+      "center": [
+        82,
+        84
+      ],
+      "polygon": [
+        [
+          68,
+          72
+        ],
+        [
+          96,
+          70
+        ],
+        [
+          98,
+          96
+        ],
+        [
+          72,
+          98
+        ],
+        [
+          62,
+          86
+        ]
+      ]
+    }
+  ],
+  "bridges": [
+    {
+      "id": "bridge_south",
+      "nameZh": "南门桥",
+      "nameEn": "South Gate Bridge",
+      "position": [
+        25,
+        80
+      ],
+      "from": [
+        22,
+        83
+      ],
+      "to": [
+        28,
+        76
+      ]
+    },
+    {
+      "id": "bridge_fengyu",
+      "nameZh": "风雨桥",
+      "nameEn": "Wind-and-Rain Bridge",
+      "position": [
+        58,
+        58
+      ],
+      "from": [
+        54,
+        60
+      ],
+      "to": [
+        62,
+        56
+      ]
+    },
+    {
+      "id": "bridge_moon",
+      "nameZh": "月影桥",
+      "nameEn": "Moon Reflection Bridge",
+      "position": [
+        66,
+        63
+      ],
+      "from": [
+        63,
+        65
+      ],
+      "to": [
+        70,
+        61
+      ]
+    },
+    {
+      "id": "bridge_wharf",
+      "nameZh": "古码头桥",
+      "nameEn": "Ancient Wharf Bridge",
+      "position": [
+        42,
+        74
+      ],
+      "from": [
+        39,
+        76
+      ],
+      "to": [
+        45,
+        71
+      ]
+    }
+  ],
+  "roads": [
+    {
+      "id": "main_street",
+      "nameZh": "主游览道路",
+      "nameEn": "Main Visitor Road",
+      "type": "main",
+      "points": [
+        [
+          18,
+          82
+        ],
+        [
+          22,
+          75
+        ],
+        [
+          28,
+          68
+        ],
+        [
+          35,
+          62
+        ],
+        [
+          42,
+          58
+        ],
+        [
+          50,
+          56
+        ],
+        [
+          58,
+          58
+        ],
+        [
+          68,
+          57
+        ],
+        [
+          75,
+          56
+        ]
+      ]
+    },
+    {
+      "id": "south_entry_road",
+      "nameZh": "南门入口路",
+      "nameEn": "South Gate Access Road",
+      "type": "main",
+      "points": [
+        [
+          10,
+          92
+        ],
+        [
+          14,
+          88
+        ],
+        [
+          18,
+          82
+        ]
+      ]
+    },
+    {
+      "id": "hexi_street",
+      "nameZh": "河西古街",
+      "nameEn": "Hexi Ancient Street",
+      "type": "secondary",
+      "points": [
+        [
+          24,
+          72
+        ],
+        [
+          30,
+          67
+        ],
+        [
+          36,
+          63
+        ],
+        [
+          42,
+          60
+        ]
+      ]
+    },
+    {
+      "id": "old_town_inner_loop",
+      "nameZh": "古镇内环巷",
+      "nameEn": "Old Town Inner Lane",
+      "type": "secondary",
+      "points": [
+        [
+          28,
+          72
+        ],
+        [
+          34,
+          70
+        ],
+        [
+          40,
+          70
+        ],
+        [
+          46,
+          67
+        ],
+        [
+          48,
+          61
+        ],
+        [
+          43,
+          57
+        ],
+        [
+          35,
+          59
+        ],
+        [
+          28,
+          64
+        ],
+        [
+          28,
+          72
+        ]
+      ]
+    },
+    {
+      "id": "academy_lane",
+      "nameZh": "书院巷",
+      "nameEn": "Academy Lane",
+      "type": "secondary",
+      "points": [
+        [
+          40,
+          54
+        ],
+        [
+          44,
+          46
+        ],
+        [
+          48,
+          38
+        ]
+      ]
+    },
+    {
+      "id": "west_wall_trail",
+      "nameZh": "古城墙步道",
+      "nameEn": "Ancient Wall Trail",
+      "type": "mountain",
+      "points": [
+        [
+          28,
+          60
+        ],
+        [
+          24,
+          52
+        ],
+        [
+          20,
+          44
+        ],
+        [
+          24,
+          36
+        ],
+        [
+          34,
+          32
+        ],
+        [
+          44,
+          38
+        ]
+      ]
+    },
+    {
+      "id": "heritage_path",
+      "nameZh": "非遗工坊路",
+      "nameEn": "Heritage Workshop Path",
+      "type": "secondary",
+      "points": [
+        [
+          48,
+          52
+        ],
+        [
+          52,
+          58
+        ],
+        [
+          54,
+          62
+        ]
+      ]
+    },
+    {
+      "id": "opera_square_path",
+      "nameZh": "戏曲广场路",
+      "nameEn": "Opera Square Path",
+      "type": "secondary",
+      "points": [
+        [
+          48,
+          52
+        ],
+        [
+          45,
+          57
+        ],
+        [
+          43,
+          62
+        ],
+        [
+          42,
+          68
+        ]
+      ]
+    },
+    {
+      "id": "wharf_road",
+      "nameZh": "码头老街",
+      "nameEn": "Wharf Old Street",
+      "type": "secondary",
+      "points": [
+        [
+          42,
+          68
+        ],
+        [
+          45,
+          72
+        ],
+        [
+          50,
+          74
+        ],
+        [
+          54,
+          70
+        ],
+        [
+          58,
+          68
+        ]
+      ]
+    },
+    {
+      "id": "riverside_walk",
+      "nameZh": "滨水步道",
+      "nameEn": "Riverside Walk",
+      "type": "riverside",
+      "points": [
+        [
+          54,
+          66
+        ],
+        [
+          58,
+          68
+        ],
+        [
+          63,
+          69
+        ],
+        [
+          68,
+          70
+        ],
+        [
+          74,
+          72
+        ]
+      ]
+    },
+    {
+      "id": "west_riverside_walk",
+      "nameZh": "西岸滨水栈道",
+      "nameEn": "West Riverside Boardwalk",
+      "type": "riverside",
+      "points": [
+        [
+          18,
+          82
+        ],
+        [
+          24,
+          80
+        ],
+        [
+          34,
+          78
+        ],
+        [
+          42,
+          74
+        ],
+        [
+          54,
+          66
+        ]
+      ]
+    },
+    {
+      "id": "east_market_loop",
+      "nameZh": "东市商街环路",
+      "nameEn": "East Market Loop",
+      "type": "secondary",
+      "points": [
+        [
+          65,
+          58
+        ],
+        [
+          72,
+          56
+        ],
+        [
+          78,
+          58
+        ],
+        [
+          80,
+          64
+        ],
+        [
+          74,
+          68
+        ],
+        [
+          68,
+          66
+        ],
+        [
+          65,
+          58
+        ]
+      ]
+    },
+    {
+      "id": "east_riverwalk",
+      "nameZh": "东岸水街步道",
+      "nameEn": "East Riverside Street Walk",
+      "type": "riverside",
+      "points": [
+        [
+          62,
+          61
+        ],
+        [
+          66,
+          63
+        ],
+        [
+          72,
+          66
+        ],
+        [
+          80,
+          66
+        ],
+        [
+          86,
+          63
+        ]
+      ]
+    },
+    {
+      "id": "moon_bridge_path",
+      "nameZh": "月影桥连接线",
+      "nameEn": "Moon Bridge Connector",
+      "type": "bridge_connector",
+      "points": [
+        [
+          62,
+          61
+        ],
+        [
+          66,
+          63
+        ],
+        [
+          70,
+          61
+        ],
+        [
+          75,
+          56
+        ]
+      ]
+    },
+    {
+      "id": "mountain_trail",
+      "nameZh": "云顶登山道",
+      "nameEn": "Yunding Mountain Trail",
+      "type": "mountain",
+      "points": [
+        [
+          50,
+          40
+        ],
+        [
+          52,
+          32
+        ],
+        [
+          54,
+          26
+        ],
+        [
+          56,
+          20
+        ],
+        [
+          58,
+          14
+        ]
+      ]
+    },
+    {
+      "id": "cableway_path",
+      "nameZh": "索道连接线",
+      "nameEn": "Cableway Access Path",
+      "type": "transport",
+      "points": [
+        [
+          50,
+          56
+        ],
+        [
+          51,
+          48
+        ],
+        [
+          50,
+          40
+        ]
+      ]
+    },
+    {
+      "id": "yunding_loop",
+      "nameZh": "云顶环线",
+      "nameEn": "Yunding Loop",
+      "type": "mountain",
+      "points": [
+        [
+          58,
+          14
+        ],
+        [
+          66,
+          12
+        ],
+        [
+          74,
+          18
+        ],
+        [
+          72,
+          26
+        ],
+        [
+          64,
+          28
+        ],
+        [
+          58,
+          14
+        ]
+      ]
+    },
+    {
+      "id": "sunrise_spur",
+      "nameZh": "日出平台支路",
+      "nameEn": "Sunrise Deck Spur",
+      "type": "mountain",
+      "points": [
+        [
+          72,
+          26
+        ],
+        [
+          80,
+          24
+        ],
+        [
+          86,
+          28
+        ]
+      ]
+    },
+    {
+      "id": "photo_deck_spur",
+      "nameZh": "摄影平台支路",
+      "nameEn": "Photo Deck Spur",
+      "type": "mountain",
+      "points": [
+        [
+          64,
+          28
+        ],
+        [
+          70,
+          34
+        ],
+        [
+          78,
+          36
+        ]
+      ]
+    },
+    {
+      "id": "starlight_path",
+      "nameZh": "星光营地路",
+      "nameEn": "Starlight Camp Path",
+      "type": "mountain",
+      "points": [
+        [
+          74,
+          18
+        ],
+        [
+          84,
+          20
+        ],
+        [
+          92,
+          28
+        ]
+      ]
+    },
+    {
+      "id": "tea_trail",
+      "nameZh": "茶山步道",
+      "nameEn": "Tea Hill Trail",
+      "type": "mountain",
+      "points": [
+        [
+          75,
+          72
+        ],
+        [
+          80,
+          78
+        ],
+        [
+          84,
+          84
+        ]
+      ]
+    },
+    {
+      "id": "flower_creek_trail",
+      "nameZh": "花溪步道",
+      "nameEn": "Flower Creek Trail",
+      "type": "riverside",
+      "points": [
+        [
+          84,
+          84
+        ],
+        [
+          88,
+          88
+        ],
+        [
+          92,
+          92
+        ]
+      ]
+    },
+    {
+      "id": "tea_museum_path",
+      "nameZh": "茶文化馆路",
+      "nameEn": "Tea Museum Path",
+      "type": "secondary",
+      "points": [
+        [
+          75,
+          72
+        ],
+        [
+          82,
+          72
+        ],
+        [
+          88,
+          76
+        ],
+        [
+          84,
+          84
+        ]
+      ]
+    },
+    {
+      "id": "hotel_access",
+      "nameZh": "酒店民宿连接线",
+      "nameEn": "Hotel &amp; Homestay Access",
+      "type": "secondary",
+      "points": [
+        [
+          74,
+          68
+        ],
+        [
+          80,
+          72
+        ],
+        [
+          86,
+          76
+        ],
+        [
+          92,
+          80
+        ]
+      ]
+    }
+  ],
+  "pois": [
+    {
+      "id": "visitor_center",
+      "nameZh": "南门游客中心",
+      "nameEn": "Visitor Center",
+      "type": "service",
+      "position": [
+        18,
+        82
+      ],
+      "road": "main_street",
+      "roadIndex": 0,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "welcome_plaza",
+      "nameZh": "山河迎宾广场",
+      "nameEn": "Welcome Plaza",
+      "type": "attraction",
+      "position": [
+        21,
+        76
+      ],
+      "road": "main_street",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "hexi_ancient_street",
+      "nameZh": "河西古街",
+      "nameEn": "Hexi Ancient Street",
+      "type": "culture",
+      "position": [
+        32,
+        66
+      ],
+      "road": "hexi_street",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "old_teahouse",
+      "nameZh": "老茶馆",
+      "nameEn": "Old Teahouse",
+      "type": "dining_culture",
+      "position": [
+        37,
+        61
+      ],
+      "road": "hexi_street",
+      "roadIndex": 2,
+      "offset": [
+        1,
+        -1
+      ]
+    },
+    {
+      "id": "herbal_pharmacy",
+      "nameZh": "百年药铺",
+      "nameEn": "Century-old Herbal Pharmacy",
+      "type": "culture",
+      "position": [
+        40,
+        60
+      ],
+      "road": "hexi_street",
+      "roadIndex": 3,
+      "offset": [
+        -1,
+        0
+      ]
+    },
+    {
+      "id": "old_well",
+      "nameZh": "古井",
+      "nameEn": "Old Well",
+      "type": "culture",
+      "position": [
+        34,
+        69
+      ],
+      "road": "old_town_inner_loop",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "shanhe_academy",
+      "nameZh": "山河书院",
+      "nameEn": "Shanhe Academy",
+      "type": "culture",
+      "position": [
+        48,
+        38
+      ],
+      "road": "academy_lane",
+      "roadIndex": 2,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "library_pavilion",
+      "nameZh": "藏书楼",
+      "nameEn": "Library Pavilion",
+      "type": "culture",
+      "position": [
+        47,
+        42
+      ],
+      "road": "academy_lane",
+      "roadIndex": 2,
+      "offset": [
+        -1,
+        2
+      ]
+    },
+    {
+      "id": "stone_gallery",
+      "nameZh": "碑林",
+      "nameEn": "Stone Inscription Gallery",
+      "type": "culture",
+      "position": [
+        45,
+        46
+      ],
+      "road": "academy_lane",
+      "roadIndex": 1,
+      "offset": [
+        1,
+        0
+      ]
+    },
+    {
+      "id": "city_wall_ruins",
+      "nameZh": "古城墙遗址",
+      "nameEn": "Ancient City Wall Ruins",
+      "type": "history",
+      "position": [
+        24,
+        38
+      ],
+      "road": "west_wall_trail",
+      "roadIndex": 3,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "west_gate_tower",
+      "nameZh": "西关城门",
+      "nameEn": "West Gate Tower",
+      "type": "history",
+      "position": [
+        27,
+        54
+      ],
+      "road": "west_wall_trail",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "town_square",
+      "nameZh": "中心广场",
+      "nameEn": "Town Square",
+      "type": "service_attraction",
+      "position": [
+        42,
+        58
+      ],
+      "road": "main_street",
+      "roadIndex": 4,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "opera_house",
+      "nameZh": "山河戏楼",
+      "nameEn": "Shanhe Opera House",
+      "type": "performance",
+      "position": [
+        50,
+        56
+      ],
+      "road": "main_street",
+      "roadIndex": 5,
+      "offset": [
+        2,
+        -3
+      ]
+    },
+    {
+      "id": "opera_square",
+      "nameZh": "戏曲广场",
+      "nameEn": "Opera Square",
+      "type": "performance",
+      "position": [
+        46,
+        60
+      ],
+      "road": "opera_square_path",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "heritage_workshop",
+      "nameZh": "非遗工坊",
+      "nameEn": "Intangible Heritage Workshop",
+      "type": "heritage",
+      "position": [
+        54,
+        62
+      ],
+      "road": "heritage_path",
+      "roadIndex": 2,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "paper_cutting",
+      "nameZh": "剪纸馆",
+      "nameEn": "Paper-cutting Studio",
+      "type": "heritage",
+      "position": [
+        52,
+        60
+      ],
+      "road": "heritage_path",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "tie_dye",
+      "nameZh": "扎染馆",
+      "nameEn": "Tie-dye Studio",
+      "type": "heritage",
+      "position": [
+        53,
+        64
+      ],
+      "road": "heritage_path",
+      "roadIndex": 2,
+      "offset": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "woodcarving",
+      "nameZh": "木雕馆",
+      "nameEn": "Woodcarving Studio",
+      "type": "heritage",
+      "position": [
+        56,
+        63
+      ],
+      "road": "heritage_path",
+      "roadIndex": 2,
+      "offset": [
+        2,
+        0
+      ]
+    },
+    {
+      "id": "sugar_painting",
+      "nameZh": "糖画摊",
+      "nameEn": "Sugar Painting Booth",
+      "type": "heritage_dining",
+      "position": [
+        49,
+        64
+      ],
+      "road": "opera_square_path",
+      "roadIndex": 2,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "ancient_wharf",
+      "nameZh": "古码头",
+      "nameEn": "Ancient Wharf",
+      "type": "waterfront",
+      "position": [
+        42,
+        74
+      ],
+      "road": "west_riverside_walk",
+      "roadIndex": 3,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "night_cruise_pier",
+      "nameZh": "夜游码头",
+      "nameEn": "Night Cruise Pier",
+      "type": "waterfront_night",
+      "position": [
+        57,
+        69
+      ],
+      "road": "riverside_walk",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "yunxi_riverside_street",
+      "nameZh": "云溪水街",
+      "nameEn": "Yunxi Riverside Street",
+      "type": "dining_night",
+      "position": [
+        67,
+        69
+      ],
+      "road": "riverside_walk",
+      "roadIndex": 3,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "wind_rain_bridge",
+      "nameZh": "风雨桥",
+      "nameEn": "Wind-and-Rain Bridge",
+      "type": "landmark",
+      "position": [
+        58,
+        58
+      ],
+      "road": "main_street",
+      "roadIndex": 6,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "moon_reflection_bridge",
+      "nameZh": "月影桥",
+      "nameEn": "Moon Reflection Bridge",
+      "type": "landmark_night",
+      "position": [
+        66,
+        63
+      ],
+      "road": "moon_bridge_path",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "river_lantern_square",
+      "nameZh": "河灯广场",
+      "nameEn": "River Lantern Square",
+      "type": "night_culture",
+      "position": [
+        64,
+        72
+      ],
+      "road": "riverside_walk",
+      "roadIndex": 2,
+      "offset": [
+        0,
+        2
+      ]
+    },
+    {
+      "id": "river_view_terrace",
+      "nameZh": "望河台",
+      "nameEn": "River View Terrace",
+      "type": "photo_nature",
+      "position": [
+        74,
+        72
+      ],
+      "road": "riverside_walk",
+      "roadIndex": 4,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "cableway_station",
+      "nameZh": "山河索道站",
+      "nameEn": "Cableway Station",
+      "type": "transport",
+      "position": [
+        50,
+        40
+      ],
+      "road": "cableway_path",
+      "roadIndex": 2,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "lanyue_pavilion",
+      "nameZh": "揽月阁",
+      "nameEn": "Lanyue Pavilion",
+      "type": "nature",
+      "position": [
+        56,
+        24
+      ],
+      "road": "mountain_trail",
+      "roadIndex": 3,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "spruce_trail",
+      "nameZh": "云杉步道",
+      "nameEn": "Spruce Trail",
+      "type": "nature",
+      "position": [
+        53,
+        30
+      ],
+      "road": "mountain_trail",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "yunding_viewpoint",
+      "nameZh": "云顶观景台",
+      "nameEn": "Yunding Viewpoint",
+      "type": "nature_photo",
+      "position": [
+        58,
+        14
+      ],
+      "road": "mountain_trail",
+      "roadIndex": 4,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "sunrise_deck",
+      "nameZh": "日出平台",
+      "nameEn": "Sunrise Deck",
+      "type": "nature_photo",
+      "position": [
+        86,
+        28
+      ],
+      "road": "sunrise_spur",
+      "roadIndex": 2,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "photo_deck",
+      "nameZh": "摄影平台",
+      "nameEn": "Photo Deck",
+      "type": "photo",
+      "position": [
+        78,
+        36
+      ],
+      "road": "photo_deck_spur",
+      "roadIndex": 2,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "starlight_camp",
+      "nameZh": "星光营地",
+      "nameEn": "Starlight Camp",
+      "type": "accommodation_nature",
+      "position": [
+        92,
+        28
+      ],
+      "road": "starlight_path",
+      "roadIndex": 2,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "wind_listening_pavilion",
+      "nameZh": "听风亭",
+      "nameEn": "Wind-listening Pavilion",
+      "type": "nature",
+      "position": [
+        70,
+        34
+      ],
+      "road": "photo_deck_spur",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "east_market_street",
+      "nameZh": "东市商街",
+      "nameEn": "East Market Street",
+      "type": "shopping_dining",
+      "position": [
+        72,
+        56
+      ],
+      "road": "east_market_loop",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "creative_center",
+      "nameZh": "山河文创中心",
+      "nameEn": "Cultural Creative Center",
+      "type": "shopping_culture",
+      "position": [
+        76,
+        58
+      ],
+      "road": "east_market_loop",
+      "roadIndex": 2,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "post_office_cafe",
+      "nameZh": "邮局咖啡",
+      "nameEn": "Post Office Cafe",
+      "type": "dining",
+      "position": [
+        78,
+        62
+      ],
+      "road": "east_market_loop",
+      "roadIndex": 3,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "shanhe_bookstore",
+      "nameZh": "山河书店",
+      "nameEn": "Shanhe Bookstore",
+      "type": "shopping_culture",
+      "position": [
+        74,
+        64
+      ],
+      "road": "east_market_loop",
+      "roadIndex": 4,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "hanfu_hall",
+      "nameZh": "汉服体验馆",
+      "nameEn": "Hanfu Experience Hall",
+      "type": "experience_photo",
+      "position": [
+        69,
+        66
+      ],
+      "road": "east_market_loop",
+      "roadIndex": 5,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "visitor_rest_station",
+      "nameZh": "游客驿站",
+      "nameEn": "Visitor Rest Station",
+      "type": "service",
+      "position": [
+        68,
+        58
+      ],
+      "road": "east_market_loop",
+      "roadIndex": 0,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "yunxi_hotel",
+      "nameZh": "云溪精品酒店",
+      "nameEn": "Yunxi Boutique Hotel",
+      "type": "accommodation",
+      "position": [
+        82,
+        64
+      ],
+      "road": "hotel_access",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "riverside_homestay",
+      "nameZh": "河畔庭院民宿",
+      "nameEn": "Riverside Courtyard Homestay",
+      "type": "accommodation",
+      "position": [
+        86,
+        76
+      ],
+      "road": "hotel_access",
+      "roadIndex": 2,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "tea_valley",
+      "nameZh": "茶山花谷",
+      "nameEn": "Tea Hill Flower Valley",
+      "type": "nature_family",
+      "position": [
+        84,
+        84
+      ],
+      "road": "tea_trail",
+      "roadIndex": 2,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "tea_museum",
+      "nameZh": "茶文化馆",
+      "nameEn": "Tea Culture Museum",
+      "type": "culture",
+      "position": [
+        82,
+        72
+      ],
+      "road": "tea_museum_path",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "flower_creek_trail",
+      "nameZh": "花溪步道",
+      "nameEn": "Flower Creek Trail",
+      "type": "nature",
+      "position": [
+        90,
+        90
+      ],
+      "road": "flower_creek_trail",
+      "roadIndex": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "children_classroom",
+      "nameZh": "儿童自然课堂",
+      "nameEn": "Children’s Nature Classroom",
+      "type": "family_education",
+      "position": [
+        88,
+        78
+      ],
+      "road": "tea_museum_path",
+      "roadIndex": 2,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "cloud_valley_homestay",
+      "nameZh": "云隐民宿",
+      "nameEn": "Cloud Valley Homestay",
+      "type": "accommodation",
+      "position": [
+        92,
+        80
+      ],
+      "road": "hotel_access",
+      "roadIndex": 3,
+      "offset": [
+        0,
+        0
+      ]
+    }
+  ],
+  "facilities": [
+    {
+      "id": "restroom_01",
+      "type": "restroom",
+      "nameZh": "卫生间1",
+      "nameEn": "Restroom 1",
+      "position": [
+        17,
+        84
+      ]
+    },
+    {
+      "id": "restroom_02",
+      "type": "restroom",
+      "nameZh": "卫生间2",
+      "nameEn": "Restroom 2",
+      "position": [
+        29,
+        68
+      ]
+    },
+    {
+      "id": "restroom_03",
+      "type": "restroom",
+      "nameZh": "卫生间3",
+      "nameEn": "Restroom 3",
+      "position": [
+        42,
+        59
+      ]
+    },
+    {
+      "id": "restroom_04",
+      "type": "restroom",
+      "nameZh": "卫生间4",
+      "nameEn": "Restroom 4",
+      "position": [
+        50,
+        55
+      ]
+    },
+    {
+      "id": "restroom_05",
+      "type": "restroom",
+      "nameZh": "卫生间5",
+      "nameEn": "Restroom 5",
+      "position": [
+        55,
+        63
+      ]
+    },
+    {
+      "id": "restroom_06",
+      "type": "restroom",
+      "nameZh": "卫生间6",
+      "nameEn": "Restroom 6",
+      "position": [
+        57,
+        70
+      ]
+    },
+    {
+      "id": "restroom_07",
+      "type": "restroom",
+      "nameZh": "卫生间7",
+      "nameEn": "Restroom 7",
+      "position": [
+        67,
+        60
+      ]
+    },
+    {
+      "id": "restroom_08",
+      "type": "restroom",
+      "nameZh": "卫生间8",
+      "nameEn": "Restroom 8",
+      "position": [
+        75,
+        59
+      ]
+    },
+    {
+      "id": "restroom_09",
+      "type": "restroom",
+      "nameZh": "卫生间9",
+      "nameEn": "Restroom 9",
+      "position": [
+        82,
+        66
+      ]
+    },
+    {
+      "id": "restroom_10",
+      "type": "restroom",
+      "nameZh": "卫生间10",
+      "nameEn": "Restroom 10",
+      "position": [
+        50,
+        41
+      ]
+    },
+    {
+      "id": "restroom_11",
+      "type": "restroom",
+      "nameZh": "卫生间11",
+      "nameEn": "Restroom 11",
+      "position": [
+        57,
+        17
+      ]
+    },
+    {
+      "id": "restroom_12",
+      "type": "restroom",
+      "nameZh": "卫生间12",
+      "nameEn": "Restroom 12",
+      "position": [
+        84,
+        85
+      ]
+    },
+    {
+      "id": "restroom_13",
+      "type": "restroom",
+      "nameZh": "卫生间13",
+      "nameEn": "Restroom 13",
+      "position": [
+        86,
+        29
+      ]
+    },
+    {
+      "id": "restroom_14",
+      "type": "restroom",
+      "nameZh": "卫生间14",
+      "nameEn": "Restroom 14",
+      "position": [
+        26,
+        54
+      ]
+    },
+    {
+      "id": "parking_01",
+      "type": "parking",
+      "nameZh": "停车场1",
+      "nameEn": "Parking 1",
+      "position": [
+        10,
+        92
+      ]
+    },
+    {
+      "id": "parking_02",
+      "type": "parking",
+      "nameZh": "停车场2",
+      "nameEn": "Parking 2",
+      "position": [
+        18,
+        88
+      ]
+    },
+    {
+      "id": "parking_03",
+      "type": "parking",
+      "nameZh": "停车场3",
+      "nameEn": "Parking 3",
+      "position": [
+        68,
+        54
+      ]
+    },
+    {
+      "id": "parking_04",
+      "type": "parking",
+      "nameZh": "停车场4",
+      "nameEn": "Parking 4",
+      "position": [
+        83,
+        56
+      ]
+    },
+    {
+      "id": "parking_05",
+      "type": "parking",
+      "nameZh": "停车场5",
+      "nameEn": "Parking 5",
+      "position": [
+        92,
+        78
+      ]
+    },
+    {
+      "id": "firstaid_01",
+      "type": "firstAid",
+      "nameZh": "急救点1",
+      "nameEn": "First Aid 1",
+      "position": [
+        18,
+        82
+      ]
+    },
+    {
+      "id": "firstaid_02",
+      "type": "firstAid",
+      "nameZh": "急救点2",
+      "nameEn": "First Aid 2",
+      "position": [
+        42,
+        58
+      ]
+    },
+    {
+      "id": "firstaid_03",
+      "type": "firstAid",
+      "nameZh": "急救点3",
+      "nameEn": "First Aid 3",
+      "position": [
+        57,
+        69
+      ]
+    },
+    {
+      "id": "firstaid_04",
+      "type": "firstAid",
+      "nameZh": "急救点4",
+      "nameEn": "First Aid 4",
+      "position": [
+        58,
+        14
+      ]
+    },
+    {
+      "id": "security_01",
+      "type": "security",
+      "nameZh": "安保点1",
+      "nameEn": "Security Station 1",
+      "position": [
+        20,
+        78
+      ]
+    },
+    {
+      "id": "security_02",
+      "type": "security",
+      "nameZh": "安保点2",
+      "nameEn": "Security Station 2",
+      "position": [
+        34,
+        62
+      ]
+    },
+    {
+      "id": "security_03",
+      "type": "security",
+      "nameZh": "安保点3",
+      "nameEn": "Security Station 3",
+      "position": [
+        48,
+        55
+      ]
+    },
+    {
+      "id": "security_04",
+      "type": "security",
+      "nameZh": "安保点4",
+      "nameEn": "Security Station 4",
+      "position": [
+        56,
+        68
+      ]
+    },
+    {
+      "id": "security_05",
+      "type": "security",
+      "nameZh": "安保点5",
+      "nameEn": "Security Station 5",
+      "position": [
+        75,
+        56
+      ]
+    },
+    {
+      "id": "security_06",
+      "type": "security",
+      "nameZh": "安保点6",
+      "nameEn": "Security Station 6",
+      "position": [
+        50,
+        40
+      ]
+    },
+    {
+      "id": "charging_01",
+      "type": "charging",
+      "nameZh": "充电站1",
+      "nameEn": "Charging Station 1",
+      "position": [
+        12,
+        89
+      ]
+    },
+    {
+      "id": "charging_02",
+      "type": "charging",
+      "nameZh": "充电站2",
+      "nameEn": "Charging Station 2",
+      "position": [
+        20,
+        82
+      ]
+    },
+    {
+      "id": "charging_03",
+      "type": "charging",
+      "nameZh": "充电站3",
+      "nameEn": "Charging Station 3",
+      "position": [
+        42,
+        57
+      ]
+    },
+    {
+      "id": "charging_04",
+      "type": "charging",
+      "nameZh": "充电站4",
+      "nameEn": "Charging Station 4",
+      "position": [
+        68,
+        57
+      ]
+    },
+    {
+      "id": "charging_05",
+      "type": "charging",
+      "nameZh": "充电站5",
+      "nameEn": "Charging Station 5",
+      "position": [
+        79,
+        61
+      ]
+    },
+    {
+      "id": "charging_06",
+      "type": "charging",
+      "nameZh": "充电站6",
+      "nameEn": "Charging Station 6",
+      "position": [
+        82,
+        64
+      ]
+    },
+    {
+      "id": "charging_07",
+      "type": "charging",
+      "nameZh": "充电站7",
+      "nameEn": "Charging Station 7",
+      "position": [
+        86,
+        76
+      ]
+    },
+    {
+      "id": "charging_08",
+      "type": "charging",
+      "nameZh": "充电站8",
+      "nameEn": "Charging Station 8",
+      "position": [
+        84,
+        84
+      ]
+    },
+    {
+      "id": "nursing_01",
+      "type": "nursing",
+      "nameZh": "母婴室1",
+      "nameEn": "Nursing Room 1",
+      "position": [
+        18,
+        82
+      ]
+    },
+    {
+      "id": "nursing_02",
+      "type": "nursing",
+      "nameZh": "母婴室2",
+      "nameEn": "Nursing Room 2",
+      "position": [
+        72,
+        56
+      ]
+    },
+    {
+      "id": "nursing_03",
+      "type": "nursing",
+      "nameZh": "母婴室3",
+      "nameEn": "Nursing Room 3",
+      "position": [
+        84,
+        84
+      ]
+    },
+    {
+      "id": "accessible_01",
+      "type": "accessible",
+      "nameZh": "无障碍设施1",
+      "nameEn": "Accessible Facility 1",
+      "position": [
+        18,
+        82
+      ]
+    },
+    {
+      "id": "accessible_02",
+      "type": "accessible",
+      "nameZh": "无障碍设施2",
+      "nameEn": "Accessible Facility 2",
+      "position": [
+        58,
+        58
+      ]
+    },
+    {
+      "id": "accessible_03",
+      "type": "accessible",
+      "nameZh": "无障碍设施3",
+      "nameEn": "Accessible Facility 3",
+      "position": [
+        50,
+        56
+      ]
+    },
+    {
+      "id": "accessible_04",
+      "type": "accessible",
+      "nameZh": "无障碍设施4",
+      "nameEn": "Accessible Facility 4",
+      "position": [
+        72,
+        56
+      ]
+    },
+    {
+      "id": "accessible_05",
+      "type": "accessible",
+      "nameZh": "无障碍设施5",
+      "nameEn": "Accessible Facility 5",
+      "position": [
+        50,
+        40
+      ]
+    },
+    {
+      "id": "dining_01",
+      "type": "dining",
+      "nameZh": "老茶馆",
+      "nameEn": "Old Teahouse",
+      "position": [
+        37,
+        61
+      ]
+    },
+    {
+      "id": "dining_02",
+      "type": "dining",
+      "nameZh": "邮局咖啡",
+      "nameEn": "Post Office Cafe",
+      "position": [
+        78,
+        62
+      ]
+    },
+    {
+      "id": "dining_03",
+      "type": "dining",
+      "nameZh": "云溪水街餐饮",
+      "nameEn": "Yunxi Riverside Dining",
+      "position": [
+        67,
+        69
+      ]
+    },
+    {
+      "id": "dining_04",
+      "type": "dining",
+      "nameZh": "古码头餐厅",
+      "nameEn": "Ancient Wharf Restaurant",
+      "position": [
+        42,
+        74
+      ]
+    },
+    {
+      "id": "dining_05",
+      "type": "dining",
+      "nameZh": "糖画摊",
+      "nameEn": "Sugar Painting Booth",
+      "position": [
+        49,
+        64
+      ]
+    },
+    {
+      "id": "dining_06",
+      "type": "dining",
+      "nameZh": "山河面馆",
+      "nameEn": "Shanhe Noodle House",
+      "position": [
+        32,
+        66
+      ]
+    },
+    {
+      "id": "dining_07",
+      "type": "dining",
+      "nameZh": "茶山小食",
+      "nameEn": "Tea Hill Snacks",
+      "position": [
+        84,
+        84
+      ]
+    },
+    {
+      "id": "dining_08",
+      "type": "dining",
+      "nameZh": "水岸茶社",
+      "nameEn": "Riverside Tea House",
+      "position": [
+        62,
+        69
+      ]
+    },
+    {
+      "id": "accommodation_01",
+      "type": "accommodation",
+      "nameZh": "云溪精品酒店",
+      "nameEn": "Yunxi Boutique Hotel",
+      "position": [
+        82,
+        64
+      ]
+    },
+    {
+      "id": "accommodation_02",
+      "type": "accommodation",
+      "nameZh": "河畔庭院民宿",
+      "nameEn": "Riverside Courtyard Homestay",
+      "position": [
+        86,
+        76
+      ]
+    },
+    {
+      "id": "accommodation_03",
+      "type": "accommodation",
+      "nameZh": "云隐民宿",
+      "nameEn": "Cloud Valley Homestay",
+      "position": [
+        92,
+        80
+      ]
+    },
+    {
+      "id": "accommodation_04",
+      "type": "accommodation",
+      "nameZh": "星光营地",
+      "nameEn": "Starlight Camp",
+      "position": [
+        92,
+        28
+      ]
+    },
+    {
+      "id": "accommodation_05",
+      "type": "accommodation",
+      "nameZh": "古镇客栈",
+      "nameEn": "Old Town Inn",
+      "position": [
+        30,
+        72
+      ]
+    },
+    {
+      "id": "photo_01",
+      "type": "photo",
+      "nameZh": "拍照点1",
+      "nameEn": "Photo Spot 1",
+      "position": [
+        21,
+        76
+      ]
+    },
+    {
+      "id": "photo_02",
+      "type": "photo",
+      "nameZh": "拍照点2",
+      "nameEn": "Photo Spot 2",
+      "position": [
+        32,
+        66
+      ]
+    },
+    {
+      "id": "photo_03",
+      "type": "photo",
+      "nameZh": "拍照点3",
+      "nameEn": "Photo Spot 3",
+      "position": [
+        58,
+        58
+      ]
+    },
+    {
+      "id": "photo_04",
+      "type": "photo",
+      "nameZh": "拍照点4",
+      "nameEn": "Photo Spot 4",
+      "position": [
+        42,
+        74
+      ]
+    },
+    {
+      "id": "photo_05",
+      "type": "photo",
+      "nameZh": "拍照点5",
+      "nameEn": "Photo Spot 5",
+      "position": [
+        66,
+        63
+      ]
+    },
+    {
+      "id": "photo_06",
+      "type": "photo",
+      "nameZh": "拍照点6",
+      "nameEn": "Photo Spot 6",
+      "position": [
+        74,
+        72
+      ]
+    },
+    {
+      "id": "photo_07",
+      "type": "photo",
+      "nameZh": "拍照点7",
+      "nameEn": "Photo Spot 7",
+      "position": [
+        56,
+        24
+      ]
+    },
+    {
+      "id": "photo_08",
+      "type": "photo",
+      "nameZh": "拍照点8",
+      "nameEn": "Photo Spot 8",
+      "position": [
+        58,
+        14
+      ]
+    },
+    {
+      "id": "photo_09",
+      "type": "photo",
+      "nameZh": "拍照点9",
+      "nameEn": "Photo Spot 9",
+      "position": [
+        86,
+        28
+      ]
+    },
+    {
+      "id": "photo_10",
+      "type": "photo",
+      "nameZh": "拍照点10",
+      "nameEn": "Photo Spot 10",
+      "position": [
+        78,
+        36
+      ]
+    },
+    {
+      "id": "photo_11",
+      "type": "photo",
+      "nameZh": "拍照点11",
+      "nameEn": "Photo Spot 11",
+      "position": [
+        84,
+        84
+      ]
+    },
+    {
+      "id": "photo_12",
+      "type": "photo",
+      "nameZh": "拍照点12",
+      "nameEn": "Photo Spot 12",
+      "position": [
+        90,
+        90
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "id": "route_short",
+      "nameZh": "90分钟速览路线",
+      "nameEn": "90-Minute Highlights Route",
+      "color": "#31a354",
+      "roads": [
+        "south_entry_road",
+        "main_street",
+        "hexi_street",
+        "main_street",
+        "west_riverside_walk",
+        "moon_bridge_path",
+        "east_market_loop"
+      ],
+      "pois": [
+        "visitor_center",
+        "welcome_plaza",
+        "hexi_ancient_street",
+        "town_square",
+        "opera_house",
+        "ancient_wharf",
+        "wind_rain_bridge",
+        "east_market_street"
+      ]
+    },
+    {
+      "id": "route_classic",
+      "nameZh": "3小时经典文化路线",
+      "nameEn": "3-Hour Classic Culture Route",
+      "color": "#16834a",
+      "roads": [
+        "south_entry_road",
+        "main_street",
+        "hexi_street",
+        "academy_lane",
+        "main_street",
+        "heritage_path",
+        "wharf_road",
+        "riverside_walk"
+      ],
+      "pois": [
+        "visitor_center",
+        "hexi_ancient_street",
+        "old_teahouse",
+        "shanhe_academy",
+        "stone_gallery",
+        "town_square",
+        "opera_house",
+        "heritage_workshop",
+        "ancient_wharf",
+        "yunxi_riverside_street"
+      ]
+    },
+    {
+      "id": "route_deep",
+      "nameZh": "半日深度游路线",
+      "nameEn": "Half-Day In-depth Route",
+      "color": "#8e44ad",
+      "roads": [
+        "south_entry_road",
+        "main_street",
+        "hexi_street",
+        "west_wall_trail",
+        "academy_lane",
+        "opera_square_path",
+        "heritage_path",
+        "wharf_road",
+        "riverside_walk",
+        "east_market_loop"
+      ],
+      "pois": [
+        "visitor_center",
+        "hexi_ancient_street",
+        "city_wall_ruins",
+        "west_gate_tower",
+        "shanhe_academy",
+        "opera_square",
+        "heritage_workshop",
+        "ancient_wharf",
+        "night_cruise_pier",
+        "east_market_street"
+      ]
+    },
+    {
+      "id": "route_mountain",
+      "nameZh": "山地观景路线",
+      "nameEn": "Mountain View Route",
+      "color": "#7a5c28",
+      "roads": [
+        "main_street",
+        "cableway_path",
+        "mountain_trail",
+        "yunding_loop",
+        "photo_deck_spur",
+        "sunrise_spur"
+      ],
+      "pois": [
+        "visitor_center",
+        "town_square",
+        "cableway_station",
+        "lanyue_pavilion",
+        "spruce_trail",
+        "yunding_viewpoint",
+        "photo_deck",
+        "wind_listening_pavilion"
+      ]
+    },
+    {
+      "id": "route_night",
+      "nameZh": "滨水夜游路线",
+      "nameEn": "Riverside Night Tour",
+      "color": "#6d5dfc",
+      "roads": [
+        "east_market_loop",
+        "moon_bridge_path",
+        "east_riverwalk",
+        "riverside_walk",
+        "wharf_road",
+        "west_riverside_walk"
+      ],
+      "pois": [
+        "east_market_street",
+        "moon_reflection_bridge",
+        "yunxi_riverside_street",
+        "river_lantern_square",
+        "ancient_wharf",
+        "night_cruise_pier",
+        "wind_rain_bridge",
+        "river_view_terrace"
+      ]
+    },
+    {
+      "id": "route_family",
+      "nameZh": "亲子研学路线",
+      "nameEn": "Family Study Route",
+      "color": "#f59e0b",
+      "roads": [
+        "south_entry_road",
+        "main_street",
+        "heritage_path",
+        "tea_museum_path",
+        "tea_trail",
+        "flower_creek_trail",
+        "hotel_access"
+      ],
+      "pois": [
+        "visitor_center",
+        "heritage_workshop",
+        "sugar_painting",
+        "children_classroom",
+        "tea_museum",
+        "flower_creek_trail",
+        "riverside_homestay"
+      ]
+    },
+    {
+      "id": "route_international",
+      "nameZh": "国际游客友好路线",
+      "nameEn": "International Visitor Route",
+      "color": "#2563eb",
+      "roads": [
+        "south_entry_road",
+        "main_street",
+        "hexi_street",
+        "academy_lane",
+        "main_street",
+        "heritage_path",
+        "wharf_road",
+        "moon_bridge_path",
+        "east_market_loop"
+      ],
+      "pois": [
+        "visitor_center",
+        "hexi_ancient_street",
+        "shanhe_academy",
+        "opera_house",
+        "heritage_workshop",
+        "ancient_wharf",
+        "wind_rain_bridge",
+        "east_market_street"
+      ]
+    }
+  ]
+}
+]]></metadata>
+<defs>
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1f2937" flood-opacity="0.22"/></filter>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/></marker>
+  <style><![CDATA[
+    .bg { fill:#f5efe0; }
+    .zone { opacity:.20; stroke:#fff; stroke-width:3; stroke-dasharray:8 8; }
+    .zone-label { font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',Arial,sans-serif; font-weight:800; fill:#1f3a2f; stroke:#ffffff; stroke-width:4; paint-order:stroke; letter-spacing:.5px; }
+    .mountain { fill:#78a65a; opacity:.50; stroke:#4b7f3a; stroke-width:2; }
+    .mountain-contour { fill:none; stroke:#446b33; stroke-width:1.2; opacity:.25; }
+    .river { fill:none; stroke:#53b6c7; stroke-width:54; stroke-linecap:round; stroke-linejoin:round; opacity:.95; }
+    .river-edge { fill:none; stroke:#2d7f92; stroke-width:60; stroke-linecap:round; stroke-linejoin:round; opacity:.22; }
+    .river-label { font-family:Georgia,serif; font-weight:700; fill:#1e7282; stroke:#e8fbff; stroke-width:3; paint-order:stroke; opacity:.92; }
+    .building { fill:#46535a; stroke:#263238; stroke-width:1.2; opacity:.78; }
+    .road-base { fill:none; stroke-linecap:round; stroke-linejoin:round; opacity:.98; }
+    .road-main { stroke:#f2c94c; stroke-width:9; }
+    .road-secondary { stroke:#4caf50; stroke-width:6; }
+    .road-riverside { stroke:#2f80ed; stroke-width:6; }
+    .road-mountain { stroke:#9b6a2f; stroke-width:5; stroke-dasharray:10 7; }
+    .road-transport { stroke:#0ea5e9; stroke-width:5; stroke-dasharray:14 8; }
+    .road-bridge-connector { stroke:#9ca3af; stroke-width:5; }
+    .road-casing { fill:none; stroke:#ffffff; stroke-width:14; stroke-linecap:round; stroke-linejoin:round; opacity:.85; }
+    .bridge { stroke:#6b7280; stroke-width:13; stroke-linecap:round; filter:url(#softShadow); }
+    .bridge-deck { stroke:#f8fafc; stroke-width:8; stroke-linecap:round; }
+    .bridge-label { font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',Arial,sans-serif; font-weight:700; fill:#374151; stroke:#ffffff; stroke-width:3; paint-order:stroke; }
+    .poi-core { fill:#b7791f; stroke:#fff7ed; stroke-width:4; filter:url(#softShadow); }
+    .poi-service { fill:#2563eb; stroke:#eff6ff; stroke-width:3; filter:url(#softShadow); }
+    .poi-nature { fill:#15803d; stroke:#f0fdf4; stroke-width:3; filter:url(#softShadow); }
+    .poi-performance { fill:#c2410c; stroke:#fff7ed; stroke-width:4; filter:url(#softShadow); }
+    .poi-label { font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',Arial,sans-serif; font-size:14px; font-weight:700; fill:#1f2937; stroke:#ffffff; stroke-width:4; paint-order:stroke; pointer-events:none; }
+    .poi-number { font-family:Arial,sans-serif; font-size:12px; font-weight:800; fill:#ffffff; text-anchor:middle; dominant-baseline:middle; pointer-events:none; }
+    .facility { stroke:#ffffff; stroke-width:2; filter:url(#softShadow); }
+    .facility-label { font-family:Arial,sans-serif; font-size:11px; fill:white; font-weight:800; text-anchor:middle; dominant-baseline:middle; pointer-events:none; }
+    .legend-text { font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',Arial,sans-serif; font-size:17px; fill:#334155; }
+    .title { font-family:'Noto Serif SC','Songti SC',serif; font-size:44px; font-weight:900; fill:#12312b; }
+    .subtitle { font-family:Georgia,serif; font-size:20px; fill:#40514b; }
+    .route-template { fill:none; stroke-width:8; stroke-linecap:round; stroke-linejoin:round; opacity:.0; pointer-events:none; }
+    #route-templates.show .route-template { opacity:.55; }
+  ]]></style>
+</defs>
+<rect class="bg" x="0" y="0" width="1600" height="1200"/>
+<g id="mountain-layer" data-walkable="false">
+<polygon class="mountain" id="mountain_mountain" points="576.0,60.0 1232.0,24.0 1520.0,288.0 1248.0,504.0 768.0,456.0 512.0,300.0"><title>山地观景区</title></polygon>
+<polygon class="mountain" id="mountain_tea" points="1088.0,864.0 1536.0,840.0 1568.0,1152.0 1152.0,1176.0 992.0,1032.0"><title>茶山花谷区</title></polygon>
+<polygon class="mountain" opacity=".25" points="0.0,0.0 672.0,0.0 544.0,300.0 256.0,420.0 0.0,300.0"/>
+<polygon class="mountain" opacity=".25" points="448.0,48.0 1408.0,0.0 1600.0,168.0 1408.0,432.0 928.0,420.0 640.0,288.0"/>
+<polygon class="mountain" opacity=".25" points="0.0,1032.0 256.0,936.0 544.0,1032.0 608.0,1200.0 0.0,1200.0"/>
+<polygon class="mountain" opacity=".25" points="1024.0,864.0 1600.0,804.0 1600.0,1200.0 1024.0,1200.0"/>
+<path class="mountain-contour" d="M608.0 96.0 L736.0 132.0 L896.0 120.0 L1088.0 168.0 L1248.0 264.0"/>
+<path class="mountain-contour" d="M672.0 216.0 L864.0 240.0 L1056.0 216.0 L1248.0 312.0 L1408.0 336.0"/>
+<path class="mountain-contour" d="M800.0 336.0 L992.0 360.0 L1152.0 408.0 L1312.0 456.0"/>
+<path class="mountain-contour" d="M1184.0 912.0 L1312.0 936.0 L1456.0 1008.0 L1536.0 1104.0"/>
+<path class="mountain-contour" d="M1248.0 1008.0 L1376.0 1044.0 L1472.0 1104.0"/>
+<path class="mountain-contour" d="M160.0 1008.0 L320.0 1032.0 L480.0 1080.0"/>
+</g>
+<g id="river-layer" data-walkable="false">
+<path id="river_1_edge" class="river-edge" d="M144.0 -24.0 L224.0 144.0 L192.0 300.0 L160.0 480.0 L160.0 660.0 L224.0 864.0 L400.0 984.0 L672.0 936.0 L864.0 792.0 L976.0 672.0 L1200.0 624.0 L1520.0 504.0 L1664.0 432.0"/>
+<path id="river_1" class="river" d="M144.0 -24.0 L224.0 144.0 L192.0 300.0 L160.0 480.0 L160.0 660.0 L224.0 864.0 L400.0 984.0 L672.0 936.0 L864.0 792.0 L976.0 672.0 L1200.0 624.0 L1520.0 504.0 L1664.0 432.0"><title>云溪河不可通行水域 Yunxi River non-walkable water area</title></path>
+<path id="river_2_edge" class="river-edge" d="M608.0 1200.0 L640.0 1056.0 L672.0 912.0 L768.0 792.0 L832.0 672.0 L928.0 576.0 L1056.0 504.0 L1248.0 456.0 L1600.0 384.0"/>
+<path id="river_2" class="river" d="M608.0 1200.0 L640.0 1056.0 L672.0 912.0 L768.0 792.0 L832.0 672.0 L928.0 576.0 L1056.0 504.0 L1248.0 456.0 L1600.0 384.0"><title>云溪河不可通行水域 Yunxi River non-walkable water area</title></path>
+<path id="river_3_edge" class="river-edge" d="M720.0 840.0 L832.0 840.0 L960.0 888.0 L1152.0 912.0 L1424.0 864.0 L1600.0 792.0"/>
+<path id="river_3" class="river" d="M720.0 840.0 L832.0 840.0 L960.0 888.0 L1152.0 912.0 L1424.0 864.0 L1600.0 792.0"><title>云溪河不可通行水域 Yunxi River non-walkable water area</title></path>
+<path id="river_4_edge" class="river-edge" d="M1248.0 0.0 L1312.0 120.0 L1408.0 264.0 L1504.0 408.0 L1600.0 504.0"/>
+<path id="river_4" class="river" d="M1248.0 0.0 L1312.0 120.0 L1408.0 264.0 L1504.0 408.0 L1600.0 504.0"><title>云溪河不可通行水域 Yunxi River non-walkable water area</title></path>
+<text class="river-label" x="240.0" y="528.0" font-size="24" text-anchor="middle" >云溪河 Yunxi River</text>
+</g>
+<g id="zone-layer" data-layer="zones">
+<polygon id="zone_entry" class="zone" fill="#f59e0b" stroke="#f59e0b" points="128.0,912.0 400.0,864.0 544.0,984.0 448.0,1128.0 144.0,1128.0"><title>入口服务区 / Visitor Service District</title></polygon>
+<text class="zone-label" x="288.0" y="984.0" font-size="22" text-anchor="middle" >入口服务区</text>
+<polygon id="zone_culture" class="zone" fill="#16a34a" stroke="#16a34a" points="352.0,576.0 720.0,504.0 928.0,660.0 800.0,864.0 432.0,864.0 288.0,720.0"><title>古镇文化区 / Old Town Heritage District</title></polygon>
+<text class="zone-label" x="608.0" y="696.0" font-size="22" text-anchor="middle" >古镇文化区</text>
+<polygon id="zone_performance" class="zone" fill="#e11d48" stroke="#e11d48" points="688.0,576.0 928.0,576.0 1024.0,732.0 880.0,816.0 720.0,756.0"><title>非遗演艺区 / Performance &amp; Heritage District</title></polygon>
+<text class="zone-label" x="800.0" y="684.0" font-size="22" text-anchor="middle" >非遗演艺区</text>
+<polygon id="zone_waterfront" class="zone" fill="#0ea5e9" stroke="#0ea5e9" points="672.0,768.0 1152.0,744.0 1328.0,912.0 1024.0,1032.0 672.0,960.0"><title>滨水夜游区 / Riverside Night District</title></polygon>
+<text class="zone-label" x="928.0" y="816.0" font-size="22" text-anchor="middle" >滨水夜游区</text>
+<polygon id="zone_eastmarket" class="zone" fill="#8b5cf6" stroke="#8b5cf6" points="992.0,564.0 1312.0,528.0 1472.0,696.0 1312.0,864.0 1024.0,816.0"><title>东岸休闲区 / East Market District</title></polygon>
+<text class="zone-label" x="1152.0" y="672.0" font-size="22" text-anchor="middle" >东岸休闲区</text>
+<polygon id="zone_mountain" class="zone" fill="#22c55e" stroke="#22c55e" points="576.0,60.0 1232.0,24.0 1520.0,288.0 1248.0,504.0 768.0,456.0 512.0,300.0"><title>山地观景区 / Mountain Scenic District</title></polygon>
+<text class="zone-label" x="880.0" y="216.0" font-size="22" text-anchor="middle" >山地观景区</text>
+<polygon id="zone_tea" class="zone" fill="#f97316" stroke="#f97316" points="1088.0,864.0 1536.0,840.0 1568.0,1152.0 1152.0,1176.0 992.0,1032.0"><title>茶山花谷区 / Tea Valley District</title></polygon>
+<text class="zone-label" x="1312.0" y="1008.0" font-size="22" text-anchor="middle" >茶山花谷区</text>
+</g>
+<g id="building-layer" data-walkable="false" data-note="Buildings are non-walkable. Routes must not cross this layer.">
+<polygon id="building_001" class="building" points="400.0,840.0 496.0,792.0 544.0,828.0 464.0,876.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_002" class="building" points="496.0,792.0 592.0,744.0 640.0,780.0 544.0,828.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_003" class="building" points="544.0,864.0 640.0,828.0 704.0,864.0 608.0,912.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_004" class="building" points="416.0,744.0 496.0,708.0 544.0,744.0 464.0,780.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_005" class="building" points="576.0,696.0 672.0,660.0 720.0,696.0 624.0,732.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_006" class="building" points="480.0,888.0 576.0,864.0 624.0,912.0 528.0,936.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_007" class="building" points="352.0,912.0 416.0,888.0 448.0,936.0 368.0,960.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_008" class="building" points="640.0,732.0 720.0,708.0 768.0,744.0 688.0,780.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_009" class="building" points="736.0,624.0 848.0,600.0 896.0,648.0 784.0,684.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_010" class="building" points="688.0,696.0 768.0,672.0 832.0,720.0 752.0,768.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_011" class="building" points="832.0,720.0 928.0,708.0 960.0,768.0 864.0,792.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_012" class="building" points="768.0,768.0 832.0,756.0 880.0,804.0 800.0,840.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_013" class="building" points="704.0,456.0 832.0,432.0 880.0,480.0 784.0,528.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_014" class="building" points="736.0,528.0 800.0,516.0 832.0,564.0 768.0,588.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_015" class="building" points="352.0,432.0 464.0,408.0 496.0,456.0 384.0,492.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_016" class="building" points="384.0,504.0 480.0,480.0 512.0,528.0 416.0,564.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_017" class="building" points="1056.0,672.0 1152.0,636.0 1216.0,672.0 1120.0,720.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_018" class="building" points="1168.0,672.0 1280.0,660.0 1328.0,720.0 1216.0,756.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_019" class="building" points="1072.0,744.0 1168.0,720.0 1216.0,780.0 1120.0,816.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_020" class="building" points="1216.0,768.0 1312.0,744.0 1360.0,804.0 1264.0,840.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_021" class="building" points="1024.0,792.0 1104.0,780.0 1152.0,828.0 1056.0,864.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_022" class="building" points="608.0,888.0 688.0,864.0 736.0,912.0 656.0,948.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_023" class="building" points="800.0,840.0 896.0,816.0 928.0,864.0 832.0,900.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_024" class="building" points="976.0,816.0 1088.0,792.0 1136.0,840.0 1040.0,876.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_025" class="building" points="864.0,264.0 960.0,240.0 992.0,288.0 896.0,324.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_026" class="building" points="896.0,144.0 992.0,120.0 1040.0,168.0 944.0,204.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_027" class="building" points="1152.0,216.0 1248.0,204.0 1296.0,252.0 1200.0,288.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_028" class="building" points="1344.0,312.0 1440.0,288.0 1472.0,348.0 1376.0,372.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_029" class="building" points="1280.0,984.0 1376.0,960.0 1424.0,1008.0 1328.0,1044.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_030" class="building" points="1376.0,1056.0 1472.0,1032.0 1520.0,1080.0 1424.0,1116.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_031" class="building" points="1280.0,864.0 1376.0,840.0 1408.0,900.0 1312.0,924.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_032" class="building" points="1408.0,912.0 1504.0,888.0 1536.0,948.0 1440.0,984.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_033" class="building" points="224.0,1008.0 304.0,972.0 368.0,1008.0 288.0,1056.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+<polygon id="building_034" class="building" points="144.0,1080.0 240.0,1056.0 288.0,1104.0 192.0,1140.0"><title>建筑不可通行 Building non-walkable area</title></polygon>
+</g>
+<g id="road-network-layer" data-walkable="true" data-note="All navigation routes must follow road-network paths and bridges.">
+<path id="main_street_casing" class="road-casing" d="M288.0 984.0 L352.0 900.0 L448.0 816.0 L560.0 744.0 L672.0 696.0 L800.0 672.0 L928.0 696.0 L1088.0 684.0 L1200.0 672.0"><title>主游览道路 / Main Visitor Road</title></path>
+<path id="south_entry_road_casing" class="road-casing" d="M160.0 1104.0 L224.0 1056.0 L288.0 984.0"><title>南门入口路 / South Gate Access Road</title></path>
+<path id="hexi_street_casing" class="road-casing" d="M384.0 864.0 L480.0 804.0 L576.0 756.0 L672.0 720.0"><title>河西古街 / Hexi Ancient Street</title></path>
+<path id="old_town_inner_loop_casing" class="road-casing" d="M448.0 864.0 L544.0 840.0 L640.0 840.0 L736.0 804.0 L768.0 732.0 L688.0 684.0 L560.0 708.0 L448.0 768.0 L448.0 864.0"><title>古镇内环巷 / Old Town Inner Lane</title></path>
+<path id="academy_lane_casing" class="road-casing" d="M640.0 648.0 L704.0 552.0 L768.0 456.0"><title>书院巷 / Academy Lane</title></path>
+<path id="west_wall_trail_casing" class="road-casing" d="M448.0 720.0 L384.0 624.0 L320.0 528.0 L384.0 432.0 L544.0 384.0 L704.0 456.0"><title>古城墙步道 / Ancient Wall Trail</title></path>
+<path id="heritage_path_casing" class="road-casing" d="M768.0 624.0 L832.0 696.0 L864.0 744.0"><title>非遗工坊路 / Heritage Workshop Path</title></path>
+<path id="opera_square_path_casing" class="road-casing" d="M768.0 624.0 L720.0 684.0 L688.0 744.0 L672.0 816.0"><title>戏曲广场路 / Opera Square Path</title></path>
+<path id="wharf_road_casing" class="road-casing" d="M672.0 816.0 L720.0 864.0 L800.0 888.0 L864.0 840.0 L928.0 816.0"><title>码头老街 / Wharf Old Street</title></path>
+<path id="riverside_walk_casing" class="road-casing" d="M864.0 792.0 L928.0 816.0 L1008.0 828.0 L1088.0 840.0 L1184.0 864.0"><title>滨水步道 / Riverside Walk</title></path>
+<path id="west_riverside_walk_casing" class="road-casing" d="M288.0 984.0 L384.0 960.0 L544.0 936.0 L672.0 888.0 L864.0 792.0"><title>西岸滨水栈道 / West Riverside Boardwalk</title></path>
+<path id="east_market_loop_casing" class="road-casing" d="M1040.0 696.0 L1152.0 672.0 L1248.0 696.0 L1280.0 768.0 L1184.0 816.0 L1088.0 792.0 L1040.0 696.0"><title>东市商街环路 / East Market Loop</title></path>
+<path id="east_riverwalk_casing" class="road-casing" d="M992.0 732.0 L1056.0 756.0 L1152.0 792.0 L1280.0 792.0 L1376.0 756.0"><title>东岸水街步道 / East Riverside Street Walk</title></path>
+<path id="moon_bridge_path_casing" class="road-casing" d="M992.0 732.0 L1056.0 756.0 L1120.0 732.0 L1200.0 672.0"><title>月影桥连接线 / Moon Bridge Connector</title></path>
+<path id="mountain_trail_casing" class="road-casing" d="M800.0 480.0 L832.0 384.0 L864.0 312.0 L896.0 240.0 L928.0 168.0"><title>云顶登山道 / Yunding Mountain Trail</title></path>
+<path id="cableway_path_casing" class="road-casing" d="M800.0 672.0 L816.0 576.0 L800.0 480.0"><title>索道连接线 / Cableway Access Path</title></path>
+<path id="yunding_loop_casing" class="road-casing" d="M928.0 168.0 L1056.0 144.0 L1184.0 216.0 L1152.0 312.0 L1024.0 336.0 L928.0 168.0"><title>云顶环线 / Yunding Loop</title></path>
+<path id="sunrise_spur_casing" class="road-casing" d="M1152.0 312.0 L1280.0 288.0 L1376.0 336.0"><title>日出平台支路 / Sunrise Deck Spur</title></path>
+<path id="photo_deck_spur_casing" class="road-casing" d="M1024.0 336.0 L1120.0 408.0 L1248.0 432.0"><title>摄影平台支路 / Photo Deck Spur</title></path>
+<path id="starlight_path_casing" class="road-casing" d="M1184.0 216.0 L1344.0 240.0 L1472.0 336.0"><title>星光营地路 / Starlight Camp Path</title></path>
+<path id="tea_trail_casing" class="road-casing" d="M1200.0 864.0 L1280.0 936.0 L1344.0 1008.0"><title>茶山步道 / Tea Hill Trail</title></path>
+<path id="flower_creek_trail_casing" class="road-casing" d="M1344.0 1008.0 L1408.0 1056.0 L1472.0 1104.0"><title>花溪步道 / Flower Creek Trail</title></path>
+<path id="tea_museum_path_casing" class="road-casing" d="M1200.0 864.0 L1312.0 864.0 L1408.0 912.0 L1344.0 1008.0"><title>茶文化馆路 / Tea Museum Path</title></path>
+<path id="hotel_access_casing" class="road-casing" d="M1184.0 816.0 L1280.0 864.0 L1376.0 912.0 L1472.0 960.0"><title>酒店民宿连接线 / Hotel &amp; Homestay Access</title></path>
+<path id="road_main_street" class="road-base road-main" data-road-type="main" data-points="[[18, 82], [22, 75], [28, 68], [35, 62], [42, 58], [50, 56], [58, 58], [68, 57], [75, 56]]" d="M288.0 984.0 L352.0 900.0 L448.0 816.0 L560.0 744.0 L672.0 696.0 L800.0 672.0 L928.0 696.0 L1088.0 684.0 L1200.0 672.0"><title>主游览道路 / Main Visitor Road</title></path>
+<path id="road_south_entry_road" class="road-base road-main" data-road-type="main" data-points="[[10, 92], [14, 88], [18, 82]]" d="M160.0 1104.0 L224.0 1056.0 L288.0 984.0"><title>南门入口路 / South Gate Access Road</title></path>
+<path id="road_hexi_street" class="road-base road-secondary" data-road-type="secondary" data-points="[[24, 72], [30, 67], [36, 63], [42, 60]]" d="M384.0 864.0 L480.0 804.0 L576.0 756.0 L672.0 720.0"><title>河西古街 / Hexi Ancient Street</title></path>
+<path id="road_old_town_inner_loop" class="road-base road-secondary" data-road-type="secondary" data-points="[[28, 72], [34, 70], [40, 70], [46, 67], [48, 61], [43, 57], [35, 59], [28, 64], [28, 72]]" d="M448.0 864.0 L544.0 840.0 L640.0 840.0 L736.0 804.0 L768.0 732.0 L688.0 684.0 L560.0 708.0 L448.0 768.0 L448.0 864.0"><title>古镇内环巷 / Old Town Inner Lane</title></path>
+<path id="road_academy_lane" class="road-base road-secondary" data-road-type="secondary" data-points="[[40, 54], [44, 46], [48, 38]]" d="M640.0 648.0 L704.0 552.0 L768.0 456.0"><title>书院巷 / Academy Lane</title></path>
+<path id="road_west_wall_trail" class="road-base road-mountain" data-road-type="mountain" data-points="[[28, 60], [24, 52], [20, 44], [24, 36], [34, 32], [44, 38]]" d="M448.0 720.0 L384.0 624.0 L320.0 528.0 L384.0 432.0 L544.0 384.0 L704.0 456.0"><title>古城墙步道 / Ancient Wall Trail</title></path>
+<path id="road_heritage_path" class="road-base road-secondary" data-road-type="secondary" data-points="[[48, 52], [52, 58], [54, 62]]" d="M768.0 624.0 L832.0 696.0 L864.0 744.0"><title>非遗工坊路 / Heritage Workshop Path</title></path>
+<path id="road_opera_square_path" class="road-base road-secondary" data-road-type="secondary" data-points="[[48, 52], [45, 57], [43, 62], [42, 68]]" d="M768.0 624.0 L720.0 684.0 L688.0 744.0 L672.0 816.0"><title>戏曲广场路 / Opera Square Path</title></path>
+<path id="road_wharf_road" class="road-base road-secondary" data-road-type="secondary" data-points="[[42, 68], [45, 72], [50, 74], [54, 70], [58, 68]]" d="M672.0 816.0 L720.0 864.0 L800.0 888.0 L864.0 840.0 L928.0 816.0"><title>码头老街 / Wharf Old Street</title></path>
+<path id="road_riverside_walk" class="road-base road-riverside" data-road-type="riverside" data-points="[[54, 66], [58, 68], [63, 69], [68, 70], [74, 72]]" d="M864.0 792.0 L928.0 816.0 L1008.0 828.0 L1088.0 840.0 L1184.0 864.0"><title>滨水步道 / Riverside Walk</title></path>
+<path id="road_west_riverside_walk" class="road-base road-riverside" data-road-type="riverside" data-points="[[18, 82], [24, 80], [34, 78], [42, 74], [54, 66]]" d="M288.0 984.0 L384.0 960.0 L544.0 936.0 L672.0 888.0 L864.0 792.0"><title>西岸滨水栈道 / West Riverside Boardwalk</title></path>
+<path id="road_east_market_loop" class="road-base road-secondary" data-road-type="secondary" data-points="[[65, 58], [72, 56], [78, 58], [80, 64], [74, 68], [68, 66], [65, 58]]" d="M1040.0 696.0 L1152.0 672.0 L1248.0 696.0 L1280.0 768.0 L1184.0 816.0 L1088.0 792.0 L1040.0 696.0"><title>东市商街环路 / East Market Loop</title></path>
+<path id="road_east_riverwalk" class="road-base road-riverside" data-road-type="riverside" data-points="[[62, 61], [66, 63], [72, 66], [80, 66], [86, 63]]" d="M992.0 732.0 L1056.0 756.0 L1152.0 792.0 L1280.0 792.0 L1376.0 756.0"><title>东岸水街步道 / East Riverside Street Walk</title></path>
+<path id="road_moon_bridge_path" class="road-base road-bridge-connector" data-road-type="bridge_connector" data-points="[[62, 61], [66, 63], [70, 61], [75, 56]]" d="M992.0 732.0 L1056.0 756.0 L1120.0 732.0 L1200.0 672.0"><title>月影桥连接线 / Moon Bridge Connector</title></path>
+<path id="road_mountain_trail" class="road-base road-mountain" data-road-type="mountain" data-points="[[50, 40], [52, 32], [54, 26], [56, 20], [58, 14]]" d="M800.0 480.0 L832.0 384.0 L864.0 312.0 L896.0 240.0 L928.0 168.0"><title>云顶登山道 / Yunding Mountain Trail</title></path>
+<path id="road_cableway_path" class="road-base road-transport" data-road-type="transport" data-points="[[50, 56], [51, 48], [50, 40]]" d="M800.0 672.0 L816.0 576.0 L800.0 480.0"><title>索道连接线 / Cableway Access Path</title></path>
+<path id="road_yunding_loop" class="road-base road-mountain" data-road-type="mountain" data-points="[[58, 14], [66, 12], [74, 18], [72, 26], [64, 28], [58, 14]]" d="M928.0 168.0 L1056.0 144.0 L1184.0 216.0 L1152.0 312.0 L1024.0 336.0 L928.0 168.0"><title>云顶环线 / Yunding Loop</title></path>
+<path id="road_sunrise_spur" class="road-base road-mountain" data-road-type="mountain" data-points="[[72, 26], [80, 24], [86, 28]]" d="M1152.0 312.0 L1280.0 288.0 L1376.0 336.0"><title>日出平台支路 / Sunrise Deck Spur</title></path>
+<path id="road_photo_deck_spur" class="road-base road-mountain" data-road-type="mountain" data-points="[[64, 28], [70, 34], [78, 36]]" d="M1024.0 336.0 L1120.0 408.0 L1248.0 432.0"><title>摄影平台支路 / Photo Deck Spur</title></path>
+<path id="road_starlight_path" class="road-base road-mountain" data-road-type="mountain" data-points="[[74, 18], [84, 20], [92, 28]]" d="M1184.0 216.0 L1344.0 240.0 L1472.0 336.0"><title>星光营地路 / Starlight Camp Path</title></path>
+<path id="road_tea_trail" class="road-base road-mountain" data-road-type="mountain" data-points="[[75, 72], [80, 78], [84, 84]]" d="M1200.0 864.0 L1280.0 936.0 L1344.0 1008.0"><title>茶山步道 / Tea Hill Trail</title></path>
+<path id="road_flower_creek_trail" class="road-base road-riverside" data-road-type="riverside" data-points="[[84, 84], [88, 88], [92, 92]]" d="M1344.0 1008.0 L1408.0 1056.0 L1472.0 1104.0"><title>花溪步道 / Flower Creek Trail</title></path>
+<path id="road_tea_museum_path" class="road-base road-secondary" data-road-type="secondary" data-points="[[75, 72], [82, 72], [88, 76], [84, 84]]" d="M1200.0 864.0 L1312.0 864.0 L1408.0 912.0 L1344.0 1008.0"><title>茶文化馆路 / Tea Museum Path</title></path>
+<path id="road_hotel_access" class="road-base road-secondary" data-road-type="secondary" data-points="[[74, 68], [80, 72], [86, 76], [92, 80]]" d="M1184.0 816.0 L1280.0 864.0 L1376.0 912.0 L1472.0 960.0"><title>酒店民宿连接线 / Hotel &amp; Homestay Access</title></path>
+<text class="poi-label" x="672.0" y="687.0" font-size="13" text-anchor="middle" >主游览道路</text>
+<text class="poi-label" x="576.0" y="747.0" font-size="13" text-anchor="middle" >河西古街</text>
+<text class="poi-label" x="800.0" y="879.0" font-size="13" text-anchor="middle" >码头老街</text>
+<text class="poi-label" x="1008.0" y="819.0" font-size="13" text-anchor="middle" >滨水步道</text>
+<text class="poi-label" x="864.0" y="303.0" font-size="13" text-anchor="middle" >云顶登山道</text>
+<text class="poi-label" x="1280.0" y="927.0" font-size="13" text-anchor="middle" >茶山步道</text>
+</g>
+<g id="bridge-network-layer" data-walkable="true" data-cross-river-only="true">
+<line id="bridge_bridge_south_base" class="bridge" x1="352.0" y1="996.0" x2="448.0" y2="912.0"><title>南门桥 / South Gate Bridge</title></line>
+<line id="bridge_bridge_south" class="bridge-deck" x1="352.0" y1="996.0" x2="448.0" y2="912.0" data-position="[25, 80]"/>
+<text class="bridge-label" x="400.0" y="947.0" font-size="14" text-anchor="middle" >南门桥</text>
+<line id="bridge_bridge_fengyu_base" class="bridge" x1="864.0" y1="720.0" x2="992.0" y2="672.0"><title>风雨桥 / Wind-and-Rain Bridge</title></line>
+<line id="bridge_bridge_fengyu" class="bridge-deck" x1="864.0" y1="720.0" x2="992.0" y2="672.0" data-position="[58, 58]"/>
+<text class="bridge-label" x="928.0" y="683.0" font-size="14" text-anchor="middle" >风雨桥</text>
+<line id="bridge_bridge_moon_base" class="bridge" x1="1008.0" y1="780.0" x2="1120.0" y2="732.0"><title>月影桥 / Moon Reflection Bridge</title></line>
+<line id="bridge_bridge_moon" class="bridge-deck" x1="1008.0" y1="780.0" x2="1120.0" y2="732.0" data-position="[66, 63]"/>
+<text class="bridge-label" x="1056.0" y="743.0" font-size="14" text-anchor="middle" >月影桥</text>
+<line id="bridge_bridge_wharf_base" class="bridge" x1="624.0" y1="912.0" x2="720.0" y2="852.0"><title>古码头桥 / Ancient Wharf Bridge</title></line>
+<line id="bridge_bridge_wharf" class="bridge-deck" x1="624.0" y1="912.0" x2="720.0" y2="852.0" data-position="[42, 74]"/>
+<text class="bridge-label" x="672.0" y="875.0" font-size="14" text-anchor="middle" >古码头桥</text>
+</g>
+<g id="route-templates" style="display:none" data-note="Predefined route templates based on legal road network. Add class show to preview all.">
+<path id="route_short" class="route-template" stroke="#31a354" d="M160.0 1104.0 L224.0 1056.0 L288.0 984.0 L288.0 984.0 L352.0 900.0 L448.0 816.0 L560.0 744.0 L672.0 696.0 L800.0 672.0 L928.0 696.0 L1088.0 684.0 L1200.0 672.0 L384.0 864.0 L480.0 804.0 L576.0 756.0 L672.0 720.0 L288.0 984.0 L352.0 900.0 L448.0 816.0 L560.0 744.0 L672.0 696.0 L800.0 672.0 L928.0 696.0 L1088.0 684.0 L1200.0 672.0 L288.0 984.0 L384.0 960.0 L544.0 936.0 L672.0 888.0 L864.0 792.0 L992.0 732.0 L1056.0 756.0 L1120.0 732.0 L1200.0 672.0 L1040.0 696.0 L1152.0 672.0 L1248.0 696.0 L1280.0 768.0 L1184.0 816.0 L1088.0 792.0 L1040.0 696.0"><title>90分钟速览路线 / 90-Minute Highlights Route</title></path>
+<path id="route_classic" class="route-template" stroke="#16834a" d="M160.0 1104.0 L224.0 1056.0 L288.0 984.0 L288.0 984.0 L352.0 900.0 L448.0 816.0 L560.0 744.0 L672.0 696.0 L800.0 672.0 L928.0 696.0 L1088.0 684.0 L1200.0 672.0 L384.0 864.0 L480.0 804.0 L576.0 756.0 L672.0 720.0 L640.0 648.0 L704.0 552.0 L768.0 456.0 L288.0 984.0 L352.0 900.0 L448.0 816.0 L560.0 744.0 L672.0 696.0 L800.0 672.0 L928.0 696.0 L1088.0 684.0 L1200.0 672.0 L768.0 624.0 L832.0 696.0 L864.0 744.0 L672.0 816.0 L720.0 864.0 L800.0 888.0 L864.0 840.0 L928.0 816.0 L864.0 792.0 L928.0 816.0 L1008.0 828.0 L1088.0 840.0 L1184.0 864.0"><title>3小时经典文化路线 / 3-Hour Classic Culture Route</title></path>
+<path id="route_deep" class="route-template" stroke="#8e44ad" d="M160.0 1104.0 L224.0 1056.0 L288.0 984.0 L288.0 984.0 L352.0 900.0 L448.0 816.0 L560.0 744.0 L672.0 696.0 L800.0 672.0 L928.0 696.0 L1088.0 684.0 L1200.0 672.0 L384.0 864.0 L480.0 804.0 L576.0 756.0 L672.0 720.0 L448.0 720.0 L384.0 624.0 L320.0 528.0 L384.0 432.0 L544.0 384.0 L704.0 456.0 L640.0 648.0 L704.0 552.0 L768.0 456.0 L768.0 624.0 L720.0 684.0 L688.0 744.0 L672.0 816.0 L768.0 624.0 L832.0 696.0 L864.0 744.0 L672.0 816.0 L720.0 864.0 L800.0 888.0 L864.0 840.0 L928.0 816.0 L864.0 792.0 L928.0 816.0 L1008.0 828.0 L1088.0 840.0 L1184.0 864.0 L1040.0 696.0 L1152.0 672.0 L1248.0 696.0 L1280.0 768.0 L1184.0 816.0 L1088.0 792.0 L1040.0 696.0"><title>半日深度游路线 / Half-Day In-depth Route</title></path>
+<path id="route_mountain" class="route-template" stroke="#7a5c28" d="M288.0 984.0 L352.0 900.0 L448.0 816.0 L560.0 744.0 L672.0 696.0 L800.0 672.0 L928.0 696.0 L1088.0 684.0 L1200.0 672.0 L800.0 672.0 L816.0 576.0 L800.0 480.0 L800.0 480.0 L832.0 384.0 L864.0 312.0 L896.0 240.0 L928.0 168.0 L928.0 168.0 L1056.0 144.0 L1184.0 216.0 L1152.0 312.0 L1024.0 336.0 L928.0 168.0 L1024.0 336.0 L1120.0 408.0 L1248.0 432.0 L1152.0 312.0 L1280.0 288.0 L1376.0 336.0"><title>山地观景路线 / Mountain View Route</title></path>
+<path id="route_night" class="route-template" stroke="#6d5dfc" d="M1040.0 696.0 L1152.0 672.0 L1248.0 696.0 L1280.0 768.0 L1184.0 816.0 L1088.0 792.0 L1040.0 696.0 L992.0 732.0 L1056.0 756.0 L1120.0 732.0 L1200.0 672.0 L992.0 732.0 L1056.0 756.0 L1152.0 792.0 L1280.0 792.0 L1376.0 756.0 L864.0 792.0 L928.0 816.0 L1008.0 828.0 L1088.0 840.0 L1184.0 864.0 L672.0 816.0 L720.0 864.0 L800.0 888.0 L864.0 840.0 L928.0 816.0 L288.0 984.0 L384.0 960.0 L544.0 936.0 L672.0 888.0 L864.0 792.0"><title>滨水夜游路线 / Riverside Night Tour</title></path>
+<path id="route_family" class="route-template" stroke="#f59e0b" d="M160.0 1104.0 L224.0 1056.0 L288.0 984.0 L288.0 984.0 L352.0 900.0 L448.0 816.0 L560.0 744.0 L672.0 696.0 L800.0 672.0 L928.0 696.0 L1088.0 684.0 L1200.0 672.0 L768.0 624.0 L832.0 696.0 L864.0 744.0 L1200.0 864.0 L1312.0 864.0 L1408.0 912.0 L1344.0 1008.0 L1200.0 864.0 L1280.0 936.0 L1344.0 1008.0 L1344.0 1008.0 L1408.0 1056.0 L1472.0 1104.0 L1184.0 816.0 L1280.0 864.0 L1376.0 912.0 L1472.0 960.0"><title>亲子研学路线 / Family Study Route</title></path>
+<path id="route_international" class="route-template" stroke="#2563eb" d="M160.0 1104.0 L224.0 1056.0 L288.0 984.0 L288.0 984.0 L352.0 900.0 L448.0 816.0 L560.0 744.0 L672.0 696.0 L800.0 672.0 L928.0 696.0 L1088.0 684.0 L1200.0 672.0 L384.0 864.0 L480.0 804.0 L576.0 756.0 L672.0 720.0 L640.0 648.0 L704.0 552.0 L768.0 456.0 L288.0 984.0 L352.0 900.0 L448.0 816.0 L560.0 744.0 L672.0 696.0 L800.0 672.0 L928.0 696.0 L1088.0 684.0 L1200.0 672.0 L768.0 624.0 L832.0 696.0 L864.0 744.0 L672.0 816.0 L720.0 864.0 L800.0 888.0 L864.0 840.0 L928.0 816.0 L992.0 732.0 L1056.0 756.0 L1120.0 732.0 L1200.0 672.0 L1040.0 696.0 L1152.0 672.0 L1248.0 696.0 L1280.0 768.0 L1184.0 816.0 L1088.0 792.0 L1040.0 696.0"><title>国际游客友好路线 / International Visitor Route</title></path>
+</g>
+<g id="poi-anchor-layer" style="display:none" data-layer="poi-anchors">
+<g id="poi_visitor_center" data-poi-id="visitor_center" data-road="main_street" data-road-index="0" data-offset="[0, 0]" data-position="[18, 82]">
+<circle class="poi-service" cx="288.0" cy="984.0" r="13"><title>1. 南门游客中心 / Visitor Center</title></circle>
+<text class="poi-number" x="288.0" y="984.0">1</text>
+<text class="poi-label" x="288.0" y="966.0" font-size="13" text-anchor="middle" >南门游客中心</text>
+</g>
+<g id="poi_welcome_plaza" data-poi-id="welcome_plaza" data-road="main_street" data-road-index="1" data-offset="[0, 1]" data-position="[21, 76]">
+<circle class="poi-core" cx="336.0" cy="912.0" r="13"><title>2. 山河迎宾广场 / Welcome Plaza</title></circle>
+<text class="poi-number" x="336.0" y="912.0">2</text>
+<text class="poi-label" x="336.0" y="894.0" font-size="13" text-anchor="middle" >山河迎宾广场</text>
+</g>
+<g id="poi_hexi_ancient_street" data-poi-id="hexi_ancient_street" data-road="hexi_street" data-road-index="1" data-offset="[0, 0]" data-position="[32, 66]">
+<circle class="poi-core" cx="512.0" cy="792.0" r="13"><title>3. 河西古街 / Hexi Ancient Street</title></circle>
+<text class="poi-number" x="512.0" y="792.0">3</text>
+<text class="poi-label" x="512.0" y="774.0" font-size="13" text-anchor="middle" >河西古街</text>
+</g>
+<g id="poi_old_teahouse" data-poi-id="old_teahouse" data-road="hexi_street" data-road-index="2" data-offset="[1, -1]" data-position="[37, 61]">
+<circle class="poi-service" cx="592.0" cy="732.0" r="13"><title>4. 老茶馆 / Old Teahouse</title></circle>
+<text class="poi-number" x="592.0" y="732.0">4</text>
+<text class="poi-label" x="592.0" y="714.0" font-size="13" text-anchor="middle" >老茶馆</text>
+</g>
+<g id="poi_herbal_pharmacy" data-poi-id="herbal_pharmacy" data-road="hexi_street" data-road-index="3" data-offset="[-1, 0]" data-position="[40, 60]">
+<circle class="poi-core" cx="640.0" cy="720.0" r="13"><title>5. 百年药铺 / Century-old Herbal Pharmacy</title></circle>
+<text class="poi-number" x="640.0" y="720.0">5</text>
+<text class="poi-label" x="648.0" y="746.0" font-size="13" text-anchor="middle" >百年药铺</text>
+</g>
+<g id="poi_old_well" data-poi-id="old_well" data-road="old_town_inner_loop" data-road-index="1" data-offset="[0, 0]" data-position="[34, 69]">
+<circle class="poi-core" cx="544.0" cy="828.0" r="13"><title>6. 古井 / Old Well</title></circle>
+<text class="poi-number" x="544.0" y="828.0">6</text>
+<text class="poi-label" x="544.0" y="810.0" font-size="13" text-anchor="middle" >古井</text>
+</g>
+<g id="poi_shanhe_academy" data-poi-id="shanhe_academy" data-road="academy_lane" data-road-index="2" data-offset="[0, 0]" data-position="[48, 38]">
+<circle class="poi-core" cx="768.0" cy="456.0" r="13"><title>7. 山河书院 / Shanhe Academy</title></circle>
+<text class="poi-number" x="768.0" y="456.0">7</text>
+<text class="poi-label" x="756.0" y="438.0" font-size="13" text-anchor="middle" >山河书院</text>
+</g>
+<g id="poi_library_pavilion" data-poi-id="library_pavilion" data-road="academy_lane" data-road-index="2" data-offset="[-1, 2]" data-position="[47, 42]">
+<circle class="poi-core" cx="752.0" cy="504.0" r="13"><title>8. 藏书楼 / Library Pavilion</title></circle>
+<text class="poi-number" x="752.0" y="504.0">8</text>
+<text class="poi-label" x="752.0" y="486.0" font-size="13" text-anchor="middle" >藏书楼</text>
+</g>
+<g id="poi_stone_gallery" data-poi-id="stone_gallery" data-road="academy_lane" data-road-index="1" data-offset="[1, 0]" data-position="[45, 46]">
+<circle class="poi-core" cx="720.0" cy="552.0" r="13"><title>9. 碑林 / Stone Inscription Gallery</title></circle>
+<text class="poi-number" x="720.0" y="552.0">9</text>
+<text class="poi-label" x="720.0" y="534.0" font-size="13" text-anchor="middle" >碑林</text>
+</g>
+<g id="poi_city_wall_ruins" data-poi-id="city_wall_ruins" data-road="west_wall_trail" data-road-index="3" data-offset="[0, 0]" data-position="[24, 38]">
+<circle class="poi-core" cx="384.0" cy="456.0" r="13"><title>10. 古城墙遗址 / Ancient City Wall Ruins</title></circle>
+<text class="poi-number" x="384.0" y="456.0">10</text>
+<text class="poi-label" x="392.0" y="482.0" font-size="13" text-anchor="middle" >古城墙遗址</text>
+</g>
+<g id="poi_west_gate_tower" data-poi-id="west_gate_tower" data-road="west_wall_trail" data-road-index="1" data-offset="[0, 0]" data-position="[27, 54]">
+<circle class="poi-core" cx="432.0" cy="648.0" r="13"><title>11. 西关城门 / West Gate Tower</title></circle>
+<text class="poi-number" x="432.0" y="648.0">11</text>
+<text class="poi-label" x="432.0" y="630.0" font-size="13" text-anchor="middle" >西关城门</text>
+</g>
+<g id="poi_town_square" data-poi-id="town_square" data-road="main_street" data-road-index="4" data-offset="[0, 0]" data-position="[42, 58]">
+<circle class="poi-service" cx="672.0" cy="696.0" r="13"><title>12. 中心广场 / Town Square</title></circle>
+<text class="poi-number" x="672.0" y="696.0">12</text>
+<text class="poi-label" x="672.0" y="678.0" font-size="13" text-anchor="middle" >中心广场</text>
+</g>
+<g id="poi_opera_house" data-poi-id="opera_house" data-road="main_street" data-road-index="5" data-offset="[2, -3]" data-position="[50, 56]">
+<circle class="poi-performance" cx="800.0" cy="672.0" r="13"><title>13. 山河戏楼 / Shanhe Opera House</title></circle>
+<text class="poi-number" x="800.0" y="672.0">13</text>
+<text class="poi-label" x="800.0" y="654.0" font-size="13" text-anchor="middle" >山河戏楼</text>
+</g>
+<g id="poi_opera_square" data-poi-id="opera_square" data-road="opera_square_path" data-road-index="1" data-offset="[0, 0]" data-position="[46, 60]">
+<circle class="poi-performance" cx="736.0" cy="720.0" r="13"><title>14. 戏曲广场 / Opera Square</title></circle>
+<text class="poi-number" x="736.0" y="720.0">14</text>
+<text class="poi-label" x="724.0" y="702.0" font-size="13" text-anchor="middle" >戏曲广场</text>
+</g>
+<g id="poi_heritage_workshop" data-poi-id="heritage_workshop" data-road="heritage_path" data-road-index="2" data-offset="[0, 0]" data-position="[54, 62]">
+<circle class="poi-performance" cx="864.0" cy="744.0" r="13"><title>15. 非遗工坊 / Intangible Heritage Workshop</title></circle>
+<text class="poi-number" x="864.0" y="744.0">15</text>
+<text class="poi-label" x="872.0" y="770.0" font-size="13" text-anchor="middle" >非遗工坊</text>
+</g>
+<g id="poi_paper_cutting" data-poi-id="paper_cutting" data-road="heritage_path" data-road-index="1" data-offset="[0, 0]" data-position="[52, 60]">
+<circle class="poi-performance" cx="832.0" cy="720.0" r="13"><title>16. 剪纸馆 / Paper-cutting Studio</title></circle>
+<text class="poi-number" x="832.0" y="720.0">16</text>
+<text class="poi-label" x="832.0" y="702.0" font-size="13" text-anchor="middle" >剪纸馆</text>
+</g>
+<g id="poi_tie_dye" data-poi-id="tie_dye" data-road="heritage_path" data-road-index="2" data-offset="[1, 2]" data-position="[53, 64]">
+<circle class="poi-performance" cx="848.0" cy="768.0" r="13"><title>17. 扎染馆 / Tie-dye Studio</title></circle>
+<text class="poi-number" x="848.0" y="768.0">17</text>
+<text class="poi-label" x="848.0" y="750.0" font-size="13" text-anchor="middle" >扎染馆</text>
+</g>
+<g id="poi_woodcarving" data-poi-id="woodcarving" data-road="heritage_path" data-road-index="2" data-offset="[2, 0]" data-position="[56, 63]">
+<circle class="poi-performance" cx="896.0" cy="756.0" r="13"><title>18. 木雕馆 / Woodcarving Studio</title></circle>
+<text class="poi-number" x="896.0" y="756.0">18</text>
+<text class="poi-label" x="896.0" y="738.0" font-size="13" text-anchor="middle" >木雕馆</text>
+</g>
+<g id="poi_sugar_painting" data-poi-id="sugar_painting" data-road="opera_square_path" data-road-index="2" data-offset="[0, 0]" data-position="[49, 64]">
+<circle class="poi-performance" cx="784.0" cy="768.0" r="13"><title>19. 糖画摊 / Sugar Painting Booth</title></circle>
+<text class="poi-number" x="784.0" y="768.0">19</text>
+<text class="poi-label" x="784.0" y="750.0" font-size="13" text-anchor="middle" >糖画摊</text>
+</g>
+<g id="poi_ancient_wharf" data-poi-id="ancient_wharf" data-road="west_riverside_walk" data-road-index="3" data-offset="[0, 0]" data-position="[42, 74]">
+<circle class="poi-core" cx="672.0" cy="888.0" r="13"><title>20. 古码头 / Ancient Wharf</title></circle>
+<text class="poi-number" x="672.0" y="888.0">20</text>
+<text class="poi-label" x="680.0" y="914.0" font-size="13" text-anchor="middle" >古码头</text>
+</g>
+<g id="poi_night_cruise_pier" data-poi-id="night_cruise_pier" data-road="riverside_walk" data-road-index="1" data-offset="[0, 0]" data-position="[57, 69]">
+<circle class="poi-core" cx="912.0" cy="828.0" r="13"><title>21. 夜游码头 / Night Cruise Pier</title></circle>
+<text class="poi-number" x="912.0" y="828.0">21</text>
+<text class="poi-label" x="900.0" y="810.0" font-size="13" text-anchor="middle" >夜游码头</text>
+</g>
+<g id="poi_yunxi_riverside_street" data-poi-id="yunxi_riverside_street" data-road="riverside_walk" data-road-index="3" data-offset="[0, 0]" data-position="[67, 69]">
+<circle class="poi-service" cx="1072.0" cy="828.0" r="13"><title>22. 云溪水街 / Yunxi Riverside Street</title></circle>
+<text class="poi-number" x="1072.0" y="828.0">22</text>
+<text class="poi-label" x="1072.0" y="810.0" font-size="13" text-anchor="middle" >云溪水街</text>
+</g>
+<g id="poi_wind_rain_bridge" data-poi-id="wind_rain_bridge" data-road="main_street" data-road-index="6" data-offset="[0, 0]" data-position="[58, 58]">
+<circle class="poi-core" cx="928.0" cy="696.0" r="13"><title>23. 风雨桥 / Wind-and-Rain Bridge</title></circle>
+<text class="poi-number" x="928.0" y="696.0">23</text>
+<text class="poi-label" x="928.0" y="678.0" font-size="13" text-anchor="middle" >风雨桥</text>
+</g>
+<g id="poi_moon_reflection_bridge" data-poi-id="moon_reflection_bridge" data-road="moon_bridge_path" data-road-index="1" data-offset="[0, 0]" data-position="[66, 63]">
+<circle class="poi-core" cx="1056.0" cy="756.0" r="13"><title>24. 月影桥 / Moon Reflection Bridge</title></circle>
+<text class="poi-number" x="1056.0" y="756.0">24</text>
+<text class="poi-label" x="1056.0" y="738.0" font-size="13" text-anchor="middle" >月影桥</text>
+</g>
+<g id="poi_river_lantern_square" data-poi-id="river_lantern_square" data-road="riverside_walk" data-road-index="2" data-offset="[0, 2]" data-position="[64, 72]">
+<circle class="poi-core" cx="1024.0" cy="864.0" r="13"><title>25. 河灯广场 / River Lantern Square</title></circle>
+<text class="poi-number" x="1024.0" y="864.0">25</text>
+<text class="poi-label" x="1032.0" y="890.0" font-size="13" text-anchor="middle" >河灯广场</text>
+</g>
+<g id="poi_river_view_terrace" data-poi-id="river_view_terrace" data-road="riverside_walk" data-road-index="4" data-offset="[0, 0]" data-position="[74, 72]">
+<circle class="poi-nature" cx="1184.0" cy="864.0" r="13"><title>26. 望河台 / River View Terrace</title></circle>
+<text class="poi-number" x="1184.0" y="864.0">26</text>
+<text class="poi-label" x="1184.0" y="846.0" font-size="13" text-anchor="middle" >望河台</text>
+</g>
+<g id="poi_cableway_station" data-poi-id="cableway_station" data-road="cableway_path" data-road-index="2" data-offset="[0, 0]" data-position="[50, 40]">
+<circle class="poi-core" cx="800.0" cy="480.0" r="13"><title>27. 山河索道站 / Cableway Station</title></circle>
+<text class="poi-number" x="800.0" y="480.0">27</text>
+<text class="poi-label" x="800.0" y="462.0" font-size="13" text-anchor="middle" >山河索道站</text>
+</g>
+<g id="poi_lanyue_pavilion" data-poi-id="lanyue_pavilion" data-road="mountain_trail" data-road-index="3" data-offset="[0, 0]" data-position="[56, 24]">
+<circle class="poi-nature" cx="896.0" cy="288.0" r="13"><title>28. 揽月阁 / Lanyue Pavilion</title></circle>
+<text class="poi-number" x="896.0" y="288.0">28</text>
+<text class="poi-label" x="884.0" y="270.0" font-size="13" text-anchor="middle" >揽月阁</text>
+</g>
+<g id="poi_spruce_trail" data-poi-id="spruce_trail" data-road="mountain_trail" data-road-index="1" data-offset="[0, 0]" data-position="[53, 30]">
+<circle class="poi-nature" cx="848.0" cy="360.0" r="13"><title>29. 云杉步道 / Spruce Trail</title></circle>
+<text class="poi-number" x="848.0" y="360.0">29</text>
+<text class="poi-label" x="848.0" y="342.0" font-size="13" text-anchor="middle" >云杉步道</text>
+</g>
+<g id="poi_yunding_viewpoint" data-poi-id="yunding_viewpoint" data-road="mountain_trail" data-road-index="4" data-offset="[0, 0]" data-position="[58, 14]">
+<circle class="poi-nature" cx="928.0" cy="168.0" r="13"><title>30. 云顶观景台 / Yunding Viewpoint</title></circle>
+<text class="poi-number" x="928.0" y="168.0">30</text>
+<text class="poi-label" x="936.0" y="194.0" font-size="13" text-anchor="middle" >云顶观景台</text>
+</g>
+<g id="poi_sunrise_deck" data-poi-id="sunrise_deck" data-road="sunrise_spur" data-road-index="2" data-offset="[0, 0]" data-position="[86, 28]">
+<circle class="poi-nature" cx="1376.0" cy="336.0" r="13"><title>31. 日出平台 / Sunrise Deck</title></circle>
+<text class="poi-number" x="1376.0" y="336.0">31</text>
+<text class="poi-label" x="1376.0" y="318.0" font-size="13" text-anchor="middle" >日出平台</text>
+</g>
+<g id="poi_photo_deck" data-poi-id="photo_deck" data-road="photo_deck_spur" data-road-index="2" data-offset="[0, 0]" data-position="[78, 36]">
+<circle class="poi-nature" cx="1248.0" cy="432.0" r="13"><title>32. 摄影平台 / Photo Deck</title></circle>
+<text class="poi-number" x="1248.0" y="432.0">32</text>
+<text class="poi-label" x="1248.0" y="414.0" font-size="13" text-anchor="middle" >摄影平台</text>
+</g>
+<g id="poi_starlight_camp" data-poi-id="starlight_camp" data-road="starlight_path" data-road-index="2" data-offset="[0, 0]" data-position="[92, 28]">
+<circle class="poi-nature" cx="1472.0" cy="336.0" r="13"><title>33. 星光营地 / Starlight Camp</title></circle>
+<text class="poi-number" x="1472.0" y="336.0">33</text>
+<text class="poi-label" x="1472.0" y="318.0" font-size="13" text-anchor="middle" >星光营地</text>
+</g>
+<g id="poi_wind_listening_pavilion" data-poi-id="wind_listening_pavilion" data-road="photo_deck_spur" data-road-index="1" data-offset="[0, 0]" data-position="[70, 34]">
+<circle class="poi-nature" cx="1120.0" cy="408.0" r="13"><title>34. 听风亭 / Wind-listening Pavilion</title></circle>
+<text class="poi-number" x="1120.0" y="408.0">34</text>
+<text class="poi-label" x="1120.0" y="390.0" font-size="13" text-anchor="middle" >听风亭</text>
+</g>
+<g id="poi_east_market_street" data-poi-id="east_market_street" data-road="east_market_loop" data-road-index="1" data-offset="[0, 0]" data-position="[72, 56]">
+<circle class="poi-service" cx="1152.0" cy="672.0" r="13"><title>35. 东市商街 / East Market Street</title></circle>
+<text class="poi-number" x="1152.0" y="672.0">35</text>
+<text class="poi-label" x="1140.0" y="654.0" font-size="13" text-anchor="middle" >东市商街</text>
+</g>
+<g id="poi_creative_center" data-poi-id="creative_center" data-road="east_market_loop" data-road-index="2" data-offset="[0, 0]" data-position="[76, 58]">
+<circle class="poi-service" cx="1216.0" cy="696.0" r="13"><title>36. 山河文创中心 / Cultural Creative Center</title></circle>
+<text class="poi-number" x="1216.0" y="696.0">36</text>
+<text class="poi-label" x="1216.0" y="678.0" font-size="13" text-anchor="middle" >山河文创中心</text>
+</g>
+<g id="poi_post_office_cafe" data-poi-id="post_office_cafe" data-road="east_market_loop" data-road-index="3" data-offset="[0, 0]" data-position="[78, 62]">
+<circle class="poi-service" cx="1248.0" cy="744.0" r="13"><title>37. 邮局咖啡 / Post Office Cafe</title></circle>
+<text class="poi-number" x="1248.0" y="744.0">37</text>
+<text class="poi-label" x="1248.0" y="726.0" font-size="13" text-anchor="middle" >邮局咖啡</text>
+</g>
+<g id="poi_shanhe_bookstore" data-poi-id="shanhe_bookstore" data-road="east_market_loop" data-road-index="4" data-offset="[0, 0]" data-position="[74, 64]">
+<circle class="poi-service" cx="1184.0" cy="768.0" r="13"><title>38. 山河书店 / Shanhe Bookstore</title></circle>
+<text class="poi-number" x="1184.0" y="768.0">38</text>
+<text class="poi-label" x="1184.0" y="750.0" font-size="13" text-anchor="middle" >山河书店</text>
+</g>
+<g id="poi_hanfu_hall" data-poi-id="hanfu_hall" data-road="east_market_loop" data-road-index="5" data-offset="[0, 0]" data-position="[69, 66]">
+<circle class="poi-nature" cx="1104.0" cy="792.0" r="13"><title>39. 汉服体验馆 / Hanfu Experience Hall</title></circle>
+<text class="poi-number" x="1104.0" y="792.0">39</text>
+<text class="poi-label" x="1104.0" y="774.0" font-size="13" text-anchor="middle" >汉服体验馆</text>
+</g>
+<g id="poi_visitor_rest_station" data-poi-id="visitor_rest_station" data-road="east_market_loop" data-road-index="0" data-offset="[0, 0]" data-position="[68, 58]">
+<circle class="poi-service" cx="1088.0" cy="696.0" r="13"><title>40. 游客驿站 / Visitor Rest Station</title></circle>
+<text class="poi-number" x="1088.0" y="696.0">40</text>
+<text class="poi-label" x="1096.0" y="722.0" font-size="13" text-anchor="middle" >游客驿站</text>
+</g>
+<g id="poi_yunxi_hotel" data-poi-id="yunxi_hotel" data-road="hotel_access" data-road-index="1" data-offset="[0, 0]" data-position="[82, 64]">
+<circle class="poi-service" cx="1312.0" cy="768.0" r="13"><title>41. 云溪精品酒店 / Yunxi Boutique Hotel</title></circle>
+<text class="poi-number" x="1312.0" y="768.0">41</text>
+<text class="poi-label" x="1312.0" y="750.0" font-size="13" text-anchor="middle" >云溪精品酒店</text>
+</g>
+<g id="poi_riverside_homestay" data-poi-id="riverside_homestay" data-road="hotel_access" data-road-index="2" data-offset="[0, 0]" data-position="[86, 76]">
+<circle class="poi-service" cx="1376.0" cy="912.0" r="13"><title>42. 河畔庭院民宿 / Riverside Courtyard Homestay</title></circle>
+<text class="poi-number" x="1376.0" y="912.0">42</text>
+<text class="poi-label" x="1364.0" y="894.0" font-size="13" text-anchor="middle" >河畔庭院民宿</text>
+</g>
+<g id="poi_tea_valley" data-poi-id="tea_valley" data-road="tea_trail" data-road-index="2" data-offset="[0, 0]" data-position="[84, 84]">
+<circle class="poi-nature" cx="1344.0" cy="1008.0" r="13"><title>43. 茶山花谷 / Tea Hill Flower Valley</title></circle>
+<text class="poi-number" x="1344.0" y="1008.0">43</text>
+<text class="poi-label" x="1344.0" y="990.0" font-size="13" text-anchor="middle" >茶山花谷</text>
+</g>
+<g id="poi_tea_museum" data-poi-id="tea_museum" data-road="tea_museum_path" data-road-index="1" data-offset="[0, 0]" data-position="[82, 72]">
+<circle class="poi-core" cx="1312.0" cy="864.0" r="13"><title>44. 茶文化馆 / Tea Culture Museum</title></circle>
+<text class="poi-number" x="1312.0" y="864.0">44</text>
+<text class="poi-label" x="1312.0" y="846.0" font-size="13" text-anchor="middle" >茶文化馆</text>
+</g>
+<g id="poi_flower_creek_trail" data-poi-id="flower_creek_trail" data-road="flower_creek_trail" data-road-index="1" data-offset="[0, 0]" data-position="[90, 90]">
+<circle class="poi-nature" cx="1440.0" cy="1080.0" r="13"><title>45. 花溪步道 / Flower Creek Trail</title></circle>
+<text class="poi-number" x="1440.0" y="1080.0">45</text>
+<text class="poi-label" x="1448.0" y="1106.0" font-size="13" text-anchor="middle" >花溪步道</text>
+</g>
+<g id="poi_children_classroom" data-poi-id="children_classroom" data-road="tea_museum_path" data-road-index="2" data-offset="[0, 0]" data-position="[88, 78]">
+<circle class="poi-core" cx="1408.0" cy="936.0" r="13"><title>46. 儿童自然课堂 / Children’s Nature Classroom</title></circle>
+<text class="poi-number" x="1408.0" y="936.0">46</text>
+<text class="poi-label" x="1408.0" y="918.0" font-size="13" text-anchor="middle" >儿童自然课堂</text>
+</g>
+<g id="poi_cloud_valley_homestay" data-poi-id="cloud_valley_homestay" data-road="hotel_access" data-road-index="3" data-offset="[0, 0]" data-position="[92, 80]">
+<circle class="poi-service" cx="1472.0" cy="960.0" r="13"><title>47. 云隐民宿 / Cloud Valley Homestay</title></circle>
+<text class="poi-number" x="1472.0" y="960.0">47</text>
+<text class="poi-label" x="1472.0" y="942.0" font-size="13" text-anchor="middle" >云隐民宿</text>
+</g>
+</g>
+<g id="facility-layer" style="display:none" data-layer="facilities" opacity="0.92">
+<g id="facility_restroom_01" data-facility-type="restroom" data-position="[17, 84]">
+<rect class="facility" x="262.0" y="998.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间1 / Restroom 1</title></rect>
+<text class="facility-label" x="272.0" y="1008.0">WC</text>
+</g>
+<g id="facility_restroom_02" data-facility-type="restroom" data-position="[29, 68]">
+<rect class="facility" x="454.0" y="806.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间2 / Restroom 2</title></rect>
+<text class="facility-label" x="464.0" y="816.0">WC</text>
+</g>
+<g id="facility_restroom_03" data-facility-type="restroom" data-position="[42, 59]">
+<rect class="facility" x="662.0" y="698.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间3 / Restroom 3</title></rect>
+<text class="facility-label" x="672.0" y="708.0">WC</text>
+</g>
+<g id="facility_restroom_04" data-facility-type="restroom" data-position="[50, 55]">
+<rect class="facility" x="790.0" y="650.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间4 / Restroom 4</title></rect>
+<text class="facility-label" x="800.0" y="660.0">WC</text>
+</g>
+<g id="facility_restroom_05" data-facility-type="restroom" data-position="[55, 63]">
+<rect class="facility" x="870.0" y="746.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间5 / Restroom 5</title></rect>
+<text class="facility-label" x="880.0" y="756.0">WC</text>
+</g>
+<g id="facility_restroom_06" data-facility-type="restroom" data-position="[57, 70]">
+<rect class="facility" x="902.0" y="830.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间6 / Restroom 6</title></rect>
+<text class="facility-label" x="912.0" y="840.0">WC</text>
+</g>
+<g id="facility_restroom_07" data-facility-type="restroom" data-position="[67, 60]">
+<rect class="facility" x="1062.0" y="710.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间7 / Restroom 7</title></rect>
+<text class="facility-label" x="1072.0" y="720.0">WC</text>
+</g>
+<g id="facility_restroom_08" data-facility-type="restroom" data-position="[75, 59]">
+<rect class="facility" x="1190.0" y="698.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间8 / Restroom 8</title></rect>
+<text class="facility-label" x="1200.0" y="708.0">WC</text>
+</g>
+<g id="facility_restroom_09" data-facility-type="restroom" data-position="[82, 66]">
+<rect class="facility" x="1302.0" y="782.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间9 / Restroom 9</title></rect>
+<text class="facility-label" x="1312.0" y="792.0">WC</text>
+</g>
+<g id="facility_restroom_10" data-facility-type="restroom" data-position="[50, 41]">
+<rect class="facility" x="790.0" y="482.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间10 / Restroom 10</title></rect>
+<text class="facility-label" x="800.0" y="492.0">WC</text>
+</g>
+<g id="facility_restroom_11" data-facility-type="restroom" data-position="[57, 17]">
+<rect class="facility" x="902.0" y="194.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间11 / Restroom 11</title></rect>
+<text class="facility-label" x="912.0" y="204.0">WC</text>
+</g>
+<g id="facility_restroom_12" data-facility-type="restroom" data-position="[84, 85]">
+<rect class="facility" x="1334.0" y="1010.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间12 / Restroom 12</title></rect>
+<text class="facility-label" x="1344.0" y="1020.0">WC</text>
+</g>
+<g id="facility_restroom_13" data-facility-type="restroom" data-position="[86, 29]">
+<rect class="facility" x="1366.0" y="338.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间13 / Restroom 13</title></rect>
+<text class="facility-label" x="1376.0" y="348.0">WC</text>
+</g>
+<g id="facility_restroom_14" data-facility-type="restroom" data-position="[26, 54]">
+<rect class="facility" x="406.0" y="638.0" width="20" height="20" rx="5" fill="#2563eb"><title>卫生间14 / Restroom 14</title></rect>
+<text class="facility-label" x="416.0" y="648.0">WC</text>
+</g>
+<g id="facility_parking_01" data-facility-type="parking" data-position="[10, 92]">
+<rect class="facility" x="150.0" y="1094.0" width="20" height="20" rx="5" fill="#1d4ed8"><title>停车场1 / Parking 1</title></rect>
+<text class="facility-label" x="160.0" y="1104.0">P</text>
+</g>
+<g id="facility_parking_02" data-facility-type="parking" data-position="[18, 88]">
+<rect class="facility" x="278.0" y="1046.0" width="20" height="20" rx="5" fill="#1d4ed8"><title>停车场2 / Parking 2</title></rect>
+<text class="facility-label" x="288.0" y="1056.0">P</text>
+</g>
+<g id="facility_parking_03" data-facility-type="parking" data-position="[68, 54]">
+<rect class="facility" x="1078.0" y="638.0" width="20" height="20" rx="5" fill="#1d4ed8"><title>停车场3 / Parking 3</title></rect>
+<text class="facility-label" x="1088.0" y="648.0">P</text>
+</g>
+<g id="facility_parking_04" data-facility-type="parking" data-position="[83, 56]">
+<rect class="facility" x="1318.0" y="662.0" width="20" height="20" rx="5" fill="#1d4ed8"><title>停车场4 / Parking 4</title></rect>
+<text class="facility-label" x="1328.0" y="672.0">P</text>
+</g>
+<g id="facility_parking_05" data-facility-type="parking" data-position="[92, 78]">
+<rect class="facility" x="1462.0" y="926.0" width="20" height="20" rx="5" fill="#1d4ed8"><title>停车场5 / Parking 5</title></rect>
+<text class="facility-label" x="1472.0" y="936.0">P</text>
+</g>
+<g id="facility_firstaid_01" data-facility-type="firstAid" data-position="[18, 82]">
+<rect class="facility" x="278.0" y="974.0" width="20" height="20" rx="5" fill="#ef4444"><title>急救点1 / First Aid 1</title></rect>
+<text class="facility-label" x="288.0" y="984.0">+</text>
+</g>
+<g id="facility_firstaid_02" data-facility-type="firstAid" data-position="[42, 58]">
+<rect class="facility" x="662.0" y="686.0" width="20" height="20" rx="5" fill="#ef4444"><title>急救点2 / First Aid 2</title></rect>
+<text class="facility-label" x="672.0" y="696.0">+</text>
+</g>
+<g id="facility_firstaid_03" data-facility-type="firstAid" data-position="[57, 69]">
+<rect class="facility" x="902.0" y="818.0" width="20" height="20" rx="5" fill="#ef4444"><title>急救点3 / First Aid 3</title></rect>
+<text class="facility-label" x="912.0" y="828.0">+</text>
+</g>
+<g id="facility_firstaid_04" data-facility-type="firstAid" data-position="[58, 14]">
+<rect class="facility" x="918.0" y="158.0" width="20" height="20" rx="5" fill="#ef4444"><title>急救点4 / First Aid 4</title></rect>
+<text class="facility-label" x="928.0" y="168.0">+</text>
+</g>
+<g id="facility_security_01" data-facility-type="security" data-position="[20, 78]">
+<rect class="facility" x="310.0" y="926.0" width="20" height="20" rx="5" fill="#334155"><title>安保点1 / Security Station 1</title></rect>
+<text class="facility-label" x="320.0" y="936.0">S</text>
+</g>
+<g id="facility_security_02" data-facility-type="security" data-position="[34, 62]">
+<rect class="facility" x="534.0" y="734.0" width="20" height="20" rx="5" fill="#334155"><title>安保点2 / Security Station 2</title></rect>
+<text class="facility-label" x="544.0" y="744.0">S</text>
+</g>
+<g id="facility_security_03" data-facility-type="security" data-position="[48, 55]">
+<rect class="facility" x="758.0" y="650.0" width="20" height="20" rx="5" fill="#334155"><title>安保点3 / Security Station 3</title></rect>
+<text class="facility-label" x="768.0" y="660.0">S</text>
+</g>
+<g id="facility_security_04" data-facility-type="security" data-position="[56, 68]">
+<rect class="facility" x="886.0" y="806.0" width="20" height="20" rx="5" fill="#334155"><title>安保点4 / Security Station 4</title></rect>
+<text class="facility-label" x="896.0" y="816.0">S</text>
+</g>
+<g id="facility_security_05" data-facility-type="security" data-position="[75, 56]">
+<rect class="facility" x="1190.0" y="662.0" width="20" height="20" rx="5" fill="#334155"><title>安保点5 / Security Station 5</title></rect>
+<text class="facility-label" x="1200.0" y="672.0">S</text>
+</g>
+<g id="facility_security_06" data-facility-type="security" data-position="[50, 40]">
+<rect class="facility" x="790.0" y="470.0" width="20" height="20" rx="5" fill="#334155"><title>安保点6 / Security Station 6</title></rect>
+<text class="facility-label" x="800.0" y="480.0">S</text>
+</g>
+<g id="facility_charging_01" data-facility-type="charging" data-position="[12, 89]">
+<rect class="facility" x="182.0" y="1058.0" width="20" height="20" rx="5" fill="#0d9488"><title>充电站1 / Charging Station 1</title></rect>
+<text class="facility-label" x="192.0" y="1068.0">⚡</text>
+</g>
+<g id="facility_charging_02" data-facility-type="charging" data-position="[20, 82]">
+<rect class="facility" x="310.0" y="974.0" width="20" height="20" rx="5" fill="#0d9488"><title>充电站2 / Charging Station 2</title></rect>
+<text class="facility-label" x="320.0" y="984.0">⚡</text>
+</g>
+<g id="facility_charging_03" data-facility-type="charging" data-position="[42, 57]">
+<rect class="facility" x="662.0" y="674.0" width="20" height="20" rx="5" fill="#0d9488"><title>充电站3 / Charging Station 3</title></rect>
+<text class="facility-label" x="672.0" y="684.0">⚡</text>
+</g>
+<g id="facility_charging_04" data-facility-type="charging" data-position="[68, 57]">
+<rect class="facility" x="1078.0" y="674.0" width="20" height="20" rx="5" fill="#0d9488"><title>充电站4 / Charging Station 4</title></rect>
+<text class="facility-label" x="1088.0" y="684.0">⚡</text>
+</g>
+<g id="facility_charging_05" data-facility-type="charging" data-position="[79, 61]">
+<rect class="facility" x="1254.0" y="722.0" width="20" height="20" rx="5" fill="#0d9488"><title>充电站5 / Charging Station 5</title></rect>
+<text class="facility-label" x="1264.0" y="732.0">⚡</text>
+</g>
+<g id="facility_charging_06" data-facility-type="charging" data-position="[82, 64]">
+<rect class="facility" x="1302.0" y="758.0" width="20" height="20" rx="5" fill="#0d9488"><title>充电站6 / Charging Station 6</title></rect>
+<text class="facility-label" x="1312.0" y="768.0">⚡</text>
+</g>
+<g id="facility_charging_07" data-facility-type="charging" data-position="[86, 76]">
+<rect class="facility" x="1366.0" y="902.0" width="20" height="20" rx="5" fill="#0d9488"><title>充电站7 / Charging Station 7</title></rect>
+<text class="facility-label" x="1376.0" y="912.0">⚡</text>
+</g>
+<g id="facility_charging_08" data-facility-type="charging" data-position="[84, 84]">
+<rect class="facility" x="1334.0" y="998.0" width="20" height="20" rx="5" fill="#0d9488"><title>充电站8 / Charging Station 8</title></rect>
+<text class="facility-label" x="1344.0" y="1008.0">⚡</text>
+</g>
+<g id="facility_nursing_01" data-facility-type="nursing" data-position="[18, 82]">
+<rect class="facility" x="278.0" y="974.0" width="20" height="20" rx="5" fill="#db2777"><title>母婴室1 / Nursing Room 1</title></rect>
+<text class="facility-label" x="288.0" y="984.0">N</text>
+</g>
+<g id="facility_nursing_02" data-facility-type="nursing" data-position="[72, 56]">
+<rect class="facility" x="1142.0" y="662.0" width="20" height="20" rx="5" fill="#db2777"><title>母婴室2 / Nursing Room 2</title></rect>
+<text class="facility-label" x="1152.0" y="672.0">N</text>
+</g>
+<g id="facility_nursing_03" data-facility-type="nursing" data-position="[84, 84]">
+<rect class="facility" x="1334.0" y="998.0" width="20" height="20" rx="5" fill="#db2777"><title>母婴室3 / Nursing Room 3</title></rect>
+<text class="facility-label" x="1344.0" y="1008.0">N</text>
+</g>
+<g id="facility_accessible_01" data-facility-type="accessible" data-position="[18, 82]">
+<rect class="facility" x="278.0" y="974.0" width="20" height="20" rx="5" fill="#059669"><title>无障碍设施1 / Accessible Facility 1</title></rect>
+<text class="facility-label" x="288.0" y="984.0">♿</text>
+</g>
+<g id="facility_accessible_02" data-facility-type="accessible" data-position="[58, 58]">
+<rect class="facility" x="918.0" y="686.0" width="20" height="20" rx="5" fill="#059669"><title>无障碍设施2 / Accessible Facility 2</title></rect>
+<text class="facility-label" x="928.0" y="696.0">♿</text>
+</g>
+<g id="facility_accessible_03" data-facility-type="accessible" data-position="[50, 56]">
+<rect class="facility" x="790.0" y="662.0" width="20" height="20" rx="5" fill="#059669"><title>无障碍设施3 / Accessible Facility 3</title></rect>
+<text class="facility-label" x="800.0" y="672.0">♿</text>
+</g>
+<g id="facility_accessible_04" data-facility-type="accessible" data-position="[72, 56]">
+<rect class="facility" x="1142.0" y="662.0" width="20" height="20" rx="5" fill="#059669"><title>无障碍设施4 / Accessible Facility 4</title></rect>
+<text class="facility-label" x="1152.0" y="672.0">♿</text>
+</g>
+<g id="facility_accessible_05" data-facility-type="accessible" data-position="[50, 40]">
+<rect class="facility" x="790.0" y="470.0" width="20" height="20" rx="5" fill="#059669"><title>无障碍设施5 / Accessible Facility 5</title></rect>
+<text class="facility-label" x="800.0" y="480.0">♿</text>
+</g>
+<g id="facility_dining_01" data-facility-type="dining" data-position="[37, 61]">
+<rect class="facility" x="582.0" y="722.0" width="20" height="20" rx="5" fill="#f97316"><title>老茶馆 / Old Teahouse</title></rect>
+<text class="facility-label" x="592.0" y="732.0">食</text>
+</g>
+<g id="facility_dining_02" data-facility-type="dining" data-position="[78, 62]">
+<rect class="facility" x="1238.0" y="734.0" width="20" height="20" rx="5" fill="#f97316"><title>邮局咖啡 / Post Office Cafe</title></rect>
+<text class="facility-label" x="1248.0" y="744.0">食</text>
+</g>
+<g id="facility_dining_03" data-facility-type="dining" data-position="[67, 69]">
+<rect class="facility" x="1062.0" y="818.0" width="20" height="20" rx="5" fill="#f97316"><title>云溪水街餐饮 / Yunxi Riverside Dining</title></rect>
+<text class="facility-label" x="1072.0" y="828.0">食</text>
+</g>
+<g id="facility_dining_04" data-facility-type="dining" data-position="[42, 74]">
+<rect class="facility" x="662.0" y="878.0" width="20" height="20" rx="5" fill="#f97316"><title>古码头餐厅 / Ancient Wharf Restaurant</title></rect>
+<text class="facility-label" x="672.0" y="888.0">食</text>
+</g>
+<g id="facility_dining_05" data-facility-type="dining" data-position="[49, 64]">
+<rect class="facility" x="774.0" y="758.0" width="20" height="20" rx="5" fill="#f97316"><title>糖画摊 / Sugar Painting Booth</title></rect>
+<text class="facility-label" x="784.0" y="768.0">食</text>
+</g>
+<g id="facility_dining_06" data-facility-type="dining" data-position="[32, 66]">
+<rect class="facility" x="502.0" y="782.0" width="20" height="20" rx="5" fill="#f97316"><title>山河面馆 / Shanhe Noodle House</title></rect>
+<text class="facility-label" x="512.0" y="792.0">食</text>
+</g>
+<g id="facility_dining_07" data-facility-type="dining" data-position="[84, 84]">
+<rect class="facility" x="1334.0" y="998.0" width="20" height="20" rx="5" fill="#f97316"><title>茶山小食 / Tea Hill Snacks</title></rect>
+<text class="facility-label" x="1344.0" y="1008.0">食</text>
+</g>
+<g id="facility_dining_08" data-facility-type="dining" data-position="[62, 69]">
+<rect class="facility" x="982.0" y="818.0" width="20" height="20" rx="5" fill="#f97316"><title>水岸茶社 / Riverside Tea House</title></rect>
+<text class="facility-label" x="992.0" y="828.0">食</text>
+</g>
+<g id="facility_accommodation_01" data-facility-type="accommodation" data-position="[82, 64]">
+<rect class="facility" x="1302.0" y="758.0" width="20" height="20" rx="5" fill="#7c3aed"><title>云溪精品酒店 / Yunxi Boutique Hotel</title></rect>
+<text class="facility-label" x="1312.0" y="768.0">宿</text>
+</g>
+<g id="facility_accommodation_02" data-facility-type="accommodation" data-position="[86, 76]">
+<rect class="facility" x="1366.0" y="902.0" width="20" height="20" rx="5" fill="#7c3aed"><title>河畔庭院民宿 / Riverside Courtyard Homestay</title></rect>
+<text class="facility-label" x="1376.0" y="912.0">宿</text>
+</g>
+<g id="facility_accommodation_03" data-facility-type="accommodation" data-position="[92, 80]">
+<rect class="facility" x="1462.0" y="950.0" width="20" height="20" rx="5" fill="#7c3aed"><title>云隐民宿 / Cloud Valley Homestay</title></rect>
+<text class="facility-label" x="1472.0" y="960.0">宿</text>
+</g>
+<g id="facility_accommodation_04" data-facility-type="accommodation" data-position="[92, 28]">
+<rect class="facility" x="1462.0" y="326.0" width="20" height="20" rx="5" fill="#7c3aed"><title>星光营地 / Starlight Camp</title></rect>
+<text class="facility-label" x="1472.0" y="336.0">宿</text>
+</g>
+<g id="facility_accommodation_05" data-facility-type="accommodation" data-position="[30, 72]">
+<rect class="facility" x="470.0" y="854.0" width="20" height="20" rx="5" fill="#7c3aed"><title>古镇客栈 / Old Town Inn</title></rect>
+<text class="facility-label" x="480.0" y="864.0">宿</text>
+</g>
+<g id="facility_photo_01" data-facility-type="photo" data-position="[21, 76]">
+<rect class="facility" x="326.0" y="902.0" width="20" height="20" rx="5" fill="#0f766e"><title>拍照点1 / Photo Spot 1</title></rect>
+<text class="facility-label" x="336.0" y="912.0">拍</text>
+</g>
+<g id="facility_photo_02" data-facility-type="photo" data-position="[32, 66]">
+<rect class="facility" x="502.0" y="782.0" width="20" height="20" rx="5" fill="#0f766e"><title>拍照点2 / Photo Spot 2</title></rect>
+<text class="facility-label" x="512.0" y="792.0">拍</text>
+</g>
+<g id="facility_photo_03" data-facility-type="photo" data-position="[58, 58]">
+<rect class="facility" x="918.0" y="686.0" width="20" height="20" rx="5" fill="#0f766e"><title>拍照点3 / Photo Spot 3</title></rect>
+<text class="facility-label" x="928.0" y="696.0">拍</text>
+</g>
+<g id="facility_photo_04" data-facility-type="photo" data-position="[42, 74]">
+<rect class="facility" x="662.0" y="878.0" width="20" height="20" rx="5" fill="#0f766e"><title>拍照点4 / Photo Spot 4</title></rect>
+<text class="facility-label" x="672.0" y="888.0">拍</text>
+</g>
+<g id="facility_photo_05" data-facility-type="photo" data-position="[66, 63]">
+<rect class="facility" x="1046.0" y="746.0" width="20" height="20" rx="5" fill="#0f766e"><title>拍照点5 / Photo Spot 5</title></rect>
+<text class="facility-label" x="1056.0" y="756.0">拍</text>
+</g>
+<g id="facility_photo_06" data-facility-type="photo" data-position="[74, 72]">
+<rect class="facility" x="1174.0" y="854.0" width="20" height="20" rx="5" fill="#0f766e"><title>拍照点6 / Photo Spot 6</title></rect>
+<text class="facility-label" x="1184.0" y="864.0">拍</text>
+</g>
+<g id="facility_photo_07" data-facility-type="photo" data-position="[56, 24]">
+<rect class="facility" x="886.0" y="278.0" width="20" height="20" rx="5" fill="#0f766e"><title>拍照点7 / Photo Spot 7</title></rect>
+<text class="facility-label" x="896.0" y="288.0">拍</text>
+</g>
+<g id="facility_photo_08" data-facility-type="photo" data-position="[58, 14]">
+<rect class="facility" x="918.0" y="158.0" width="20" height="20" rx="5" fill="#0f766e"><title>拍照点8 / Photo Spot 8</title></rect>
+<text class="facility-label" x="928.0" y="168.0">拍</text>
+</g>
+<g id="facility_photo_09" data-facility-type="photo" data-position="[86, 28]">
+<rect class="facility" x="1366.0" y="326.0" width="20" height="20" rx="5" fill="#0f766e"><title>拍照点9 / Photo Spot 9</title></rect>
+<text class="facility-label" x="1376.0" y="336.0">拍</text>
+</g>
+<g id="facility_photo_10" data-facility-type="photo" data-position="[78, 36]">
+<rect class="facility" x="1238.0" y="422.0" width="20" height="20" rx="5" fill="#0f766e"><title>拍照点10 / Photo Spot 10</title></rect>
+<text class="facility-label" x="1248.0" y="432.0">拍</text>
+</g>
+<g id="facility_photo_11" data-facility-type="photo" data-position="[84, 84]">
+<rect class="facility" x="1334.0" y="998.0" width="20" height="20" rx="5" fill="#0f766e"><title>拍照点11 / Photo Spot 11</title></rect>
+<text class="facility-label" x="1344.0" y="1008.0">拍</text>
+</g>
+<g id="facility_photo_12" data-facility-type="photo" data-position="[90, 90]">
+<rect class="facility" x="1430.0" y="1070.0" width="20" height="20" rx="5" fill="#0f766e"><title>拍照点12 / Photo Spot 12</title></rect>
+<text class="facility-label" x="1440.0" y="1080.0">拍</text>
+</g>
+</g>
+<g id="current-location" data-position="[18,82]"><circle cx="288.0" cy="984.0" r="20" fill="#ef4444" stroke="#fff" stroke-width="5" filter="url(#softShadow)"/><text class="poi-number" x="288.0" y="982.0" font-size="13">我</text><text class="poi-label" x="288.0" y="1018.0" font-size="14">您在这里</text></g>
+<g id="map-title" transform="translate(34,44)"><text class="title">山河古镇导航地图</text><text class="subtitle" y="38">Shanhe Ancient Town Navigation Map · SVG Road Network</text></g>
+<g id="legend" transform="translate(40,1040)">
+  <rect x="0" y="0" width="820" height="120" rx="18" fill="#fffaf0" stroke="#d6c9a8" opacity="0.92"/>
+  <text class="legend-text" x="22" y="34" font-weight="800">图例 Legend</text>
+  <line x1="28" y1="62" x2="92" y2="62" class="road-base road-main"/><text class="legend-text" x="110" y="68">主路 Main Road</text>
+  <line x1="245" y1="62" x2="309" y2="62" class="road-base road-secondary"/><text class="legend-text" x="327" y="68">次级路 Secondary</text>
+  <line x1="492" y1="62" x2="556" y2="62" class="road-base road-riverside"/><text class="legend-text" x="574" y="68">滨水步道 Riverside</text>
+  <line x1="28" y1="96" x2="92" y2="96" class="road-base road-mountain"/><text class="legend-text" x="110" y="102">登山步道 Mountain Trail</text>
+  <line x1="338" y1="96" x2="402" y2="96" class="bridge"/><line x1="338" y1="96" x2="402" y2="96" class="bridge-deck"/><text class="legend-text" x="420" y="102">桥 Bridge</text>
+  <rect x="578" y="82" width="24" height="18" class="building"/><text class="legend-text" x="618" y="98">建筑 Building · 不可通行</text>
+</g>
+<g id="data-note" transform="translate(1010,1040)"><rect x="0" y="0" width="540" height="120" rx="18" fill="#f8fafc" stroke="#cbd5e1" opacity="0.94"/><text class="legend-text" x="24" y="34" font-weight="800">Codex使用说明</text><text class="legend-text" x="24" y="66">路线只能沿 road-network-layer 和 bridge-network-layer。</text><text class="legend-text" x="24" y="96">river、mountain、building 图层均为不可通行区域。</text></g>
+</svg>

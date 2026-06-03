@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "./components/Header.jsx";
 import PoiPanel from "./components/PoiPanel.jsx";
 import RoutePanel from "./components/RoutePanel.jsx";
@@ -8,9 +8,9 @@ import DetailPanel from "./components/DetailPanel.jsx";
 import Legend from "./components/Legend.jsx";
 import QrMock from "./components/QrMock.jsx";
 import ProductValue from "./components/ProductValue.jsx";
-import { pois } from "./data/pois.js";
-import { facilities } from "./data/facilities.js";
-import { recommendRules, routes } from "./data/routes.js";
+import { pois as richPois } from "./data/pois.js";
+import { facilities as richFacilities } from "./data/facilities.js";
+import { recommendRules, routes as legacyRoutes } from "./data/routes.js";
 import { copy } from "./data/i18n.js";
 import {
   facilityAliases,
@@ -21,6 +21,14 @@ import {
   poiAliases
 } from "./data/mapMeta.js";
 import { facilityTypeLabels } from "./data/facilities.js";
+import {
+  findNetworkPath,
+  hydrateSvgMapData,
+  legacyRouteIdMap,
+  parseSvgMapMetadata,
+  SVG_MAP_ASSET,
+  SVG_MAP_SIZE
+} from "./data/svgMap.js";
 
 const currentLocationId = "visitor_center";
 
@@ -35,10 +43,6 @@ function normalizeItem(item) {
     aliases
   };
 }
-
-const normalizedPois = pois.map(normalizeItem);
-const normalizedFacilities = facilities.map(normalizeItem);
-const allMapItems = [...normalizedPois, ...normalizedFacilities];
 
 function categoryMatches(poi, selectedCategory) {
   if (selectedCategory === "all") return true;
@@ -67,12 +71,22 @@ function searchMatchesPoi(poi, term) {
 }
 
 export default function App() {
+  const [mapData, setMapData] = useState(() => ({
+    mapAsset: SVG_MAP_ASSET,
+    mapSize: SVG_MAP_SIZE,
+    zones: [],
+    roads: [],
+    bridges: [],
+    pois: richPois,
+    facilities: richFacilities,
+    routes: legacyRoutes
+  }));
   const [lang, setLang] = useState("zh");
   const labels = copy[lang];
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedPoi, setSelectedPoi] = useState(() => allMapItems.find((poi) => poi.id === "opera_house"));
-  const [activeRoute, setActiveRoute] = useState(() => routes.find((route) => route.id === "classic-cultural"));
+  const [selectedPoi, setSelectedPoi] = useState(() => richPois.find((poi) => poi.id === "opera_house"));
+  const [activeRoute, setActiveRoute] = useState(() => legacyRoutes.find((route) => route.id === "classic-cultural"));
   const [audioState, setAudioState] = useState({ id: null, playing: false });
   const [viewRequest, setViewRequest] = useState({ type: "fit-map", nonce: 0 });
   const [navigationTarget, setNavigationTarget] = useState(null);
@@ -82,6 +96,7 @@ export default function App() {
   const [isMapFullscreen, setIsMapFullscreen] = useState(false);
   const [leftCollapsed, setLeftCollapsed] = useState(false);
   const [rightCollapsed, setRightCollapsed] = useState(false);
+  const [mobilePanel, setMobilePanel] = useState("details");
   const [recommendation, setRecommendation] = useState({
     duration: labels.durations[1],
     visitor: labels.visitors[0],
@@ -89,10 +104,39 @@ export default function App() {
   });
   const [generated, setGenerated] = useState(null);
 
+  useEffect(() => {
+    let cancelled = false;
+    fetch(SVG_MAP_ASSET)
+      .then((response) => {
+        if (!response.ok) throw new Error(`Failed to load SVG map: ${response.status}`);
+        return response.text();
+      })
+      .then((svgText) => hydrateSvgMapData(parseSvgMapMetadata(svgText), richPois, richFacilities))
+      .then((nextMapData) => {
+        if (cancelled) return;
+        setMapData(nextMapData);
+        setSelectedPoi(normalizeItem(nextMapData.pois.find((poi) => poi.id === "opera_house") || nextMapData.pois[0]));
+        setActiveRoute(nextMapData.routes.find((route) => route.id === "route_classic") || nextMapData.routes[0]);
+        setViewRequest({ type: "fit-map", nonce: Date.now() });
+      })
+      .catch((error) => {
+        console.error(error);
+        showToast(lang === "zh" ? "SVG地图数据读取失败" : "Failed to load SVG map data");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const normalizedPois = useMemo(() => mapData.pois.map(normalizeItem), [mapData.pois]);
+  const normalizedFacilities = useMemo(() => mapData.facilities.map(normalizeItem), [mapData.facilities]);
+  const routes = mapData.routes;
+  const allMapItems = useMemo(() => [...normalizedPois, ...normalizedFacilities], [normalizedPois, normalizedFacilities]);
+
   const searchResults = useMemo(() => {
     if (!searchTerm.trim()) return [];
     return allMapItems.filter((poi) => searchMatchesPoi(poi, searchTerm));
-  }, [searchTerm]);
+  }, [allMapItems, searchTerm]);
 
   const searchMatchIds = useMemo(() => new Set(searchResults.map((poi) => poi.id)), [searchResults]);
 
@@ -108,6 +152,7 @@ export default function App() {
 
   const handleSelectPoi = (poi, options = {}) => {
     setSelectedPoi(poi);
+    setMobilePanel("details");
     if (options.focus !== false) {
       requestView({ type: "point", id: poi.id, scale: poi.distance ? 2.05 : 1.75 });
     }
@@ -128,17 +173,17 @@ export default function App() {
     const dy = poi.y - from.y;
     const approxMeters = Math.round(Math.sqrt(dx * dx + dy * dy) * 55);
     const minutes = Math.max(3, Math.round(approxMeters / 75));
+    const networkPath = findNetworkPath(from, poi, mapData);
+    if (!networkPath.length) {
+      showToast(lang === "zh" ? "未找到可通行路网路径" : "No walkable network path found");
+      return;
+    }
     setNavigationTarget({
       fromId: currentLocationId,
       toId: poi.id,
       distance: { zh: `${approxMeters}米`, en: `${approxMeters} m` },
       time: { zh: `${minutes}分钟`, en: `${minutes} min` },
-      path: [
-        [from.x, from.y],
-        [from.x + dx * 0.35, from.y + dy * 0.2 + 3],
-        [from.x + dx * 0.68, from.y + dy * 0.72 - 3],
-        [poi.x, poi.y]
-      ]
+      path: networkPath
     });
     requestView({ type: "bounds", points: [[from.x, from.y], [poi.x, poi.y]], padding: 0.7 });
     showToast(labels.plannedRoute);
@@ -160,7 +205,8 @@ export default function App() {
   const handleGenerate = () => {
     const choices = [recommendation.duration, recommendation.visitor, recommendation.interest];
     const rule = recommendRules.find((item) => item.matches.some((match) => choices.includes(match))) || recommendRules[4];
-    const route = routes.find((item) => item.id === rule.routeId) || routes[1];
+    const routeId = legacyRouteIdMap[rule.routeId] || rule.routeId;
+    const route = routes.find((item) => item.id === routeId) || routes[1];
     setActiveRoute(route);
     requestView({ type: "route", route });
     setGenerated({ route, reason: rule.reason });
@@ -168,10 +214,18 @@ export default function App() {
 
   const handleRouteSelect = (route) => {
     setActiveRoute(route);
+    setMobilePanel("routes");
     requestView({ type: "route", route });
   };
 
   const visibleCategoryFilter = (poi) => categoryMatches(poi, selectedCategory);
+  const mobileTabs = [
+    { key: "pois", label: lang === "zh" ? "景点" : "POI" },
+    { key: "routes", label: lang === "zh" ? "路线" : "Routes" },
+    { key: "facilities", label: lang === "zh" ? "设施" : "Facilities" },
+    { key: "details", label: lang === "zh" ? "详情" : "Details" }
+  ];
+  const mobilePanelTitle = mobileTabs.find((item) => item.key === mobilePanel)?.label;
 
   return (
     <div className={[
@@ -184,7 +238,10 @@ export default function App() {
         lang={lang}
         labels={labels}
         searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
+        setSearchTerm={(value) => {
+          setSearchTerm(value);
+          if (value.trim()) setMobilePanel("pois");
+        }}
         setLang={(nextLang) => {
           setLang(nextLang);
           setRecommendation({
@@ -246,6 +303,9 @@ export default function App() {
             currentLocationId={currentLocationId}
             isFullscreen={isMapFullscreen}
             onToggleFullscreen={() => setIsMapFullscreen((value) => !value)}
+            mapAsset={mapData.mapAsset}
+            mapSize={mapData.mapSize}
+            zones={mapData.zones}
           />
           <div className="bottom-dock">
             <Legend labels={labels} />
@@ -289,6 +349,72 @@ export default function App() {
           <QrMock labels={labels} />
         </aside>
       </main>
+
+      <section className="mobile-bottom-sheet" aria-label="mobile guide controls">
+        <div className="mobile-grabber" />
+        <nav className="mobile-tabs">
+          {mobileTabs.map((item) => (
+            <button
+              key={item.key}
+              className={mobilePanel === item.key ? "active" : ""}
+              onClick={() => setMobilePanel(item.key)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+        <div className="mobile-sheet-title">{mobilePanelTitle}</div>
+        <div className="mobile-sheet-content">
+          {mobilePanel === "pois" && (
+            <PoiPanel
+              lang={lang}
+              labels={labels}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              searchResults={searchResults}
+              searchTerm={searchTerm}
+              onSelectPoi={(poi) => handleSelectPoi(poi)}
+            />
+          )}
+          {mobilePanel === "routes" && (
+            <RoutePanel
+              lang={lang}
+              labels={labels}
+              routes={routes}
+              activeRoute={activeRoute}
+              setActiveRoute={handleRouteSelect}
+              recommendation={recommendation}
+              setRecommendation={setRecommendation}
+              generated={generated}
+              onGenerate={handleGenerate}
+            />
+          )}
+          {mobilePanel === "facilities" && (
+            <FacilityPanel
+              lang={lang}
+              labels={labels}
+              facilities={normalizedFacilities}
+              onSelectPoi={(poi) => handleSelectPoi(poi)}
+              onNavigate={handleStartNavigation}
+            />
+          )}
+          {mobilePanel === "details" && (
+            <DetailPanel
+              lang={lang}
+              labels={labels}
+              selectedPoi={selectedPoi}
+              audioState={audioState}
+              onPlayAudio={handlePlayAudio}
+              onStartNavigation={handleStartNavigation}
+              onAddToRoute={handleAddToRoute}
+              onBilingualIntro={handleBilingualIntro}
+              onShareCard={handleShareCard}
+              navigationTarget={navigationTarget}
+              myRoute={myRoute}
+            />
+          )}
+        </div>
+      </section>
 
       {toast && <div className="toast">{toast}</div>}
 

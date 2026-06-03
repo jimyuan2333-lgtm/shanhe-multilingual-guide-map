@@ -22,10 +22,11 @@ import {
   Waves,
   Zap
 } from "./icons.jsx";
-import { MAP_SIZE, mapZones } from "../data/mapMeta.js";
+
+const DEFAULT_MAP_SIZE = { width: 1600, height: 1200 };
 
 function getIcon(type) {
-  const normalized = type?.split("/")?.[0];
+  const normalized = type?.split(/[\/_]/)?.[0];
   const icons = {
     service: MapPin,
     attraction: Landmark,
@@ -59,8 +60,8 @@ function smooth(min, max, value) {
   return t * t * (3 - 2 * t);
 }
 
-function pointToPx(point) {
-  return [(point[0] / 100) * MAP_SIZE.width, (point[1] / 100) * MAP_SIZE.height];
+function pointToPx(point, mapSize) {
+  return [(point[0] / 100) * mapSize.width, (point[1] / 100) * mapSize.height];
 }
 
 function poiToPoint(poi) {
@@ -81,9 +82,9 @@ function getLabelThreshold(poi) {
   return 1.8;
 }
 
-function pathPoints(path) {
+function pathPoints(path, mapSize) {
   return path.map((point) => {
-    const [x, y] = pointToPx(point);
+    const [x, y] = pointToPx(point, mapSize);
     return `${x},${y}`;
   }).join(" ");
 }
@@ -102,10 +103,14 @@ export default function GuideMap({
   navigationTarget,
   currentLocationId,
   isFullscreen,
-  onToggleFullscreen
+  onToggleFullscreen,
+  mapAsset,
+  mapSize = DEFAULT_MAP_SIZE,
+  zones = []
 }) {
   const viewportRef = useRef(null);
   const dragRef = useRef(null);
+  const touchRef = useRef(null);
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
 
@@ -136,22 +141,22 @@ export default function GuideMap({
 
   const fitMap = () => {
     const viewport = getViewport();
-    const scale = clampZoom(Math.min(viewport.width / MAP_SIZE.width, viewport.height / MAP_SIZE.height) * 0.98);
+    const scale = clampZoom(Math.min(viewport.width / mapSize.width, viewport.height / mapSize.height) * 0.98);
     setZoom(scale);
     setPan({
-      x: (viewport.width - MAP_SIZE.width * scale) / 2,
-      y: (viewport.height - MAP_SIZE.height * scale) / 2
+      x: (viewport.width - mapSize.width * scale) / 2,
+      y: (viewport.height - mapSize.height * scale) / 2
     });
   };
 
   const centerOnPoi = (poi, scale = 1.75) => {
     if (!poi) return;
-    applyView(scale, pointToPx(poiToPoint(poi)));
+    applyView(scale, pointToPx(poiToPoint(poi), mapSize));
   };
 
   const fitPoints = (points, padding = 0.82) => {
     if (!points?.length) return;
-    const pxPoints = points.map(pointToPx);
+    const pxPoints = points.map((point) => pointToPx(point, mapSize));
     const minX = Math.min(...pxPoints.map((point) => point[0]));
     const maxX = Math.max(...pxPoints.map((point) => point[0]));
     const minY = Math.min(...pxPoints.map((point) => point[1]));
@@ -247,6 +252,65 @@ export default function GuideMap({
     dragRef.current = null;
   };
 
+  const touchDistance = (touches) => {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.hypot(dx, dy);
+  };
+
+  const touchCenter = (touches) => ({
+    x: (touches[0].clientX + touches[1].clientX) / 2,
+    y: (touches[0].clientY + touches[1].clientY) / 2
+  });
+
+  const handleTouchStart = (event) => {
+    if (event.touches.length === 1) {
+      touchRef.current = {
+        mode: "pan",
+        startX: event.touches[0].clientX,
+        startY: event.touches[0].clientY,
+        panX: pan.x,
+        panY: pan.y
+      };
+    }
+    if (event.touches.length === 2) {
+      const center = touchCenter(event.touches);
+      const viewport = getViewport();
+      touchRef.current = {
+        mode: "pinch",
+        startDistance: touchDistance(event.touches),
+        startZoom: zoom,
+        mapX: (center.x - viewport.left - pan.x) / zoom,
+        mapY: (center.y - viewport.top - pan.y) / zoom
+      };
+    }
+  };
+
+  const handleTouchMove = (event) => {
+    if (!touchRef.current) return;
+    event.preventDefault();
+    if (touchRef.current.mode === "pan" && event.touches.length === 1) {
+      setPan({
+        x: touchRef.current.panX + event.touches[0].clientX - touchRef.current.startX,
+        y: touchRef.current.panY + event.touches[0].clientY - touchRef.current.startY
+      });
+    }
+    if (touchRef.current.mode === "pinch" && event.touches.length === 2) {
+      const center = touchCenter(event.touches);
+      const viewport = getViewport();
+      const scale = clampZoom(touchRef.current.startZoom * (touchDistance(event.touches) / touchRef.current.startDistance));
+      setZoom(scale);
+      setPan({
+        x: center.x - viewport.left - touchRef.current.mapX * scale,
+        y: center.y - viewport.top - touchRef.current.mapY * scale
+      });
+    }
+  };
+
+  const handleTouchEnd = () => {
+    touchRef.current = null;
+  };
+
   const routeStart = pointsById.get(activeRoute.nodes[0]);
   const routeEnd = pointsById.get(activeRoute.nodes[activeRoute.nodes.length - 1]);
   const currentLocation = pointsById.get(currentLocationId);
@@ -254,8 +318,8 @@ export default function GuideMap({
   const visiblePois = pois.filter((poi) => {
     const forced = selectedPoi?.id === poi.id || searchMatches.has(poi.id) || navigationTarget?.toId === poi.id;
     const routeKeyNode = activeRouteIds.has(poi.id) && (poi.level <= 2 || zoom > 1.35);
-    const opacity = smooth(getThreshold(poi) - 0.25, getThreshold(poi) + 0.32, zoom);
-    return categoryFilter(poi) && (forced || routeKeyNode || opacity > 0.08);
+    const visibility = smooth(getThreshold(poi) - 0.2, getThreshold(poi) + 0.28, zoom);
+    return categoryFilter(poi) && (forced || routeKeyNode || visibility >= 0.62);
   });
 
   return (
@@ -279,33 +343,33 @@ export default function GuideMap({
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
       >
         <div
           className="map-canvas"
           style={{
-            width: MAP_SIZE.width,
-            height: MAP_SIZE.height,
+            width: mapSize.width,
+            height: mapSize.height,
             transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`
           }}
         >
-          <img src="/assets/shanhe-map.png" alt="Shanhe Ancient Town base map" draggable="false" />
+          <img src={mapAsset} alt="Shanhe Ancient Town SVG navigation map" draggable="false" />
 
-          <svg className="route-layer" viewBox={`0 0 ${MAP_SIZE.width} ${MAP_SIZE.height}`}>
-            <polyline className="main-road-line" points={pathPoints([[20, 82], [31, 70], [43, 62], [53, 58], [64, 59], [76, 57], [90, 57]])} />
-            <polyline className="secondary-road-line" points={pathPoints([[30, 61], [41, 48], [54, 37], [68, 31], [80, 20]])} />
-            <polyline className="walking-line" points={pathPoints([[58, 48], [68, 30], [76, 20], [82, 11], [90, 17]])} />
-            <polyline className="riverside-line" points={pathPoints([[52, 72], [62, 69], [70, 62], [79, 55], [88, 50]])} />
+          <svg className="route-layer" viewBox={`0 0 ${mapSize.width} ${mapSize.height}`}>
             {navigationTarget?.path && (
-              <polyline className="navigation-path" points={pathPoints(navigationTarget.path)} />
+              <polyline className="navigation-path" points={pathPoints(navigationTarget.path, mapSize)} />
             )}
             <polyline
               className="route-path active"
-              points={pathPoints(activeRoute.path || activeRoute.nodes.map((id) => pointsById.get(id)).filter(Boolean).map(poiToPoint))}
+              points={pathPoints(activeRoute.path || activeRoute.nodes.map((id) => pointsById.get(id)).filter(Boolean).map(poiToPoint), mapSize)}
               stroke={activeRoute.color}
             />
           </svg>
 
-          {mapZones.map((zone) => {
+          {zones.map((zone) => {
             const opacity = Math.max(0, 0.92 - smooth(0.72, 1.42, zoom));
             return (
               <div
@@ -346,8 +410,7 @@ export default function GuideMap({
             const inRoute = activeRouteIds.has(poi.id);
             const isNavigationTarget = navigationTarget?.toId === poi.id;
             const forced = isMatch || isSelected || isNavigationTarget;
-            const iconOpacity = forced ? 1 : smooth(getThreshold(poi) - 0.25, getThreshold(poi) + 0.32, zoom);
-            const labelOpacity = forced ? 1 : smooth(getLabelThreshold(poi) - 0.2, getLabelThreshold(poi) + 0.4, zoom);
+            const labelVisible = forced || smooth(getLabelThreshold(poi) - 0.15, getLabelThreshold(poi) + 0.25, zoom) >= 0.62;
             const routeNumber = routeIndex.get(poi.id);
             const showRouteNumber = inRoute && zoom <= 1.55;
             return (
@@ -356,7 +419,7 @@ export default function GuideMap({
                 className={[
                   "poi-marker",
                   poi.distance ? "facility" : "place",
-                  poi.type.split("/")[0],
+                  poi.type.split(/[\/_]/)[0],
                   isSelected ? "selected" : "",
                   isMatch ? "search-match" : "",
                   inRoute ? "in-route" : "",
@@ -365,9 +428,7 @@ export default function GuideMap({
                 ].join(" ")}
                 style={{
                   left: `${poi.x}%`,
-                  top: `${poi.y}%`,
-                  opacity: iconOpacity,
-                  "--label-opacity": labelOpacity
+                  top: `${poi.y}%`
                 }}
                 onClick={(event) => {
                   event.stopPropagation();
@@ -377,7 +438,7 @@ export default function GuideMap({
                 title={`${poi.name.zh} / ${poi.name.en}`}
               >
                 {showRouteNumber ? <b className="route-node-number">{routeNumber}</b> : <Icon size={poi.distance ? 14 : 16} />}
-                <span>{poi.name[lang]}</span>
+                {labelVisible && <span>{poi.name[lang]}</span>}
               </button>
             );
           })}
