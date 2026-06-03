@@ -1908,3 +1908,113 @@ button {
     padding: 16px;
   }
 }
+
+.ai-map-button {
+  color: #fff;
+  background: linear-gradient(135deg, #246d55, #1e86a4);
+  border-color: rgba(255, 255, 255, 0.54);
+}
+
+@media (max-width: 760px) {
+  .app-header,
+  .mobile-bottom-sheet {
+    transition: transform 260ms cubic-bezier(0.2, 0.82, 0.22, 1), opacity 210ms ease, height 260ms cubic-bezier(0.2, 0.82, 0.22, 1);
+  }
+
+  .mobile-bottom-sheet {
+    touch-action: pan-y;
+    will-change: height, transform;
+  }
+
+  .mobile-grabber {
+    display: block;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .mobile-tabs,
+  .mobile-sheet-title,
+  .mobile-sheet-content {
+    transition: opacity 210ms ease, transform 240ms cubic-bezier(0.2, 0.82, 0.22, 1);
+  }
+
+  .mobile-sheet-collapsed .app-header {
+    transform: translateY(calc(-100% - 18px));
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .mobile-sheet-collapsed .mobile-bottom-sheet {
+    height: calc(54px + env(safe-area-inset-bottom));
+    min-height: 0;
+    padding-top: 10px;
+  }
+
+  .mobile-sheet-collapsed .mobile-tabs,
+  .mobile-sheet-collapsed .mobile-sheet-title,
+  .mobile-sheet-collapsed .mobile-sheet-content {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(14px);
+  }
+
+  .mobile-sheet-collapsed .zoom-badge {
+    bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+
+  .mobile-sheet-collapsed .map-toolbar,
+  .map-fullscreen-mode .map-toolbar {
+    top: calc(12px + env(safe-area-inset-top));
+  }
+
+  .map-fullscreen-mode .app-header,
+  .map-fullscreen-mode .mobile-bottom-sheet {
+    display: none;
+  }
+
+  .map-fullscreen-mode .zoom-badge {
+    bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+
+  .mobile-sheet-content .poi-panel .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    overflow: visible;
+    padding-bottom: 4px;
+  }
+
+  .mobile-sheet-content .poi-panel .category-grid button {
+    display: grid;
+    place-items: center;
+    min-height: 54px;
+    padding: 8px 6px;
+    border-radius: 8px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.18;
+    font-size: 12px;
+    font-weight: 850;
+  }
+
+  .mobile-sheet-content .poi-panel .category-grid .all-category {
+    grid-column: 1 / -1;
+    min-height: 42px;
+  }
+
+  .mobile-sheet-content .detail-panel .action-grid {
+    position: static;
+    bottom: auto;
+    padding-top: 10px;
+    background: transparent;
+  }
+
+  .mobile-sheet-content .detail-panel {
+    padding-bottom: 14px;
+  }
+
+  .map-toolbar .ai-map-button {
+    background: linear-gradient(135deg, #246d55, #1f8dac);
+  }
+}

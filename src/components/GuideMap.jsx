@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Accessibility,
   Bed,
+  Bot,
   Camera,
   Car,
   Coffee,
@@ -102,7 +103,8 @@ export default function GuideMap({
   navigationTarget,
   currentLocationId,
   isFullscreen,
-  onToggleFullscreen
+  onToggleFullscreen,
+  onAskAi
 }) {
   const viewportRef = useRef(null);
   const dragRef = useRef(null);
@@ -328,6 +330,10 @@ export default function GuideMap({
         <button onClick={onToggleFullscreen} title={isFullscreen ? labels.exitFullscreen : labels.fullscreen}>
           {isFullscreen ? <Minimize2 size={17} /> : <Maximize2 size={17} />}
           {isFullscreen ? labels.exitFullscreen : labels.fullscreen}
+        </button>
+        <button className="ai-map-button" onClick={onAskAi} title={labels.aiAsk}>
+          <Bot size={17} />
+          {labels.aiAsk}
         </button>
       </div>
 

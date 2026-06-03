@@ -172,6 +172,8 @@ export default function App() {
   const [leftCollapsed, setLeftCollapsed] = useState(false);
   const [rightCollapsed, setRightCollapsed] = useState(false);
   const [mobilePanel, setMobilePanel] = useState("details");
+  const [mobileSheetCollapsed, setMobileSheetCollapsed] = useState(false);
+  const [sheetTouchStart, setSheetTouchStart] = useState(null);
   const [recommendation, setRecommendation] = useState({
     duration: labels.durations[1],
     visitor: labels.visitors[0],
@@ -199,6 +201,8 @@ export default function App() {
   const handleSelectPoi = (poi, options = {}) => {
     setSelectedPoi(poi);
     setMobilePanel("details");
+    setMobileSheetCollapsed(false);
+    setIsMapFullscreen(false);
     if (options.focus !== false) {
       requestView({ type: "point", id: poi.id, scale: poi.distance ? 2.05 : 1.75 });
     }
@@ -226,6 +230,7 @@ export default function App() {
       time: { zh: `${minutes}分钟`, en: `${minutes} min` },
       path: buildNavigationPath(from, poi)
     });
+    setMobileSheetCollapsed(true);
     requestView({ type: "bounds", points: [[from.x, from.y], [poi.x, poi.y]], padding: 0.7 });
     showToast(labels.plannedRoute);
   };
@@ -249,6 +254,8 @@ export default function App() {
     const route = routes.find((item) => item.id === rule.routeId) || routes[1];
     setActiveRoute(route);
     setMobilePanel("routes");
+    setMobileSheetCollapsed(false);
+    setIsMapFullscreen(false);
     requestView({ type: "route", route });
     setGenerated({ route, reason: rule.reason });
   };
@@ -256,7 +263,46 @@ export default function App() {
   const handleRouteSelect = (route) => {
     setActiveRoute(route);
     setMobilePanel("routes");
+    setMobileSheetCollapsed(true);
     requestView({ type: "route", route });
+  };
+
+  const toggleMapFullscreen = () => {
+    setIsMapFullscreen((value) => {
+      const next = !value;
+      if (next) setMobileSheetCollapsed(true);
+      return next;
+    });
+  };
+
+  const handleAiEntry = () => {
+    showToast(labels.aiComingSoon);
+  };
+
+  const toggleMobileSheet = () => {
+    setMobileSheetCollapsed((value) => !value);
+    if (isMapFullscreen) setIsMapFullscreen(false);
+  };
+
+  const handleSheetTouchStart = (event) => {
+    setSheetTouchStart(event.touches[0]?.clientY ?? null);
+  };
+
+  const handleSheetTouchEnd = (event) => {
+    if (sheetTouchStart == null) return;
+    const scroller = event.target.closest?.(".mobile-sheet-content");
+    if (scroller?.scrollTop > 8) {
+      setSheetTouchStart(null);
+      return;
+    }
+    const endY = event.changedTouches[0]?.clientY ?? sheetTouchStart;
+    const delta = endY - sheetTouchStart;
+    if (delta > 34) setMobileSheetCollapsed(true);
+    if (delta < -34) {
+      setMobileSheetCollapsed(false);
+      if (isMapFullscreen) setIsMapFullscreen(false);
+    }
+    setSheetTouchStart(null);
   };
 
   const visibleCategoryFilter = (poi) => categoryMatches(poi, selectedCategory);
@@ -273,7 +319,8 @@ export default function App() {
       "app",
       isMapFullscreen ? "map-fullscreen-mode" : "",
       leftCollapsed ? "left-collapsed" : "",
-      rightCollapsed ? "right-collapsed" : ""
+      rightCollapsed ? "right-collapsed" : "",
+      mobileSheetCollapsed ? "mobile-sheet-collapsed" : ""
     ].join(" ")}>
       <Header
         lang={lang}
@@ -281,7 +328,11 @@ export default function App() {
         searchTerm={searchTerm}
         setSearchTerm={(value) => {
           setSearchTerm(value);
-          if (value.trim()) setMobilePanel("pois");
+          if (value.trim()) {
+            setMobilePanel("pois");
+            setMobileSheetCollapsed(false);
+            setIsMapFullscreen(false);
+          }
         }}
         setLang={(nextLang) => {
           setLang(nextLang);
@@ -343,7 +394,8 @@ export default function App() {
             navigationTarget={navigationTarget}
             currentLocationId={currentLocationId}
             isFullscreen={isMapFullscreen}
-            onToggleFullscreen={() => setIsMapFullscreen((value) => !value)}
+            onToggleFullscreen={toggleMapFullscreen}
+            onAskAi={handleAiEntry}
           />
           <div className="bottom-dock">
             <Legend labels={labels} />
@@ -390,14 +442,23 @@ export default function App() {
         </aside>
       </main>
 
-      <section className="mobile-bottom-sheet" aria-label="mobile guide controls">
-        <div className="mobile-grabber" />
+      <section
+        className="mobile-bottom-sheet"
+        aria-label="mobile guide controls"
+        onTouchStart={handleSheetTouchStart}
+        onTouchEnd={handleSheetTouchEnd}
+      >
+        <button className="mobile-grabber" onClick={toggleMobileSheet} aria-label="Toggle map panel" />
         <nav className="mobile-tabs">
           {mobileTabs.map((item) => (
             <button
               key={item.key}
               className={mobilePanel === item.key ? "active" : ""}
-              onClick={() => setMobilePanel(item.key)}
+              onClick={() => {
+                setMobilePanel(item.key);
+                setMobileSheetCollapsed(false);
+                if (isMapFullscreen) setIsMapFullscreen(false);
+              }}
             >
               {item.label}
             </button>

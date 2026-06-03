@@ -37,6 +37,10 @@ export function Sparkles(props) {
   return <Icon {...props}><path d="m12 3 1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z" /><path d="m5 16 .8 1.8L8 19l-2.2.8L5 22l-.8-2.2L2 19l2.2-1.2zM19 14l.7 1.5L21 16l-1.3.5L19 18l-.7-1.5L17 16l1.3-.5z" /></Icon>;
 }
 
+export function Bot(props) {
+  return <Icon {...props}><path d="M12 6V3M8 6h8a4 4 0 0 1 4 4v5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-5a4 4 0 0 1 4-4z" /><circle cx="9" cy="12" r="1" /><circle cx="15" cy="12" r="1" /><path d="M9 16h6" /></Icon>;
+}
+
 export function Filter(props) {
   return <Icon {...props}><path d="M4 5h16M7 12h10M10 19h4" /></Icon>;
 }

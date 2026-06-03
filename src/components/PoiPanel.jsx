@@ -21,7 +21,10 @@ export default function PoiPanel({
         {categoryOptions.map((item) => (
           <button
             key={item.key}
-            className={selectedCategory === item.key ? "active" : ""}
+            className={[
+              selectedCategory === item.key ? "active" : "",
+              item.key === "all" ? "all-category" : ""
+            ].join(" ")}
             onClick={() => setSelectedCategory(item.key)}
           >
             {item[lang]}
