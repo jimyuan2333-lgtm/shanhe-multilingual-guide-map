@@ -1,7 +1,7 @@
 import { QrCode, Search, Sparkles } from "./icons.jsx";
 import LanguageSwitcher from "./LanguageSwitcher.jsx";
 
-export default function Header({ lang, labels, searchTerm, setSearchTerm, setLang }) {
+export default function Header({ lang, labels, searchTerm, setSearchTerm, setLang, onUnavailableLanguage }) {
   return (
     <header className="app-header">
       <div className="brand">
@@ -27,7 +27,7 @@ export default function Header({ lang, labels, searchTerm, setSearchTerm, setLan
           lang={lang}
           onChange={setLang}
           comingSoon={labels.comingSoon}
-          comingSoonNotice={labels.comingSoonNotice}
+          onUnavailable={onUnavailableLanguage}
         />
         <button className="ghost-button">
           <QrCode size={16} />

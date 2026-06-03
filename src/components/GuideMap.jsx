@@ -127,24 +127,38 @@ export default function GuideMap({
     return rect || { width: 900, height: 620, left: 0, top: 0 };
   };
 
+  const clampPan = (nextPan, scale = zoom) => {
+    const viewport = getViewport();
+    const mapWidth = MAP_SIZE.width * scale;
+    const mapHeight = MAP_SIZE.height * scale;
+    const clampAxis = (value, viewportSize, mapSize) => {
+      if (mapSize <= viewportSize) return (viewportSize - mapSize) / 2;
+      return Math.min(0, Math.max(viewportSize - mapSize, value));
+    };
+    return {
+      x: clampAxis(nextPan.x, viewport.width, mapWidth),
+      y: clampAxis(nextPan.y, viewport.height, mapHeight)
+    };
+  };
+
   const applyView = (nextZoom, centerPx) => {
     const viewport = getViewport();
     const scale = clampZoom(nextZoom);
     setZoom(scale);
-    setPan({
+    setPan(clampPan({
       x: viewport.width / 2 - centerPx[0] * scale,
       y: viewport.height / 2 - centerPx[1] * scale
-    });
+    }, scale));
   };
 
   const fitMap = () => {
     const viewport = getViewport();
     const scale = clampZoom(Math.min(viewport.width / MAP_SIZE.width, viewport.height / MAP_SIZE.height) * 0.98);
     setZoom(scale);
-    setPan({
+    setPan(clampPan({
       x: (viewport.width - MAP_SIZE.width * scale) / 2,
       y: (viewport.height - MAP_SIZE.height * scale) / 2
-    });
+    }, scale));
   };
 
   const centerOnPoi = (poi, scale = 1.75) => {
@@ -164,10 +178,10 @@ export default function GuideMap({
     const height = Math.max(80, maxY - minY);
     const scale = clampZoom(Math.min((viewport.width * padding) / width, (viewport.height * padding) / height));
     setZoom(scale);
-    setPan({
+    setPan(clampPan({
       x: viewport.width / 2 - ((minX + maxX) / 2) * scale,
       y: viewport.height / 2 - ((minY + maxY) / 2) * scale
-    });
+    }, scale));
   };
 
   useEffect(() => {
@@ -202,10 +216,10 @@ export default function GuideMap({
     const mapY = (pointY - pan.y) / zoom;
     const scale = clampZoom(nextZoom);
     setZoom(scale);
-    setPan({
+    setPan(clampPan({
       x: pointX - mapX * scale,
       y: pointY - mapY * scale
-    });
+    }, scale));
   };
 
   const zoomBy = (delta) => {
@@ -240,10 +254,10 @@ export default function GuideMap({
 
   const handlePointerMove = (event) => {
     if (!dragRef.current) return;
-    setPan({
+    setPan(clampPan({
       x: dragRef.current.panX + event.clientX - dragRef.current.startX,
       y: dragRef.current.panY + event.clientY - dragRef.current.startY
-    });
+    }));
   };
 
   const handlePointerUp = () => {
@@ -288,20 +302,20 @@ export default function GuideMap({
     if (!touchRef.current) return;
     event.preventDefault();
     if (touchRef.current.mode === "pan" && event.touches.length === 1) {
-      setPan({
+      setPan(clampPan({
         x: touchRef.current.panX + event.touches[0].clientX - touchRef.current.startX,
         y: touchRef.current.panY + event.touches[0].clientY - touchRef.current.startY
-      });
+      }));
     }
     if (touchRef.current.mode === "pinch" && event.touches.length === 2) {
       const center = touchCenter(event.touches);
       const viewport = getViewport();
       const scale = clampZoom(touchRef.current.startZoom * (touchDistance(event.touches) / touchRef.current.startDistance));
       setZoom(scale);
-      setPan({
+      setPan(clampPan({
         x: center.x - viewport.left - touchRef.current.mapX * scale,
         y: center.y - viewport.top - touchRef.current.mapY * scale
-      });
+      }, scale));
     }
   };
 

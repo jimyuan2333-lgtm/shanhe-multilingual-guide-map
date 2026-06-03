@@ -343,6 +343,7 @@ export default function App() {
           });
           setGenerated(null);
         }}
+        onUnavailableLanguage={() => showToast(labels.comingSoonNotice)}
       />
 
       <main className="workspace">
