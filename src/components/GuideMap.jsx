@@ -24,6 +24,7 @@ import {
   Zap
 } from "./icons.jsx";
 import { MAP_SIZE, mapZones } from "../data/mapMeta.js";
+import { text } from "../utils/lang.js";
 
 function getIcon(type) {
   const normalized = type?.split("/")?.[0];
@@ -410,7 +411,7 @@ export default function GuideMap({
                 className="zone-marker"
                 style={{ left: `${zone.x}%`, top: `${zone.y}%`, "--zone-color": zone.color, opacity }}
               >
-                <strong>{zone.name[lang]}</strong>
+                <strong>{text(zone.name, lang)}</strong>
               </div>
             );
           })}
@@ -471,7 +472,7 @@ export default function GuideMap({
                 title={`${poi.name.zh} / ${poi.name.en}`}
               >
                 {showRouteNumber ? <b className="route-node-number">{routeNumber}</b> : <Icon size={poi.distance ? 14 : 16} />}
-                {labelVisible && <span>{poi.name[lang]}</span>}
+                {labelVisible && <span>{text(poi.name, lang)}</span>}
               </button>
             );
           })}

@@ -11,6 +11,7 @@ import {
 } from "./icons.jsx";
 import { facilityTypeLabels } from "../data/facilities.js";
 import { getReadableType } from "../data/mapMeta.js";
+import { text, textArray } from "../utils/lang.js";
 
 export default function DetailPanel({
   lang,
@@ -36,13 +37,13 @@ export default function DetailPanel({
 
   const isFacility = Boolean(selectedPoi.distance);
   const secondaryLang = lang === "zh" ? "en" : "zh";
-  const keywords = selectedPoi.keywords?.[lang] || [];
+  const keywords = textArray(selectedPoi.keywords, lang);
   const isCurrentAudio = audioState?.id === selectedPoi.id;
   const isPlaying = isCurrentAudio && audioState.playing;
   const isNavigationTarget = navigationTarget?.toId === selectedPoi.id;
   const audioText = lang === "zh"
     ? `正在播放：${selectedPoi.name.zh}中文导览音频`
-    : `Now playing: English audio guide for ${selectedPoi.name.en}.`;
+    : `${labels.nowPlaying}: ${text(selectedPoi.name, lang)} ${labels.audio}`;
 
   return (
     <section className="detail-panel">
@@ -50,20 +51,20 @@ export default function DetailPanel({
         <span className={`detail-type ${isFacility ? selectedPoi.type : selectedPoi.type.split("/")[0]}`}>
           {getReadableType(selectedPoi, lang, facilityTypeLabels)}
         </span>
-        <h2>{selectedPoi.name[lang]}</h2>
-        <p>{selectedPoi.name[secondaryLang]}</p>
+        <h2>{text(selectedPoi.name, lang)}</h2>
+        <p>{text(selectedPoi.name, secondaryLang)}</p>
       </div>
 
       {isFacility ? (
         <div className="facts">
-          <span><Info size={16} />{labels.facilityType}: {facilityTypeLabels[selectedPoi.type]?.[lang] || selectedPoi.type}</span>
-          <span><Navigation size={16} />{labels.distance}: {selectedPoi.distance[lang]}</span>
-          <span><Clock size={16} />{labels.status}: {selectedPoi.status[lang]}</span>
+          <span><Info size={16} />{labels.facilityType}: {text(facilityTypeLabels[selectedPoi.type], lang, selectedPoi.type)}</span>
+          <span><Navigation size={16} />{labels.distance}: {text(selectedPoi.distance, lang)}</span>
+          <span><Clock size={16} />{labels.status}: {text(selectedPoi.status, lang)}</span>
         </div>
       ) : (
         <div className="facts">
-          <span><Clock size={16} />{labels.stay}: {selectedPoi.stay[lang]}</span>
-          <span><Info size={16} />{labels.open}: {selectedPoi.open?.[lang] || selectedPoi.open}</span>
+          <span><Clock size={16} />{labels.stay}: {text(selectedPoi.stay, lang)}</span>
+          <span><Info size={16} />{labels.open}: {text(selectedPoi.open, lang, selectedPoi.open)}</span>
           <span><Headphones size={16} />{labels.audio}: {selectedPoi.audio ? labels.yes : labels.no}</span>
           <span><Accessibility size={16} />{labels.access}: {selectedPoi.accessible ? labels.yes : labels.no}</span>
         </div>
@@ -72,20 +73,20 @@ export default function DetailPanel({
       {isNavigationTarget && (
         <div className="navigation-feedback">
           <strong>{labels.navigationRoute}</strong>
-          <span>{labels.walkingEstimate}: {navigationTarget.time[lang]} · {navigationTarget.distance[lang]}</span>
+          <span>{labels.walkingEstimate}: {text(navigationTarget.time, lang)} · {text(navigationTarget.distance, lang)}</span>
         </div>
       )}
 
       <div className="intro-block">
-        <p>{selectedPoi.intro[lang]}</p>
-        <p>{selectedPoi.intro[secondaryLang]}</p>
+        <p>{text(selectedPoi.intro, lang)}</p>
+        <p>{text(selectedPoi.intro, secondaryLang)}</p>
       </div>
 
       {!isFacility && (
         <>
           <div className="meta-row">
             <strong>{labels.audience}</strong>
-            <span>{selectedPoi.audience[lang]}</span>
+            <span>{text(selectedPoi.audience, lang)}</span>
           </div>
           <div className="meta-row">
             <strong>{labels.keywords}</strong>
@@ -129,7 +130,7 @@ export default function DetailPanel({
       {!isFacility && myRoute.length > 0 && (
         <div className="my-route-chip">
           <strong>{labels.myRoute}</strong>
-          <span>{myRoute.map((item) => item.name[lang]).join(" · ")}</span>
+          <span>{myRoute.map((item) => text(item.name, lang)).join(" · ")}</span>
         </div>
       )}
     </section>

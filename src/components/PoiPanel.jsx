@@ -1,5 +1,6 @@
 import { Filter, MapPin } from "./icons.jsx";
 import { categoryOptions } from "../data/i18n.js";
+import { text } from "../utils/lang.js";
 
 export default function PoiPanel({
   lang,
@@ -27,7 +28,7 @@ export default function PoiPanel({
             ].join(" ")}
             onClick={() => setSelectedCategory(item.key)}
           >
-            {item[lang]}
+            {text(item, lang)}
           </button>
         ))}
       </div>
@@ -43,8 +44,8 @@ export default function PoiPanel({
             {searchResults.map((item) => (
               <button key={item.id} onClick={() => onSelectPoi(item)} className="result-row">
                 <MapPin size={15} />
-                <span>{item.name[lang]}</span>
-                <small>{item.name[lang === "zh" ? "en" : "zh"]}</small>
+                <span>{text(item.name, lang)}</span>
+                <small>{text(item.name, lang === "zh" ? "en" : "zh")}</small>
               </button>
             ))}
           </div>

@@ -21,6 +21,7 @@ import {
   poiAliases
 } from "./data/mapMeta.js";
 import { facilityTypeLabels } from "./data/facilities.js";
+import { text } from "./utils/lang.js";
 
 const currentLocationId = "visitor_center";
 
@@ -157,7 +158,7 @@ function searchMatchesPoi(poi, term) {
 
 export default function App() {
   const [lang, setLang] = useState("zh");
-  const labels = copy[lang];
+  const labels = copy[lang] || copy.en;
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedPoi, setSelectedPoi] = useState(() => allMapItems.find((poi) => poi.id === "opera_house"));
@@ -317,10 +318,10 @@ export default function App() {
 
   const visibleCategoryFilter = (poi) => categoryMatches(poi, selectedCategory);
   const mobileTabs = [
-    { key: "pois", label: lang === "zh" ? "景点" : "POI" },
-    { key: "routes", label: lang === "zh" ? "路线" : "Routes" },
-    { key: "facilities", label: lang === "zh" ? "设施" : "Facilities" },
-    { key: "details", label: lang === "zh" ? "详情" : "Details" }
+    { key: "pois", label: labels.filters },
+    { key: "routes", label: labels.routes },
+    { key: "facilities", label: labels.facilities },
+    { key: "details", label: labels.details }
   ];
   const mobilePanelTitle = mobileTabs.find((item) => item.key === mobilePanel)?.label;
 
@@ -353,7 +354,6 @@ export default function App() {
           });
           setGenerated(null);
         }}
-        onUnavailableLanguage={() => showToast(labels.comingSoonNotice)}
       />
 
       <main className="workspace">
@@ -413,7 +413,7 @@ export default function App() {
             <Legend labels={labels} />
             {activeRoute && (
               <div className="active-route-strip" style={{ "--route-color": activeRoute.color }}>
-                <strong>{labels.routeNodes}: {activeRoute.name[lang]}</strong>
+                <strong>{labels.routeNodes}: {text(activeRoute.name, lang)}</strong>
                 <div className="route-timeline" aria-label={labels.routeTimeline}>
                   {activeRoute.nodes.map((id, index) => {
                     const item = allMapItems.find((poi) => poi.id === id);
@@ -421,12 +421,12 @@ export default function App() {
                     return (
                       <button key={`${id}-${index}`} onClick={() => handleSelectPoi(item)}>
                         <b>{index + 1}</b>
-                        <span>{item.name[lang]}</span>
+                        <span>{text(item.name, lang)}</span>
                       </button>
                     );
                   })}
                 </div>
-                <small>{labels.routeFeature}: {activeRoute.feature[lang]}</small>
+                <small>{labels.routeFeature}: {text(activeRoute.feature, lang)}</small>
               </div>
             )}
           </div>
@@ -558,8 +558,8 @@ export default function App() {
                 <div className="share-card-preview">
                   <div>
                     <span>Shanhe Ancient Town</span>
-                    <h3>{modal.poi.name[lang]}</h3>
-                    <p>{modal.poi.intro[lang]}</p>
+                    <h3>{text(modal.poi.name, lang)}</h3>
+                    <p>{text(modal.poi.intro, lang)}</p>
                     <small>{modal.poi.name.zh} / {modal.poi.name.en}</small>
                   </div>
                   <div className="qr-fake compact">

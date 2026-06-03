@@ -1,4 +1,5 @@
 import { Route, SlidersHorizontal } from "./icons.jsx";
+import { text } from "../utils/lang.js";
 
 export default function RoutePanel({
   lang,
@@ -30,8 +31,8 @@ export default function RoutePanel({
           >
             <span className="route-key">{route.key}</span>
             <span>
-              <strong>{route.name[lang]}</strong>
-              <small>{route.duration[lang]} · {route.feature[lang]}</small>
+              <strong>{text(route.name, lang)}</strong>
+              <small>{text(route.duration, lang)} · {text(route.feature, lang)}</small>
             </span>
           </button>
         ))}
@@ -84,7 +85,7 @@ export default function RoutePanel({
         {generated && (
           <div className="recommend-result">
             <strong>{labels.generatedReason}</strong>
-            <p>{generated.reason[lang]}</p>
+            <p>{text(generated.reason, lang)}</p>
           </div>
         )}
       </div>

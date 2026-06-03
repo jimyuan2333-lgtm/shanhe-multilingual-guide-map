@@ -315,3 +315,17 @@ export const facilityTypeLabels = {
   accommodation: { zh: "住宿", en: "Accommodation" },
   transport: { zh: "交通接驳", en: "Transport" }
 };
+
+Object.assign(facilityTypeLabels.restroom, { ja: "トイレ", ko: "화장실", fr: "Toilettes", de: "WC", ru: "Туалет", hi: "शौचालय", ar: "دورات المياه", th: "ห้องน้ำ" });
+Object.assign(facilityTypeLabels.parking, { ja: "駐車場", ko: "주차장", fr: "Parking", de: "Parkplatz", ru: "Парковка", hi: "पार्किंग", ar: "موقف سيارات", th: "ที่จอดรถ" });
+Object.assign(facilityTypeLabels.service, { ja: "観光サービス", ko: "방문객 서비스", fr: "Centre de services", de: "Servicezentrum", ru: "Сервисный центр", hi: "सेवा केंद्र", ar: "مركز خدمات", th: "ศูนย์บริการ" });
+Object.assign(facilityTypeLabels.firstAid, { ja: "救護所", ko: "응급처치소", fr: "Premiers secours", de: "Erste Hilfe", ru: "Первая помощь", hi: "प्राथमिक उपचार", ar: "إسعاف أولي", th: "ปฐมพยาบาล" });
+Object.assign(facilityTypeLabels.security, { ja: "警備所", ko: "보안 초소", fr: "Poste de sécurité", de: "Sicherheitsstation", ru: "Пункт охраны", hi: "सुरक्षा चौकी", ar: "نقطة أمن", th: "จุดรักษาความปลอดภัย" });
+Object.assign(facilityTypeLabels.charging, { ja: "充電ステーション", ko: "충전소", fr: "Station de recharge", de: "Ladestation", ru: "Зарядная станция", hi: "चार्जिंग स्टेशन", ar: "محطة شحن", th: "จุดชาร์จ" });
+Object.assign(facilityTypeLabels.nursing, { ja: "授乳室", ko: "수유실", fr: "Salle bébé", de: "Stillraum", ru: "Комната матери и ребенка", hi: "शिशु देखभाल कक्ष", ar: "غرفة رعاية الأطفال", th: "ห้องแม่และเด็ก" });
+Object.assign(facilityTypeLabels.accessible, { ja: "バリアフリー設備", ko: "무장애 시설", fr: "Équipement accessible", de: "Barrierefreie Einrichtung", ru: "Доступная среда", hi: "सुगम सुविधा", ar: "مرفق ميسر", th: "สิ่งอำนวยความสะดวกสำหรับผู้พิการ" });
+Object.assign(facilityTypeLabels.ticket, { ja: "自動券売機", ko: "무인 발권기", fr: "Billetterie automatique", de: "Ticketautomat", ru: "Автомат продажи билетов", hi: "टिकट मशीन", ar: "آلة بيع التذاكر", th: "เครื่องจำหน่ายตั๋ว" });
+Object.assign(facilityTypeLabels.photo, { ja: "撮影スポット", ko: "사진 명소", fr: "Point photo", de: "Fotospot", ru: "Фототочка", hi: "फोटो स्थल", ar: "موقع تصوير", th: "จุดถ่ายรูป" });
+Object.assign(facilityTypeLabels.dining, { ja: "飲食", ko: "식음료", fr: "Restauration", de: "Gastronomie", ru: "Питание", hi: "भोजन", ar: "مطاعم", th: "อาหาร" });
+Object.assign(facilityTypeLabels.accommodation, { ja: "宿泊", ko: "숙박", fr: "Hébergement", de: "Unterkunft", ru: "Проживание", hi: "आवास", ar: "إقامة", th: "ที่พัก" });
+Object.assign(facilityTypeLabels.transport, { ja: "交通接続", ko: "교통 연결", fr: "Transport", de: "Verkehrsanbindung", ru: "Транспорт", hi: "परिवहन संपर्क", ar: "ربط النقل", th: "การเดินทาง" });

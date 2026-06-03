@@ -198,6 +198,52 @@ export const routes = [
   }
 ];
 
+const routeLocales = {
+  "quick-90": {
+    duration: { ja: "90分", ko: "90분", fr: "90 min", de: "90 Min.", ru: "90 мин", hi: "90 मिनट", ar: "90 دقيقة", th: "90 นาที" },
+    name: { ja: "90分ハイライトルート", ko: "90분 핵심 코스", fr: "Parcours express de 90 minutes", de: "90-Minuten-Highlights", ru: "Маршрут на 90 минут", hi: "90 मिनट का मुख्य मार्ग", ar: "مسار أبرز المعالم في 90 دقيقة", th: "เส้นทางไฮไลต์ 90 นาที" },
+    feature: { ja: "団体、ビジネス視察、時間の限られた旅行者に適しています。", ko: "단체 방문객, 비즈니스 답사, 시간이 부족한 방문객에게 적합합니다.", fr: "Idéal pour les groupes, les visites professionnelles et les visiteurs pressés.", de: "Geeignet für Gruppen, Geschäftsbesuche und Gäste mit wenig Zeit.", ru: "Подходит для групп, деловых визитов и гостей с ограниченным временем.", hi: "समूहों, व्यावसायिक निरीक्षण और कम समय वाले पर्यटकों के लिए उपयुक्त।", ar: "مناسب للمجموعات والزيارات المهنية والزوار محدودي الوقت.", th: "เหมาะสำหรับกรุ๊ปทัวร์ การดูงาน และผู้มีเวลาจำกัด" }
+  },
+  "classic-cultural": {
+    duration: { ja: "3時間", ko: "3시간", fr: "3 heures", de: "3 Stunden", ru: "3 часа", hi: "3 घंटे", ar: "3 ساعات", th: "3 ชั่วโมง" },
+    name: { ja: "3時間クラシック文化ルート", ko: "3시간 클래식 문화 코스", fr: "Parcours culturel classique de 3 heures", de: "Klassische Kulturroute, 3 Stunden", ru: "Классический культурный маршрут на 3 часа", hi: "3 घंटे का क्लासिक सांस्कृतिक मार्ग", ar: "مسار ثقافي كلاسيكي لمدة 3 ساعات", th: "เส้นทางวัฒนธรรมคลาสสิก 3 ชั่วโมง" },
+    feature: { ja: "文化解説、多言語ガイド、景区の言語サービス力を示すのに最適です。", ko: "문화 해설, 다국어 안내, 관광지 언어 서비스 역량을 보여주기에 가장 적합합니다.", fr: "Le meilleur choix pour présenter l'interprétation culturelle et les services multilingues.", de: "Ideal, um Kulturvermittlung und mehrsprachige Services zu zeigen.", ru: "Лучше всего демонстрирует культурное сопровождение и многоязычные сервисы.", hi: "सांस्कृतिक व्याख्या, बहुभाषी गाइड और भाषा सेवा क्षमता दिखाने के लिए सर्वोत्तम।", ar: "الأفضل لعرض الشرح الثقافي وخدمات الإرشاد متعددة اللغات.", th: "เหมาะที่สุดสำหรับแสดงการบรรยายวัฒนธรรมและบริการหลายภาษา" }
+  },
+  "half-day": {
+    duration: { ja: "半日", ko: "반나절", fr: "Demi-journée", de: "Halber Tag", ru: "Полдня", hi: "आधा दिन", ar: "نصف يوم", th: "ครึ่งวัน" },
+    name: { ja: "半日じっくり周遊ルート", ko: "반나절 심층 코스", fr: "Parcours approfondi d'une demi-journée", de: "Halbtägige Intensivroute", ru: "Углубленный маршрут на полдня", hi: "आधा दिन गहन भ्रमण मार्ग", ar: "مسار معمق لنصف يوم", th: "เส้นทางเจาะลึกครึ่งวัน" },
+    feature: { ja: "旅行団、学習団体、深く体験したい海外旅行者向けです。", ko: "관광단, 학습 단체, 심층 체험을 원하는 외국인 방문객에게 적합합니다.", fr: "Pour les groupes touristiques, scolaires et les visiteurs internationaux curieux.", de: "Für Reisegruppen, Studiengruppen und internationale Gäste mit vertieftem Interesse.", ru: "Для туристических групп, учебных групп и иностранных гостей.", hi: "टूर समूहों, शैक्षिक समूहों और गहन अनुभव चाहने वाले विदेशी पर्यटकों के लिए।", ar: "مناسب للمجموعات السياحية والتعليمية والزوار الدوليين المهتمين بالتعمق.", th: "เหมาะกับกรุ๊ปทัวร์ คณะศึกษา และนักท่องเที่ยวต่างชาติที่อยากลงลึก" }
+  },
+  "mountain-view": {
+    duration: { ja: "3時間", ko: "3시간", fr: "3 heures", de: "3 Stunden", ru: "3 часа", hi: "3 घंटे", ar: "3 ساعات", th: "3 ชั่วโมง" },
+    name: { ja: "山地展望ルート", ko: "산악 전망 코스", fr: "Parcours panoramique de montagne", de: "Bergpanorama-Route", ru: "Горный обзорный маршрут", hi: "पर्वतीय दृश्य मार्ग", ar: "مسار الإطلالات الجبلية", th: "เส้นทางชมวิวภูเขา" },
+    feature: { ja: "若い旅行者、写真愛好家、自然景観を楽しむ方に適しています。", ko: "젊은 방문객, 사진 여행객, 자연 경관을 즐기는 방문객에게 적합합니다.", fr: "Pour les jeunes visiteurs, photographes et amateurs de paysages naturels.", de: "Für junge Gäste, Fotografen und Naturliebhaber.", ru: "Для молодых гостей, фотографов и любителей природы.", hi: "युवा पर्यटकों, फोटोग्राफरों और प्राकृतिक दृश्य पसंद करने वालों के लिए।", ar: "مناسب للشباب ومحبي التصوير والمناظر الطبيعية.", th: "เหมาะกับนักท่องเที่ยววัยรุ่น ช่างภาพ และผู้รักธรรมชาติ" }
+  },
+  "night-riverside": {
+    duration: { ja: "夜間観光", ko: "야간 관광", fr: "Visite nocturne", de: "Nachtbesuch", ru: "Ночная прогулка", hi: "रात्रि भ्रमण", ar: "جولة ليلية", th: "เที่ยวกลางคืน" },
+    name: { ja: "水辺夜間観光ルート", ko: "수변 야간 코스", fr: "Parcours nocturne riverain", de: "Nächtliche Uferroute", ru: "Ночной маршрут вдоль воды", hi: "नदी किनारे रात्रि मार्ग", ar: "مسار ليلي على الواجهة المائية", th: "เส้นทางเที่ยวกลางคืนริมน้ำ" },
+    feature: { ja: "夜間経済、ライトアップ、撮影スポット、水辺消費を示します。", ko: "야간 경제, 조명 포인트, 수변 소비 장면을 보여줍니다.", fr: "Met en valeur l'économie nocturne, les lumières et les loisirs au bord de l'eau.", de: "Zeigt Nachtwirtschaft, Lichtpunkte und Konsum am Wasser.", ru: "Показывает ночную экономику, подсветку и отдых у воды.", hi: "रात्रि अर्थव्यवस्था, रोशनी, फोटो स्थल और नदी किनारे अवकाश दिखाता है।", ar: "يعرض اقتصاد الليل والإضاءة ونقاط التصوير والترفيه على الماء.", th: "นำเสนอเศรษฐกิจยามค่ำ แสงไฟ จุดถ่ายรูป และกิจกรรมริมน้ำ" }
+  },
+  "family-study": {
+    duration: { ja: "半日", ko: "반나절", fr: "Demi-journée", de: "Halber Tag", ru: "Полдня", hi: "आधा दिन", ar: "نصف يوم", th: "ครึ่งวัน" },
+    name: { ja: "親子学習ルート", ko: "가족 학습 코스", fr: "Parcours famille et découverte", de: "Familien- und Lernroute", ru: "Семейно-образовательный маршрут", hi: "परिवार और शैक्षिक मार्ग", ar: "مسار عائلي تعليمي", th: "เส้นทางครอบครัวและการเรียนรู้" },
+    feature: { ja: "親子、学習団体、学校の実践活動に適しています。", ko: "가족 방문객, 학습 단체, 학교 체험 활동에 적합합니다.", fr: "Adapté aux familles, groupes scolaires et activités éducatives.", de: "Für Familien, Studiengruppen und Schulaktivitäten.", ru: "Для семей, учебных групп и школьных практик.", hi: "परिवार, शैक्षिक समूह और स्कूल गतिविधियों के लिए उपयुक्त।", ar: "مناسب للعائلات والمجموعات التعليمية والأنشطة المدرسية.", th: "เหมาะกับครอบครัว คณะศึกษา และกิจกรรมโรงเรียน" }
+  },
+  "international-friendly": {
+    duration: { ja: "3時間", ko: "3시간", fr: "3 heures", de: "3 Stunden", ru: "3 часа", hi: "3 घंटे", ar: "3 ساعات", th: "3 ชั่วโมง" },
+    name: { ja: "海外旅行者フレンドリールート", ko: "외국인 친화 코스", fr: "Parcours adapté aux visiteurs internationaux", de: "Route für internationale Gäste", ru: "Маршрут для иностранных гостей", hi: "अंतरराष्ट्रीय पर्यटक अनुकूल मार्ग", ar: "مسار ملائم للزوار الدوليين", th: "เส้นทางสำหรับนักท่องเที่ยวต่างชาติ" },
+    feature: { ja: "各スポットに多言語紹介、文化背景、AI音声ガイド、旅行者向けヒントを用意します。", ko: "각 지점에 다국어 소개, 문화 배경, AI 음성 안내, 방문 팁을 제공합니다.", fr: "Chaque arrêt propose des contenus multilingues, un contexte culturel, un audioguide IA et des conseils.", de: "Jeder Halt bietet mehrsprachige Inhalte, kulturellen Kontext, KI-Audio und Hinweise.", ru: "На каждой точке есть многоязычное описание, культурный контекст, ИИ-аудиогид и советы.", hi: "हर बिंदु पर बहुभाषी परिचय, सांस्कृतिक पृष्ठभूमि, AI ऑडियो और सुझाव मिलते हैं।", ar: "يوفر كل موقع تعريفا متعدد اللغات وخلفية ثقافية ودليلا صوتيا بالذكاء الاصطناعي ونصائح.", th: "แต่ละจุดมีคำอธิบายหลายภาษา ภูมิหลังทางวัฒนธรรม เสียงนำเที่ยว AI และคำแนะนำ" }
+  }
+};
+
+routes.forEach((route) => {
+  const locale = routeLocales[route.id];
+  if (!locale) return;
+  Object.assign(route.duration, locale.duration);
+  Object.assign(route.name, locale.name);
+  Object.assign(route.feature, locale.feature);
+});
+
 export const recommendRules = [
   {
     routeId: "night-riverside",

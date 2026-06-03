@@ -48,6 +48,17 @@ export const mapZones = [
   }
 ];
 
+const zoneLocales = {
+  "old-town": { ja: "古鎮文化エリア", ko: "고진 문화구역", fr: "Quartier culturel de la vieille ville", de: "Kulturzone der Altstadt", ru: "Культурная зона старого города", hi: "प्राचीन नगर सांस्कृतिक क्षेत्र", ar: "منطقة الثقافة في البلدة القديمة", th: "เขตวัฒนธรรมเมืองโบราณ" },
+  heritage: { ja: "無形文化公演エリア", ko: "무형문화 공연구역", fr: "Zone de spectacles patrimoniaux", de: "Kulturerbe- und Aufführungszone", ru: "Зона представлений и наследия", hi: "विरासत प्रदर्शन क्षेत्र", ar: "منطقة عروض التراث", th: "เขตการแสดงมรดก" },
+  "riverside-night": { ja: "水辺夜間観光エリア", ko: "수변 야간 관광구역", fr: "Zone nocturne riveraine", de: "Nächtliche Uferzone", ru: "Ночная прибрежная зона", hi: "नदी किनारे रात्रि क्षेत्र", ar: "منطقة الجولة الليلية على الواجهة المائية", th: "เขตเที่ยวกลางคืนริมน้ำ" },
+  mountain: { ja: "山地展望エリア", ko: "산악 전망구역", fr: "Zone panoramique de montagne", de: "Bergpanoramazone", ru: "Горная смотровая зона", hi: "पर्वतीय दृश्य क्षेत्र", ar: "منطقة الإطلالات الجبلية", th: "เขตชมวิวภูเขา" },
+  "east-bank": { ja: "東岸レジャーエリア", ko: "동안 휴식구역", fr: "Zone de loisirs de la rive est", de: "Freizeitzone am Ostufer", ru: "Зона отдыха восточного берега", hi: "पूर्वी तट अवकाश क्षेत्र", ar: "منطقة الترفيه في الضفة الشرقية", th: "เขตพักผ่อนฝั่งตะวันออก" },
+  "tea-valley": { ja: "茶山花谷エリア", ko: "차산 꽃계곡구역", fr: "Vallée fleurie des collines de thé", de: "Teehügel-Blumental", ru: "Цветочная долина чайных холмов", hi: "चाय पहाड़ी फूल घाटी", ar: "وادي الزهور في تلال الشاي", th: "เขตหุบเขาดอกไม้ไร่ชา" }
+};
+
+mapZones.forEach((zone) => Object.assign(zone.name, zoneLocales[zone.id] || {}));
+
 export const typeDisplayLabels = {
   service: { zh: "游客服务", en: "Visitor Service" },
   attraction: { zh: "核心景点", en: "Attraction" },
@@ -68,6 +79,19 @@ export const typeDisplayLabels = {
   education: { zh: "研学教育", en: "Education" },
   experience: { zh: "体验项目", en: "Experience" }
 };
+
+Object.values(typeDisplayLabels).forEach((label) => {
+  Object.assign(label, {
+    ja: label.en,
+    ko: label.en,
+    fr: label.en,
+    de: label.en,
+    ru: label.en,
+    hi: label.en,
+    ar: label.en,
+    th: label.en
+  });
+});
 
 export const poiAliases = {
   visitor_center: ["游客中心", "服务中心", "入口", "ticket", "visitor", "service", "information", "help"],
@@ -103,8 +127,8 @@ export const facilityAliases = {
 export function normalizeOpen(open) {
   if (typeof open !== "string") return open;
   const known = {
-    "全天开放": { zh: "全天开放", en: "Open all day" },
-    "24小时": { zh: "24小时", en: "24 hours" }
+    "全天开放": { zh: "全天开放", en: "Open all day", ja: "終日開放", ko: "상시 개방", fr: "Ouvert toute la journée", de: "Ganztägig geöffnet", ru: "Открыто весь день", hi: "पूरे दिन खुला", ar: "مفتوح طوال اليوم", th: "เปิดตลอดวัน" },
+    "24小时": { zh: "24小时", en: "24 hours", ja: "24時間", ko: "24시간", fr: "24 h/24", de: "24 Stunden", ru: "24 часа", hi: "24 घंटे", ar: "24 ساعة", th: "24 ชั่วโมง" }
   };
   return known[open] || { zh: open, en: open };
 }
@@ -154,9 +178,9 @@ export function normalizeKeywords(keywords) {
 }
 
 export function getReadableType(item, lang, facilityLabels) {
-  if (item.distance) return facilityLabels[item.type]?.[lang] || item.type;
+  if (item.distance) return facilityLabels[item.type]?.[lang] || facilityLabels[item.type]?.en || item.type;
   const firstType = item.type?.split("/")?.[0];
-  return typeDisplayLabels[firstType]?.[lang] || firstType || "";
+  return typeDisplayLabels[firstType]?.[lang] || typeDisplayLabels[firstType]?.en || firstType || "";
 }
 
 export function parseDistanceMeters(distance) {

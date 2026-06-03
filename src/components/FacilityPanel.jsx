@@ -15,18 +15,19 @@ import {
 } from "./icons.jsx";
 import { facilityTypeLabels } from "../data/facilities.js";
 import { parseDistanceMeters } from "../data/mapMeta.js";
+import { text } from "../utils/lang.js";
 
 const facilityFilters = [
-  { key: "all", label: { zh: "全部", en: "All" } },
-  { key: "restroom", label: { zh: "卫生间", en: "Restroom" } },
-  { key: "parking", label: { zh: "停车场", en: "Parking" } },
-  { key: "firstAid", label: { zh: "急救点", en: "First Aid" } },
-  { key: "security", label: { zh: "安保点", en: "Security" } },
-  { key: "charging", label: { zh: "充电站", en: "Charging" } },
-  { key: "nursing", label: { zh: "母婴室", en: "Nursing Room" } },
-  { key: "accessible", label: { zh: "无障碍", en: "Accessible" } },
-  { key: "dining", label: { zh: "餐饮", en: "Dining" } },
-  { key: "accommodation", label: { zh: "住宿", en: "Accommodation" } }
+  { key: "all", label: { zh: "全部", en: "All", ja: "すべて", ko: "전체", fr: "Tout", de: "Alle", ru: "Все", hi: "सभी", ar: "الكل", th: "ทั้งหมด" } },
+  { key: "restroom", label: { zh: "卫生间", en: "Restroom", ja: "トイレ", ko: "화장실", fr: "Toilettes", de: "WC", ru: "Туалет", hi: "शौचालय", ar: "دورات المياه", th: "ห้องน้ำ" } },
+  { key: "parking", label: { zh: "停车场", en: "Parking", ja: "駐車場", ko: "주차장", fr: "Parking", de: "Parkplatz", ru: "Парковка", hi: "पार्किंग", ar: "موقف سيارات", th: "ที่จอดรถ" } },
+  { key: "firstAid", label: { zh: "急救点", en: "First Aid", ja: "救護所", ko: "응급처치", fr: "Premiers secours", de: "Erste Hilfe", ru: "Первая помощь", hi: "प्राथमिक उपचार", ar: "إسعاف أولي", th: "ปฐมพยาบาล" } },
+  { key: "security", label: { zh: "安保点", en: "Security", ja: "警備", ko: "보안", fr: "Sécurité", de: "Sicherheit", ru: "Охрана", hi: "सुरक्षा", ar: "الأمن", th: "รักษาความปลอดภัย" } },
+  { key: "charging", label: { zh: "充电站", en: "Charging", ja: "充電", ko: "충전", fr: "Recharge", de: "Laden", ru: "Зарядка", hi: "चार्जिंग", ar: "شحن", th: "ชาร์จไฟ" } },
+  { key: "nursing", label: { zh: "母婴室", en: "Nursing Room", ja: "授乳室", ko: "수유실", fr: "Salle bébé", de: "Stillraum", ru: "Комната матери и ребенка", hi: "शिशु कक्ष", ar: "غرفة رعاية الأطفال", th: "ห้องแม่และเด็ก" } },
+  { key: "accessible", label: { zh: "无障碍", en: "Accessible", ja: "バリアフリー", ko: "무장애", fr: "Accessible", de: "Barrierefrei", ru: "Доступная среда", hi: "सुगम", ar: "مرافق ميسرة", th: "รองรับผู้พิการ" } },
+  { key: "dining", label: { zh: "餐饮", en: "Dining", ja: "飲食", ko: "식음료", fr: "Restauration", de: "Gastronomie", ru: "Питание", hi: "भोजन", ar: "مطاعم", th: "อาหาร" } },
+  { key: "accommodation", label: { zh: "住宿", en: "Accommodation", ja: "宿泊", ko: "숙박", fr: "Hébergement", de: "Unterkunft", ru: "Проживание", hi: "आवास", ar: "إقامة", th: "ที่พัก" } }
 ];
 
 const facilityIcons = {
@@ -67,7 +68,7 @@ export default function FacilityPanel({ lang, labels, facilities, onSelectPoi, o
             className={typeFilter === item.key ? "active" : ""}
             onClick={() => setTypeFilter(item.key)}
           >
-            {item.label[lang]}
+            {text(item.label, lang)}
           </button>
         ))}
       </div>
@@ -79,9 +80,9 @@ export default function FacilityPanel({ lang, labels, facilities, onSelectPoi, o
               <button className="facility-card-main" onClick={() => onSelectPoi(item)}>
                 <span className={`facility-mini ${item.type}`}><Icon size={14} /></span>
                 <span>
-                  <strong>{item.name[lang]}</strong>
-                  <small>{facilityTypeLabels[item.type]?.[lang] || item.type} · {item.distance[lang]}</small>
-                  <em>{item.status[lang]}</em>
+                  <strong>{text(item.name, lang)}</strong>
+                  <small>{text(facilityTypeLabels[item.type], lang, item.type)} · {text(item.distance, lang)}</small>
+                  <em>{text(item.status, lang)}</em>
                 </span>
               </button>
               <button className="tiny-nav" onClick={() => onNavigate(item)}>

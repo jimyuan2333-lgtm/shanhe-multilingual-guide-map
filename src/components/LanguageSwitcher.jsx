@@ -11,18 +11,15 @@ const languageOptions = [
   { key: "th", label: "ไทย" }
 ];
 
-export default function LanguageSwitcher({ lang, onChange, comingSoon, onUnavailable }) {
+export default function LanguageSwitcher({ lang, onChange }) {
   return (
     <div className="language-switcher" aria-label="language switcher">
       {languageOptions.map((item) => (
         <button
           key={item.key}
           className={lang === item.key ? "active" : ""}
-          title={item.key === "zh" || item.key === "en" ? item.label : comingSoon}
-          onClick={() => {
-            if (item.key === "zh" || item.key === "en") onChange(item.key);
-            else onUnavailable();
-          }}
+          title={item.label}
+          onClick={() => onChange(item.key)}
         >
           {item.label}
         </button>
