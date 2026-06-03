@@ -1,8 +1,10 @@
-export const SVG_MAP_ASSET = "/assets/shanhe_navigation_map.svg";
+export const SVG_DATA_ASSET = "/assets/shanhe_navigation_map.svg";
+export const SVG_MAP_ASSET = "/assets/shanhe-guide-clean.png";
+export const POSTER_MAP_ASSET = "/assets/shanhe-guide-poster-full.png";
 
 export const SVG_MAP_SIZE = {
-  width: 1600,
-  height: 1200
+  width: 1536,
+  height: 1024
 };
 
 const zoneColors = {
