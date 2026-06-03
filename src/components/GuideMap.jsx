@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Accessibility,
   Bed,
@@ -8,6 +9,8 @@ import {
   Landmark,
   LocateFixed,
   MapPin,
+  Maximize2,
+  Minimize2,
   Minus,
   Navigation,
   Plus,
@@ -19,15 +22,7 @@ import {
   Waves,
   Zap
 } from "./icons.jsx";
-
-const MAP_WIDTH = 1600;
-const MAP_HEIGHT = 1200;
-
-function getZoomLevel(scale) {
-  if (scale < 1.35) return 1;
-  if (scale < 1.9) return 2;
-  return 3;
-}
+import { MAP_SIZE, mapZones } from "../data/mapMeta.js";
 
 function getIcon(type) {
   const normalized = type?.split("/")?.[0];
@@ -57,6 +52,42 @@ function getIcon(type) {
   return icons[normalized] || MapPin;
 }
 
+function smooth(min, max, value) {
+  if (value <= min) return 0;
+  if (value >= max) return 1;
+  const t = (value - min) / (max - min);
+  return t * t * (3 - 2 * t);
+}
+
+function pointToPx(point) {
+  return [(point[0] / 100) * MAP_SIZE.width, (point[1] / 100) * MAP_SIZE.height];
+}
+
+function poiToPoint(poi) {
+  return [poi.x, poi.y];
+}
+
+function getThreshold(poi) {
+  if (poi.distance) return 1.9;
+  if (poi.level <= 1) return 0.5;
+  if (poi.level === 2) return 1.08;
+  return 1.45;
+}
+
+function getLabelThreshold(poi) {
+  if (poi.distance) return 2.35;
+  if (poi.level <= 1) return 0.86;
+  if (poi.level === 2) return 1.48;
+  return 1.8;
+}
+
+function pathPoints(path) {
+  return path.map((point) => {
+    const [x, y] = pointToPx(point);
+    return `${x},${y}`;
+  }).join(" ");
+}
+
 export default function GuideMap({
   lang,
   labels,
@@ -67,82 +98,181 @@ export default function GuideMap({
   onSelectPoi,
   searchMatches,
   categoryFilter,
-  zoom,
-  setZoom,
-  pan,
-  setPan
+  viewRequest,
+  navigationTarget,
+  currentLocationId,
+  isFullscreen,
+  onToggleFullscreen
 }) {
-  const zoomLevel = getZoomLevel(zoom);
+  const viewportRef = useRef(null);
+  const dragRef = useRef(null);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
 
-  const routePoiIds = new Set(activeRoute.nodes);
-  const visiblePois = pois.filter((poi) => {
-    const isSearchMatch = searchMatches.has(poi.id);
-    const inRoute = routePoiIds.has(poi.id);
-    const isSelected = selectedPoi?.id === poi.id;
-    const passesCategory = categoryFilter(poi);
-    return passesCategory && (poi.level <= zoomLevel || isSearchMatch || inRoute || isSelected);
-  });
+  const pointsById = useMemo(() => new Map(pois.map((poi) => [poi.id, poi])), [pois]);
+  const activeRouteIds = useMemo(() => new Set(activeRoute.nodes), [activeRoute]);
+  const routeIndex = useMemo(() => {
+    const map = new Map();
+    activeRoute.nodes.forEach((id, index) => map.set(id, index + 1));
+    return map;
+  }, [activeRoute]);
 
-  const pointsById = new Map(pois.map((poi) => [poi.id, poi]));
+  const clampZoom = (value) => Math.min(3.25, Math.max(0.3, Number(value.toFixed(3))));
 
-  const clampZoom = (value) => Math.min(2.55, Math.max(0.82, Number(value.toFixed(2))));
-
-  const zoomBy = (delta) => {
-    setZoom((current) => clampZoom(current + delta));
+  const getViewport = () => {
+    const rect = viewportRef.current?.getBoundingClientRect();
+    return rect || { width: 900, height: 620, left: 0, top: 0 };
   };
 
-  const resetView = () => {
-    setZoom(1);
-    setPan({ x: 0, y: 0 });
+  const applyView = (nextZoom, centerPx) => {
+    const viewport = getViewport();
+    const scale = clampZoom(nextZoom);
+    setZoom(scale);
+    setPan({
+      x: viewport.width / 2 - centerPx[0] * scale,
+      y: viewport.height / 2 - centerPx[1] * scale
+    });
+  };
+
+  const fitMap = () => {
+    const viewport = getViewport();
+    const scale = clampZoom(Math.min(viewport.width / MAP_SIZE.width, viewport.height / MAP_SIZE.height) * 0.98);
+    setZoom(scale);
+    setPan({
+      x: (viewport.width - MAP_SIZE.width * scale) / 2,
+      y: (viewport.height - MAP_SIZE.height * scale) / 2
+    });
+  };
+
+  const centerOnPoi = (poi, scale = 1.75) => {
+    if (!poi) return;
+    applyView(scale, pointToPx(poiToPoint(poi)));
+  };
+
+  const fitPoints = (points, padding = 0.82) => {
+    if (!points?.length) return;
+    const pxPoints = points.map(pointToPx);
+    const minX = Math.min(...pxPoints.map((point) => point[0]));
+    const maxX = Math.max(...pxPoints.map((point) => point[0]));
+    const minY = Math.min(...pxPoints.map((point) => point[1]));
+    const maxY = Math.max(...pxPoints.map((point) => point[1]));
+    const viewport = getViewport();
+    const width = Math.max(80, maxX - minX);
+    const height = Math.max(80, maxY - minY);
+    const scale = clampZoom(Math.min((viewport.width * padding) / width, (viewport.height * padding) / height));
+    setZoom(scale);
+    setPan({
+      x: viewport.width / 2 - ((minX + maxX) / 2) * scale,
+      y: viewport.height / 2 - ((minY + maxY) / 2) * scale
+    });
+  };
+
+  useEffect(() => {
+    const timer = window.setTimeout(fitMap, 60);
+    const handleResize = () => fitMap();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!viewRequest) return;
+    if (viewRequest.type === "fit-map") fitMap();
+    if (viewRequest.type === "point") centerOnPoi(pointsById.get(viewRequest.id), viewRequest.scale);
+    if (viewRequest.type === "route") {
+      const route = viewRequest.route;
+      const points = route.path?.length
+        ? route.path
+        : route.nodes.map((id) => pointsById.get(id)).filter(Boolean).map(poiToPoint);
+      fitPoints(points, 0.78);
+    }
+    if (viewRequest.type === "bounds") fitPoints(viewRequest.points, viewRequest.padding);
+  }, [viewRequest?.nonce]);
+
+  const zoomAt = (nextZoom, clientX, clientY) => {
+    const viewport = getViewport();
+    const pointX = clientX - viewport.left;
+    const pointY = clientY - viewport.top;
+    const mapX = (pointX - pan.x) / zoom;
+    const mapY = (pointY - pan.y) / zoom;
+    const scale = clampZoom(nextZoom);
+    setZoom(scale);
+    setPan({
+      x: pointX - mapX * scale,
+      y: pointY - mapY * scale
+    });
+  };
+
+  const zoomBy = (delta) => {
+    const viewport = getViewport();
+    zoomAt(zoom + delta, viewport.left + viewport.width / 2, viewport.top + viewport.height / 2);
   };
 
   const locateMe = () => {
-    const scale = 1.55;
-    setZoom(scale);
-    setPan({ x: -125, y: -455 });
-    const visitorCenter = pointsById.get("visitor_center");
-    if (visitorCenter) onSelectPoi(visitorCenter);
+    const visitorCenter = pointsById.get(currentLocationId);
+    if (visitorCenter) {
+      onSelectPoi(visitorCenter, { focus: false });
+      centerOnPoi(visitorCenter, 1.92);
+    }
   };
 
   const handleWheel = (event) => {
     event.preventDefault();
-    const delta = event.deltaY > 0 ? -0.12 : 0.12;
-    setZoom((current) => clampZoom(current + delta));
+    const factor = event.deltaY > 0 ? 0.9 : 1.1;
+    zoomAt(zoom * factor, event.clientX, event.clientY);
   };
 
   const handlePointerDown = (event) => {
     if (event.button !== 0) return;
     event.currentTarget.setPointerCapture(event.pointerId);
-    event.currentTarget.dataset.dragging = "true";
-    event.currentTarget.dataset.startX = String(event.clientX);
-    event.currentTarget.dataset.startY = String(event.clientY);
-    event.currentTarget.dataset.panX = String(pan.x);
-    event.currentTarget.dataset.panY = String(pan.y);
+    dragRef.current = {
+      startX: event.clientX,
+      startY: event.clientY,
+      panX: pan.x,
+      panY: pan.y
+    };
   };
 
   const handlePointerMove = (event) => {
-    if (event.currentTarget.dataset.dragging !== "true") return;
-    const startX = Number(event.currentTarget.dataset.startX);
-    const startY = Number(event.currentTarget.dataset.startY);
-    const panX = Number(event.currentTarget.dataset.panX);
-    const panY = Number(event.currentTarget.dataset.panY);
-    setPan({ x: panX + event.clientX - startX, y: panY + event.clientY - startY });
+    if (!dragRef.current) return;
+    setPan({
+      x: dragRef.current.panX + event.clientX - dragRef.current.startX,
+      y: dragRef.current.panY + event.clientY - dragRef.current.startY
+    });
   };
 
-  const handlePointerUp = (event) => {
-    event.currentTarget.dataset.dragging = "false";
+  const handlePointerUp = () => {
+    dragRef.current = null;
   };
+
+  const routeStart = pointsById.get(activeRoute.nodes[0]);
+  const routeEnd = pointsById.get(activeRoute.nodes[activeRoute.nodes.length - 1]);
+  const currentLocation = pointsById.get(currentLocationId);
+
+  const visiblePois = pois.filter((poi) => {
+    const forced = selectedPoi?.id === poi.id || searchMatches.has(poi.id) || navigationTarget?.toId === poi.id;
+    const routeKeyNode = activeRouteIds.has(poi.id) && (poi.level <= 2 || zoom > 1.35);
+    const opacity = smooth(getThreshold(poi) - 0.25, getThreshold(poi) + 0.32, zoom);
+    return categoryFilter(poi) && (forced || routeKeyNode || opacity > 0.08);
+  });
 
   return (
-    <section className="map-shell">
+    <section className={`map-shell ${isFullscreen ? "fullscreen-map" : ""}`}>
       <div className="map-toolbar">
-        <button onClick={() => zoomBy(0.18)} title="Zoom in"><Plus size={17} /></button>
-        <button onClick={() => zoomBy(-0.18)} title="Zoom out"><Minus size={17} /></button>
-        <button onClick={resetView} title={labels.reset}><RotateCcw size={17} />{labels.reset}</button>
+        <button onClick={() => zoomBy(0.22)} title="Zoom in"><Plus size={17} /></button>
+        <button onClick={() => zoomBy(-0.22)} title="Zoom out"><Minus size={17} /></button>
+        <button onClick={fitMap} title={labels.reset}><RotateCcw size={17} />{labels.reset}</button>
         <button onClick={locateMe} title={labels.locateMe}><LocateFixed size={17} />{labels.locateMe}</button>
+        <button onClick={onToggleFullscreen} title={isFullscreen ? labels.exitFullscreen : labels.fullscreen}>
+          {isFullscreen ? <Minimize2 size={17} /> : <Maximize2 size={17} />}
+          {isFullscreen ? labels.exitFullscreen : labels.fullscreen}
+        </button>
       </div>
 
       <div
+        ref={viewportRef}
         className="map-viewport"
         onWheel={handleWheel}
         onPointerDown={handlePointerDown}
@@ -153,56 +283,73 @@ export default function GuideMap({
         <div
           className="map-canvas"
           style={{
-            width: MAP_WIDTH,
-            height: MAP_HEIGHT,
+            width: MAP_SIZE.width,
+            height: MAP_SIZE.height,
             transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`
           }}
         >
           <img src="/assets/shanhe-map.png" alt="Shanhe Ancient Town base map" draggable="false" />
 
-          <svg className="route-layer" viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}>
+          <svg className="route-layer" viewBox={`0 0 ${MAP_SIZE.width} ${MAP_SIZE.height}`}>
+            <polyline className="main-road-line" points={pathPoints([[20, 82], [31, 70], [43, 62], [53, 58], [64, 59], [76, 57], [90, 57]])} />
+            <polyline className="secondary-road-line" points={pathPoints([[30, 61], [41, 48], [54, 37], [68, 31], [80, 20]])} />
+            <polyline className="walking-line" points={pathPoints([[58, 48], [68, 30], [76, 20], [82, 11], [90, 17]])} />
+            <polyline className="riverside-line" points={pathPoints([[52, 72], [62, 69], [70, 62], [79, 55], [88, 50]])} />
+            {navigationTarget?.path && (
+              <polyline className="navigation-path" points={pathPoints(navigationTarget.path)} />
+            )}
             <polyline
-              className="main-road-line"
-              points="310,880 430,740 560,660 720,610 890,650 1080,610 1260,650"
+              className="route-path active"
+              points={pathPoints(activeRoute.path || activeRoute.nodes.map((id) => pointsById.get(id)).filter(Boolean).map(poiToPoint))}
+              stroke={activeRoute.color}
             />
-            <polyline
-              className="secondary-road-line"
-              points="420,620 520,480 750,380 1010,300 1250,200"
-            />
-            <polyline
-              className="walking-line"
-              points="820,530 960,310 1120,230 1250,140 1420,210"
-            />
-            <polyline
-              className="riverside-line"
-              points="760,800 900,790 1070,680 1160,560 1280,500"
-            />
-            {routes.map((route) => {
-              const coordinates = route.nodes
-                .map((id) => pointsById.get(id))
-                .filter(Boolean)
-                .map((poi) => `${(poi.x / 100) * MAP_WIDTH},${(poi.y / 100) * MAP_HEIGHT}`)
-                .join(" ");
-              return (
-                <polyline
-                  key={route.id}
-                  className={route.id === activeRoute.id ? "route-path active" : "route-path"}
-                  points={coordinates}
-                  stroke={route.color}
-                />
-              );
-            })}
           </svg>
 
-          <div className="you-are-here" style={{ left: "20.5%", top: "69.5%" }}>
-            <span>{labels.youAreHere}</span>
-          </div>
+          {mapZones.map((zone) => {
+            const opacity = Math.max(0, 0.92 - smooth(0.72, 1.42, zoom));
+            return (
+              <div
+                key={zone.id}
+                className="zone-marker"
+                style={{ left: `${zone.x}%`, top: `${zone.y}%`, "--zone-color": zone.color, opacity }}
+              >
+                <strong>{zone.name[lang]}</strong>
+              </div>
+            );
+          })}
+
+          {currentLocation && (
+            <button
+              className="you-are-here"
+              style={{ left: `${currentLocation.x}%`, top: `${currentLocation.y}%` }}
+              onClick={(event) => {
+                event.stopPropagation();
+                onSelectPoi(currentLocation);
+              }}
+              onPointerDown={(event) => event.stopPropagation()}
+            >
+              <span>{labels.youAreHere}</span>
+            </button>
+          )}
+
+          {routeStart && (
+            <span className="endpoint-marker start" style={{ left: `${routeStart.x}%`, top: `${routeStart.y}%` }}>{labels.startPoint}</span>
+          )}
+          {routeEnd && (
+            <span className="endpoint-marker end" style={{ left: `${routeEnd.x}%`, top: `${routeEnd.y}%` }}>{labels.endPoint}</span>
+          )}
 
           {visiblePois.map((poi) => {
             const Icon = getIcon(poi.type);
             const isMatch = searchMatches.has(poi.id);
             const isSelected = selectedPoi?.id === poi.id;
-            const inRoute = routePoiIds.has(poi.id);
+            const inRoute = activeRouteIds.has(poi.id);
+            const isNavigationTarget = navigationTarget?.toId === poi.id;
+            const forced = isMatch || isSelected || isNavigationTarget;
+            const iconOpacity = forced ? 1 : smooth(getThreshold(poi) - 0.25, getThreshold(poi) + 0.32, zoom);
+            const labelOpacity = forced ? 1 : smooth(getLabelThreshold(poi) - 0.2, getLabelThreshold(poi) + 0.4, zoom);
+            const routeNumber = routeIndex.get(poi.id);
+            const showRouteNumber = inRoute && zoom <= 1.55;
             return (
               <button
                 key={poi.id}
@@ -212,9 +359,16 @@ export default function GuideMap({
                   poi.type.split("/")[0],
                   isSelected ? "selected" : "",
                   isMatch ? "search-match" : "",
-                  inRoute ? "in-route" : ""
+                  inRoute ? "in-route" : "",
+                  isNavigationTarget ? "navigation-target" : "",
+                  poi.level <= 1 ? "core" : ""
                 ].join(" ")}
-                style={{ left: `${poi.x}%`, top: `${poi.y}%` }}
+                style={{
+                  left: `${poi.x}%`,
+                  top: `${poi.y}%`,
+                  opacity: iconOpacity,
+                  "--label-opacity": labelOpacity
+                }}
                 onClick={(event) => {
                   event.stopPropagation();
                   onSelectPoi(poi);
@@ -222,8 +376,8 @@ export default function GuideMap({
                 onPointerDown={(event) => event.stopPropagation()}
                 title={`${poi.name.zh} / ${poi.name.en}`}
               >
-                <Icon size={zoomLevel === 1 ? 14 : 16} />
-                {(zoomLevel >= 2 || isSelected || isMatch) && <span>{poi.name[lang]}</span>}
+                {showRouteNumber ? <b className="route-node-number">{routeNumber}</b> : <Icon size={poi.distance ? 14 : 16} />}
+                <span>{poi.name[lang]}</span>
               </button>
             );
           })}
@@ -231,7 +385,7 @@ export default function GuideMap({
       </div>
 
       <div className="zoom-badge">
-        {labels.zoomLevel} {zoomLevel} / 3
+        {labels.zoomScale} {zoom.toFixed(2)}x
       </div>
     </section>
   );

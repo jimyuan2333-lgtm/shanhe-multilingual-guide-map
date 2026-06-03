@@ -10,8 +10,21 @@ import {
   Volume2
 } from "./icons.jsx";
 import { facilityTypeLabels } from "../data/facilities.js";
+import { getReadableType } from "../data/mapMeta.js";
 
-export default function DetailPanel({ lang, labels, selectedPoi, audioState, onPlayAudio }) {
+export default function DetailPanel({
+  lang,
+  labels,
+  selectedPoi,
+  audioState,
+  onPlayAudio,
+  onStartNavigation,
+  onAddToRoute,
+  onBilingualIntro,
+  onShareCard,
+  navigationTarget,
+  myRoute
+}) {
   if (!selectedPoi) {
     return (
       <section className="detail-panel empty">
@@ -23,15 +36,19 @@ export default function DetailPanel({ lang, labels, selectedPoi, audioState, onP
 
   const isFacility = Boolean(selectedPoi.distance);
   const secondaryLang = lang === "zh" ? "en" : "zh";
+  const keywords = selectedPoi.keywords?.[lang] || [];
+  const isCurrentAudio = audioState?.id === selectedPoi.id;
+  const isPlaying = isCurrentAudio && audioState.playing;
+  const isNavigationTarget = navigationTarget?.toId === selectedPoi.id;
   const audioText = lang === "zh"
-    ? `山河戏楼英文导览音频`
-    : `English audio guide for ${selectedPoi.name.en}`;
+    ? `正在播放：${selectedPoi.name.zh}中文导览音频`
+    : `Now playing: English audio guide for ${selectedPoi.name.en}.`;
 
   return (
     <section className="detail-panel">
       <div className="detail-hero">
         <span className={`detail-type ${isFacility ? selectedPoi.type : selectedPoi.type.split("/")[0]}`}>
-          {isFacility ? facilityTypeLabels[selectedPoi.type]?.[lang] || selectedPoi.type : selectedPoi.type}
+          {getReadableType(selectedPoi, lang, facilityTypeLabels)}
         </span>
         <h2>{selectedPoi.name[lang]}</h2>
         <p>{selectedPoi.name[secondaryLang]}</p>
@@ -39,16 +56,23 @@ export default function DetailPanel({ lang, labels, selectedPoi, audioState, onP
 
       {isFacility ? (
         <div className="facts">
-          <span><Info size={16} />{facilityTypeLabels[selectedPoi.type]?.[lang] || selectedPoi.type}</span>
+          <span><Info size={16} />{labels.facilityType}: {facilityTypeLabels[selectedPoi.type]?.[lang] || selectedPoi.type}</span>
           <span><Navigation size={16} />{labels.distance}: {selectedPoi.distance[lang]}</span>
           <span><Clock size={16} />{labels.status}: {selectedPoi.status[lang]}</span>
         </div>
       ) : (
         <div className="facts">
           <span><Clock size={16} />{labels.stay}: {selectedPoi.stay[lang]}</span>
-          <span><Info size={16} />{labels.open}: {selectedPoi.open}</span>
-          <span><Headphones size={16} />{labels.audio}: {selectedPoi.audio ? "Yes" : "No"}</span>
-          <span><Accessibility size={16} />{labels.access}: {selectedPoi.accessible ? "Yes" : "No"}</span>
+          <span><Info size={16} />{labels.open}: {selectedPoi.open?.[lang] || selectedPoi.open}</span>
+          <span><Headphones size={16} />{labels.audio}: {selectedPoi.audio ? labels.yes : labels.no}</span>
+          <span><Accessibility size={16} />{labels.access}: {selectedPoi.accessible ? labels.yes : labels.no}</span>
+        </div>
+      )}
+
+      {isNavigationTarget && (
+        <div className="navigation-feedback">
+          <strong>{labels.navigationRoute}</strong>
+          <span>{labels.walkingEstimate}: {navigationTarget.time[lang]} · {navigationTarget.distance[lang]}</span>
         </div>
       )}
 
@@ -66,30 +90,48 @@ export default function DetailPanel({ lang, labels, selectedPoi, audioState, onP
           <div className="meta-row">
             <strong>{labels.keywords}</strong>
             <div className="tag-row">
-              {selectedPoi.keywords.map((keyword) => <span key={keyword}>{keyword}</span>)}
+              {keywords.map((keyword) => <span key={keyword}>{keyword}</span>)}
             </div>
           </div>
         </>
       )}
 
-      {audioState?.id === selectedPoi.id && (
-        <div className="audio-box">
+      {isCurrentAudio && (
+        <div className={`audio-box ${isPlaying ? "playing" : "paused"}`}>
           <div>
             <Volume2 size={16} />
-            <span>{labels.nowPlaying}: {audioText}</span>
+            <span>{audioText}</span>
           </div>
-          <div className="audio-progress"><i /></div>
-          <button><Pause size={14} />{labels.pause}</button>
+          <div className="audio-progress"><i style={{ width: `${audioState.progress || 42}%` }} /></div>
+          <button onClick={() => onPlayAudio(selectedPoi)}>
+            {isPlaying ? <Pause size={14} /> : <Play size={14} />}
+            {isPlaying ? labels.pause : labels.resume}
+          </button>
         </div>
       )}
 
       <div className="action-grid">
-        <button className="primary-button"><Navigation size={16} />{isFacility ? labels.navigateHere : labels.startNav}</button>
-        {!isFacility && <button onClick={() => onPlayAudio(selectedPoi)}><Play size={16} />{labels.playAudio}</button>}
-        {!isFacility && <button><Info size={16} />{labels.addRoute}</button>}
-        {!isFacility && <button><Headphones size={16} />{labels.bilingual}</button>}
-        {!isFacility && <button><Share2 size={16} />{labels.share}</button>}
+        <button className="primary-button" onClick={() => onStartNavigation(selectedPoi)}>
+          <Navigation size={16} />
+          {isFacility ? labels.navigateHere : labels.startNav}
+        </button>
+        {!isFacility && (
+          <button onClick={() => onPlayAudio(selectedPoi)}>
+            {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+            {isPlaying ? labels.pause : labels.playAudio}
+          </button>
+        )}
+        {!isFacility && <button onClick={() => onAddToRoute(selectedPoi)}><Info size={16} />{labels.addRoute}</button>}
+        {!isFacility && <button onClick={() => onBilingualIntro(selectedPoi)}><Headphones size={16} />{labels.bilingual}</button>}
+        {!isFacility && <button onClick={() => onShareCard(selectedPoi)}><Share2 size={16} />{labels.share}</button>}
       </div>
+
+      {!isFacility && myRoute.length > 0 && (
+        <div className="my-route-chip">
+          <strong>{labels.myRoute}</strong>
+          <span>{myRoute.map((item) => item.name[lang]).join(" · ")}</span>
+        </div>
+      )}
     </section>
   );
 }

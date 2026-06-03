@@ -18,11 +18,17 @@ export default function Header({ lang, labels, searchTerm, setSearchTerm, setLan
           value={searchTerm}
           onChange={(event) => setSearchTerm(event.target.value)}
           placeholder={labels.search}
+          autoComplete="off"
         />
       </label>
 
       <div className="header-actions">
-        <LanguageSwitcher lang={lang} onChange={setLang} comingSoon={labels.comingSoon} />
+        <LanguageSwitcher
+          lang={lang}
+          onChange={setLang}
+          comingSoon={labels.comingSoon}
+          comingSoonNotice={labels.comingSoonNotice}
+        />
         <button className="ghost-button">
           <QrCode size={16} />
           {labels.qrGuide}

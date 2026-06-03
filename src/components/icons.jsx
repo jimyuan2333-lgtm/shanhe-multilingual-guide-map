@@ -69,6 +69,14 @@ export function LocateFixed(props) {
   return <Icon {...props}><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3" /><circle cx="12" cy="12" r="8" /></Icon>;
 }
 
+export function Maximize2(props) {
+  return <Icon {...props}><path d="M15 3h6v6M21 3l-7 7M9 21H3v-6M3 21l7-7" /></Icon>;
+}
+
+export function Minimize2(props) {
+  return <Icon {...props}><path d="M14 10h6V4M20 10l-7-7M10 14H4v6M4 14l7 7" /></Icon>;
+}
+
 export function Navigation(props) {
   return <Icon {...props}><path d="m12 2 7 19-7-4-7 4z" /></Icon>;
 }

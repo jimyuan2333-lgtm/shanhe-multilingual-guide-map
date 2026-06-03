@@ -35,13 +35,16 @@ export default function PoiPanel({
             <span>{labels.searchResults}</span>
             <b>{searchResults.length}</b>
           </div>
-          {searchResults.slice(0, 7).map((item) => (
-            <button key={item.id} onClick={() => onSelectPoi(item)} className="result-row">
-              <MapPin size={15} />
-              <span>{item.name[lang]}</span>
-              <small>{item.name[lang === "zh" ? "en" : "zh"]}</small>
-            </button>
-          ))}
+          <div className="scroll-list search-scroll">
+            {searchResults.length === 0 && <p className="empty-state">{labels.noResults}</p>}
+            {searchResults.map((item) => (
+              <button key={item.id} onClick={() => onSelectPoi(item)} className="result-row">
+                <MapPin size={15} />
+                <span>{item.name[lang]}</span>
+                <small>{item.name[lang === "zh" ? "en" : "zh"]}</small>
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </section>

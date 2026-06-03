@@ -8,7 +8,7 @@ const languageOptions = [
   { key: "fr", label: "Français" }
 ];
 
-export default function LanguageSwitcher({ lang, onChange, comingSoon }) {
+export default function LanguageSwitcher({ lang, onChange, comingSoon, comingSoonNotice }) {
   return (
     <div className="language-switcher" aria-label="language switcher">
       <Languages size={16} />
@@ -19,6 +19,7 @@ export default function LanguageSwitcher({ lang, onChange, comingSoon }) {
           title={item.key === "zh" || item.key === "en" ? item.label : comingSoon}
           onClick={() => {
             if (item.key === "zh" || item.key === "en") onChange(item.key);
+            else window.alert(comingSoonNotice);
           }}
         >
           {item.label}
