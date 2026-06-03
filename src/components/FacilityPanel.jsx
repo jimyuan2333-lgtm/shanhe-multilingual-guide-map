@@ -1,4 +1,18 @@
 import { useMemo, useState } from "react";
+import {
+  Accessibility,
+  Bed,
+  Camera,
+  Car,
+  Coffee,
+  HeartPulse,
+  Info,
+  Navigation,
+  ShieldCheck,
+  Ticket,
+  Utensils,
+  Zap
+} from "./icons.jsx";
 import { facilityTypeLabels } from "../data/facilities.js";
 import { parseDistanceMeters } from "../data/mapMeta.js";
 
@@ -14,6 +28,23 @@ const facilityFilters = [
   { key: "dining", label: { zh: "餐饮", en: "Dining" } },
   { key: "accommodation", label: { zh: "住宿", en: "Accommodation" } }
 ];
+
+const facilityIcons = {
+  restroom: Accessibility,
+  parking: Car,
+  service: Info,
+  firstAid: HeartPulse,
+  security: ShieldCheck,
+  charging: Zap,
+  nursing: HeartPulse,
+  accessible: Accessibility,
+  ticket: Ticket,
+  photo: Camera,
+  dining: Utensils,
+  accommodation: Bed,
+  transport: Navigation,
+  shopping: Coffee
+};
 
 export default function FacilityPanel({ lang, labels, facilities, onSelectPoi, onNavigate }) {
   const [typeFilter, setTypeFilter] = useState("all");
@@ -41,19 +72,25 @@ export default function FacilityPanel({ lang, labels, facilities, onSelectPoi, o
         ))}
       </div>
       <div className="facility-list scroll-list">
-        {listed.map((item) => (
-          <article key={item.id} className="facility-card">
-            <button className="facility-card-main" onClick={() => onSelectPoi(item)}>
-              <span className={`facility-mini ${item.type}`} />
-              <span>
-                <strong>{item.name[lang]}</strong>
-                <small>{facilityTypeLabels[item.type]?.[lang] || item.type} · {item.distance[lang]}</small>
-                <em>{item.status[lang]}</em>
-              </span>
-            </button>
-            <button className="tiny-nav" onClick={() => onNavigate(item)}>{labels.navigateHere}</button>
-          </article>
-        ))}
+        {listed.map((item) => {
+          const Icon = facilityIcons[item.type] || Info;
+          return (
+            <article key={item.id} className="facility-card">
+              <button className="facility-card-main" onClick={() => onSelectPoi(item)}>
+                <span className={`facility-mini ${item.type}`}><Icon size={14} /></span>
+                <span>
+                  <strong>{item.name[lang]}</strong>
+                  <small>{facilityTypeLabels[item.type]?.[lang] || item.type} · {item.distance[lang]}</small>
+                  <em>{item.status[lang]}</em>
+                </span>
+              </button>
+              <button className="tiny-nav" onClick={() => onNavigate(item)}>
+                <Navigation size={14} />
+                {labels.startNav}
+              </button>
+            </article>
+          );
+        })}
       </div>
     </section>
   );
