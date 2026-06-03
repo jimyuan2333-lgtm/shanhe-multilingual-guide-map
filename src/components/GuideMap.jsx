@@ -331,11 +331,12 @@ export default function GuideMap({
           {isFullscreen ? <Minimize2 size={17} /> : <Maximize2 size={17} />}
           {isFullscreen ? labels.exitFullscreen : labels.fullscreen}
         </button>
-        <button className="ai-map-button" onClick={onAskAi} title={labels.aiAsk}>
-          <Bot size={17} />
-          {labels.aiAsk}
-        </button>
       </div>
+
+      <button className="map-ai-entry" onClick={onAskAi} title={labels.aiAsk}>
+        <Bot size={17} />
+        {labels.aiAsk}
+      </button>
 
       <div
         ref={viewportRef}
