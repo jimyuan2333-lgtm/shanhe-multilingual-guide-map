@@ -1380,7 +1380,7 @@ button {
 
 .facility-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 106px;
+  grid-template-columns: minmax(0, 1fr) 124px;
   gap: 6px;
   align-items: stretch;
   margin-top: 7px;
@@ -1425,14 +1425,22 @@ button {
 }
 
 .tiny-nav {
-  min-width: 106px;
-  padding: 0 10px;
+  display: inline-flex;
+  grid-template-columns: none;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 124px;
+  margin-top: 0;
+  padding: 0 12px;
   border-radius: 8px;
+  text-align: center;
   color: #fff;
   background: var(--green);
   font-size: 12px;
   font-weight: 850;
   gap: 5px;
+  white-space: nowrap;
 }
 
 .tiny-nav svg {

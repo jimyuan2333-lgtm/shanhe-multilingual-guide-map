@@ -131,9 +131,13 @@ export default function GuideMap({
     const viewport = getViewport();
     const mapWidth = MAP_SIZE.width * scale;
     const mapHeight = MAP_SIZE.height * scale;
+    const edgeSlack = Math.min(170, Math.max(72, Math.min(viewport.width, viewport.height) * 0.2));
     const clampAxis = (value, viewportSize, mapSize) => {
-      if (mapSize <= viewportSize) return (viewportSize - mapSize) / 2;
-      return Math.min(0, Math.max(viewportSize - mapSize, value));
+      if (mapSize <= viewportSize) {
+        const center = (viewportSize - mapSize) / 2;
+        return Math.min(center + edgeSlack, Math.max(center - edgeSlack, value));
+      }
+      return Math.min(edgeSlack, Math.max(viewportSize - mapSize - edgeSlack, value));
     };
     return {
       x: clampAxis(nextPan.x, viewport.width, mapWidth),
