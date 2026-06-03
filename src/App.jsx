@@ -24,6 +24,95 @@ import { facilityTypeLabels } from "./data/facilities.js";
 
 const currentLocationId = "visitor_center";
 
+const walkableSegments = [
+  [[19, 72], [22, 68], [28, 63], [35, 58], [42, 55], [48, 52], [56, 56], [60, 49], [68, 51], [77, 53]],
+  [[28, 63], [32, 47], [36, 40], [42, 36], [48, 31]],
+  [[48, 52], [50, 45], [52, 39], [56, 37], [62, 27], [66, 18], [76, 18], [78, 12], [82, 16]],
+  [[41, 55], [43, 62], [47, 67], [54, 70], [60, 69], [66, 62], [72, 56], [77, 53]],
+  [[47, 67], [52, 62], [56, 56], [60, 49]],
+  [[60, 49], [66, 46], [72, 44], [82, 40]],
+  [[47, 67], [42, 70], [38, 72], [32, 70], [24, 75], [19, 72]],
+  [[60, 69], [68, 72], [76, 79], [84, 76], [80, 78], [71, 82], [60, 78], [48, 72], [39, 70]]
+];
+
+function pointKey(point) {
+  return `${Number(point[0]).toFixed(2)},${Number(point[1]).toFixed(2)}`;
+}
+
+function distance(a, b) {
+  return Math.hypot(a[0] - b[0], a[1] - b[1]);
+}
+
+function addGraphEdge(graph, a, b) {
+  const aKey = pointKey(a);
+  const bKey = pointKey(b);
+  if (!graph.has(aKey)) graph.set(aKey, { point: a, links: [] });
+  if (!graph.has(bKey)) graph.set(bKey, { point: b, links: [] });
+  const weight = distance(a, b);
+  graph.get(aKey).links.push({ key: bKey, weight });
+  graph.get(bKey).links.push({ key: aKey, weight });
+}
+
+function nearestGraphKey(graph, point) {
+  let best = null;
+  for (const [key, node] of graph.entries()) {
+    const score = distance(point, node.point);
+    if (!best || score < best.score) best = { key, score };
+  }
+  return best?.key;
+}
+
+function buildNavigationPath(from, to) {
+  const graph = new Map();
+  walkableSegments.forEach((segment) => {
+    for (let index = 0; index < segment.length - 1; index += 1) addGraphEdge(graph, segment[index], segment[index + 1]);
+  });
+  const fromPoint = [from.x, from.y];
+  const toPoint = [to.x, to.y];
+  const fromAnchor = nearestGraphKey(graph, fromPoint);
+  const toAnchor = nearestGraphKey(graph, toPoint);
+  if (!fromAnchor || !toAnchor) return [];
+  addGraphEdge(graph, fromPoint, graph.get(fromAnchor).point);
+  addGraphEdge(graph, toPoint, graph.get(toAnchor).point);
+
+  const start = pointKey(fromPoint);
+  const end = pointKey(toPoint);
+  const distances = new Map([[start, 0]]);
+  const previous = new Map();
+  const queue = new Set(graph.keys());
+
+  while (queue.size) {
+    let current = null;
+    let currentDistance = Infinity;
+    for (const key of queue) {
+      const value = distances.get(key) ?? Infinity;
+      if (value < currentDistance) {
+        current = key;
+        currentDistance = value;
+      }
+    }
+    if (!current || current === end) break;
+    queue.delete(current);
+    for (const link of graph.get(current).links) {
+      if (!queue.has(link.key)) continue;
+      const nextDistance = currentDistance + link.weight;
+      if (nextDistance < (distances.get(link.key) ?? Infinity)) {
+        distances.set(link.key, nextDistance);
+        previous.set(link.key, current);
+      }
+    }
+  }
+
+  const keys = [];
+  let cursor = end;
+  while (cursor) {
+    keys.unshift(cursor);
+    if (cursor === start) break;
+    cursor = previous.get(cursor);
+  }
+  return keys.map((key) => graph.get(key).point);
+}
+
 function normalizeItem(item) {
   const aliases = item.distance
     ? [...(facilityAliases[item.type] || []), item.name.zh, item.name.en]
@@ -72,7 +161,7 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedPoi, setSelectedPoi] = useState(() => allMapItems.find((poi) => poi.id === "opera_house"));
-  const [activeRoute, setActiveRoute] = useState(() => routes.find((route) => route.id === "classic-cultural"));
+  const [activeRoute, setActiveRoute] = useState(null);
   const [audioState, setAudioState] = useState({ id: null, playing: false });
   const [viewRequest, setViewRequest] = useState({ type: "fit-map", nonce: 0 });
   const [navigationTarget, setNavigationTarget] = useState(null);
@@ -82,6 +171,7 @@ export default function App() {
   const [isMapFullscreen, setIsMapFullscreen] = useState(false);
   const [leftCollapsed, setLeftCollapsed] = useState(false);
   const [rightCollapsed, setRightCollapsed] = useState(false);
+  const [mobilePanel, setMobilePanel] = useState("details");
   const [recommendation, setRecommendation] = useState({
     duration: labels.durations[1],
     visitor: labels.visitors[0],
@@ -108,6 +198,7 @@ export default function App() {
 
   const handleSelectPoi = (poi, options = {}) => {
     setSelectedPoi(poi);
+    setMobilePanel("details");
     if (options.focus !== false) {
       requestView({ type: "point", id: poi.id, scale: poi.distance ? 2.05 : 1.75 });
     }
@@ -133,12 +224,7 @@ export default function App() {
       toId: poi.id,
       distance: { zh: `${approxMeters}米`, en: `${approxMeters} m` },
       time: { zh: `${minutes}分钟`, en: `${minutes} min` },
-      path: [
-        [from.x, from.y],
-        [from.x + dx * 0.35, from.y + dy * 0.2 + 3],
-        [from.x + dx * 0.68, from.y + dy * 0.72 - 3],
-        [poi.x, poi.y]
-      ]
+      path: buildNavigationPath(from, poi)
     });
     requestView({ type: "bounds", points: [[from.x, from.y], [poi.x, poi.y]], padding: 0.7 });
     showToast(labels.plannedRoute);
@@ -162,16 +248,25 @@ export default function App() {
     const rule = recommendRules.find((item) => item.matches.some((match) => choices.includes(match))) || recommendRules[4];
     const route = routes.find((item) => item.id === rule.routeId) || routes[1];
     setActiveRoute(route);
+    setMobilePanel("routes");
     requestView({ type: "route", route });
     setGenerated({ route, reason: rule.reason });
   };
 
   const handleRouteSelect = (route) => {
     setActiveRoute(route);
+    setMobilePanel("routes");
     requestView({ type: "route", route });
   };
 
   const visibleCategoryFilter = (poi) => categoryMatches(poi, selectedCategory);
+  const mobileTabs = [
+    { key: "pois", label: lang === "zh" ? "景点" : "POI" },
+    { key: "routes", label: lang === "zh" ? "路线" : "Routes" },
+    { key: "facilities", label: lang === "zh" ? "设施" : "Facilities" },
+    { key: "details", label: lang === "zh" ? "详情" : "Details" }
+  ];
+  const mobilePanelTitle = mobileTabs.find((item) => item.key === mobilePanel)?.label;
 
   return (
     <div className={[
@@ -184,7 +279,10 @@ export default function App() {
         lang={lang}
         labels={labels}
         searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
+        setSearchTerm={(value) => {
+          setSearchTerm(value);
+          if (value.trim()) setMobilePanel("pois");
+        }}
         setLang={(nextLang) => {
           setLang(nextLang);
           setRecommendation({
@@ -249,22 +347,24 @@ export default function App() {
           />
           <div className="bottom-dock">
             <Legend labels={labels} />
-            <div className="active-route-strip" style={{ "--route-color": activeRoute.color }}>
-              <strong>{labels.routeNodes}: {activeRoute.name[lang]}</strong>
-              <div className="route-timeline" aria-label={labels.routeTimeline}>
-                {activeRoute.nodes.map((id, index) => {
-                  const item = allMapItems.find((poi) => poi.id === id);
-                  if (!item) return null;
-                  return (
-                    <button key={`${id}-${index}`} onClick={() => handleSelectPoi(item)}>
-                      <b>{index + 1}</b>
-                      <span>{item.name[lang]}</span>
-                    </button>
-                  );
-                })}
+            {activeRoute && (
+              <div className="active-route-strip" style={{ "--route-color": activeRoute.color }}>
+                <strong>{labels.routeNodes}: {activeRoute.name[lang]}</strong>
+                <div className="route-timeline" aria-label={labels.routeTimeline}>
+                  {activeRoute.nodes.map((id, index) => {
+                    const item = allMapItems.find((poi) => poi.id === id);
+                    if (!item) return null;
+                    return (
+                      <button key={`${id}-${index}`} onClick={() => handleSelectPoi(item)}>
+                        <b>{index + 1}</b>
+                        <span>{item.name[lang]}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <small>{labels.routeFeature}: {activeRoute.feature[lang]}</small>
               </div>
-              <small>{labels.routeFeature}: {activeRoute.feature[lang]}</small>
-            </div>
+            )}
           </div>
         </section>
 
@@ -289,6 +389,72 @@ export default function App() {
           <QrMock labels={labels} />
         </aside>
       </main>
+
+      <section className="mobile-bottom-sheet" aria-label="mobile guide controls">
+        <div className="mobile-grabber" />
+        <nav className="mobile-tabs">
+          {mobileTabs.map((item) => (
+            <button
+              key={item.key}
+              className={mobilePanel === item.key ? "active" : ""}
+              onClick={() => setMobilePanel(item.key)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+        <div className="mobile-sheet-title">{mobilePanelTitle}</div>
+        <div className="mobile-sheet-content">
+          {mobilePanel === "pois" && (
+            <PoiPanel
+              lang={lang}
+              labels={labels}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              searchResults={searchResults}
+              searchTerm={searchTerm}
+              onSelectPoi={(poi) => handleSelectPoi(poi)}
+            />
+          )}
+          {mobilePanel === "routes" && (
+            <RoutePanel
+              lang={lang}
+              labels={labels}
+              routes={routes}
+              activeRoute={activeRoute}
+              setActiveRoute={handleRouteSelect}
+              recommendation={recommendation}
+              setRecommendation={setRecommendation}
+              generated={generated}
+              onGenerate={handleGenerate}
+            />
+          )}
+          {mobilePanel === "facilities" && (
+            <FacilityPanel
+              lang={lang}
+              labels={labels}
+              facilities={normalizedFacilities}
+              onSelectPoi={(poi) => handleSelectPoi(poi)}
+              onNavigate={handleStartNavigation}
+            />
+          )}
+          {mobilePanel === "details" && (
+            <DetailPanel
+              lang={lang}
+              labels={labels}
+              selectedPoi={selectedPoi}
+              audioState={audioState}
+              onPlayAudio={handlePlayAudio}
+              onStartNavigation={handleStartNavigation}
+              onAddToRoute={handleAddToRoute}
+              onBilingualIntro={handleBilingualIntro}
+              onShareCard={handleShareCard}
+              navigationTarget={navigationTarget}
+              myRoute={myRoute}
+            />
+          )}
+        </div>
+      </section>
 
       {toast && <div className="toast">{toast}</div>}
 

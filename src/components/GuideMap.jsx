@@ -106,14 +106,15 @@ export default function GuideMap({
 }) {
   const viewportRef = useRef(null);
   const dragRef = useRef(null);
+  const touchRef = useRef(null);
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
 
   const pointsById = useMemo(() => new Map(pois.map((poi) => [poi.id, poi])), [pois]);
-  const activeRouteIds = useMemo(() => new Set(activeRoute.nodes), [activeRoute]);
+  const activeRouteIds = useMemo(() => new Set(activeRoute?.nodes || []), [activeRoute]);
   const routeIndex = useMemo(() => {
     const map = new Map();
-    activeRoute.nodes.forEach((id, index) => map.set(id, index + 1));
+    (activeRoute?.nodes || []).forEach((id, index) => map.set(id, index + 1));
     return map;
   }, [activeRoute]);
 
@@ -247,15 +248,74 @@ export default function GuideMap({
     dragRef.current = null;
   };
 
-  const routeStart = pointsById.get(activeRoute.nodes[0]);
-  const routeEnd = pointsById.get(activeRoute.nodes[activeRoute.nodes.length - 1]);
+  const touchDistance = (touches) => {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.hypot(dx, dy);
+  };
+
+  const touchCenter = (touches) => ({
+    x: (touches[0].clientX + touches[1].clientX) / 2,
+    y: (touches[0].clientY + touches[1].clientY) / 2
+  });
+
+  const handleTouchStart = (event) => {
+    if (event.touches.length === 1) {
+      touchRef.current = {
+        mode: "pan",
+        startX: event.touches[0].clientX,
+        startY: event.touches[0].clientY,
+        panX: pan.x,
+        panY: pan.y
+      };
+    }
+    if (event.touches.length === 2) {
+      const center = touchCenter(event.touches);
+      const viewport = getViewport();
+      touchRef.current = {
+        mode: "pinch",
+        startDistance: touchDistance(event.touches),
+        startZoom: zoom,
+        mapX: (center.x - viewport.left - pan.x) / zoom,
+        mapY: (center.y - viewport.top - pan.y) / zoom
+      };
+    }
+  };
+
+  const handleTouchMove = (event) => {
+    if (!touchRef.current) return;
+    event.preventDefault();
+    if (touchRef.current.mode === "pan" && event.touches.length === 1) {
+      setPan({
+        x: touchRef.current.panX + event.touches[0].clientX - touchRef.current.startX,
+        y: touchRef.current.panY + event.touches[0].clientY - touchRef.current.startY
+      });
+    }
+    if (touchRef.current.mode === "pinch" && event.touches.length === 2) {
+      const center = touchCenter(event.touches);
+      const viewport = getViewport();
+      const scale = clampZoom(touchRef.current.startZoom * (touchDistance(event.touches) / touchRef.current.startDistance));
+      setZoom(scale);
+      setPan({
+        x: center.x - viewport.left - touchRef.current.mapX * scale,
+        y: center.y - viewport.top - touchRef.current.mapY * scale
+      });
+    }
+  };
+
+  const handleTouchEnd = () => {
+    touchRef.current = null;
+  };
+
+  const routeStart = activeRoute ? pointsById.get(activeRoute.nodes[0]) : null;
+  const routeEnd = activeRoute ? pointsById.get(activeRoute.nodes[activeRoute.nodes.length - 1]) : null;
   const currentLocation = pointsById.get(currentLocationId);
 
   const visiblePois = pois.filter((poi) => {
     const forced = selectedPoi?.id === poi.id || searchMatches.has(poi.id) || navigationTarget?.toId === poi.id;
     const routeKeyNode = activeRouteIds.has(poi.id) && (poi.level <= 2 || zoom > 1.35);
-    const opacity = smooth(getThreshold(poi) - 0.25, getThreshold(poi) + 0.32, zoom);
-    return categoryFilter(poi) && (forced || routeKeyNode || opacity > 0.08);
+    const visibility = smooth(getThreshold(poi) - 0.2, getThreshold(poi) + 0.28, zoom);
+    return categoryFilter(poi) && (forced || routeKeyNode || visibility >= 0.62);
   });
 
   return (
@@ -279,6 +339,10 @@ export default function GuideMap({
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
       >
         <div
           className="map-canvas"
@@ -291,18 +355,16 @@ export default function GuideMap({
           <img src="/assets/shanhe-map.png" alt="Shanhe Ancient Town base map" draggable="false" />
 
           <svg className="route-layer" viewBox={`0 0 ${MAP_SIZE.width} ${MAP_SIZE.height}`}>
-            <polyline className="main-road-line" points={pathPoints([[20, 82], [31, 70], [43, 62], [53, 58], [64, 59], [76, 57], [90, 57]])} />
-            <polyline className="secondary-road-line" points={pathPoints([[30, 61], [41, 48], [54, 37], [68, 31], [80, 20]])} />
-            <polyline className="walking-line" points={pathPoints([[58, 48], [68, 30], [76, 20], [82, 11], [90, 17]])} />
-            <polyline className="riverside-line" points={pathPoints([[52, 72], [62, 69], [70, 62], [79, 55], [88, 50]])} />
             {navigationTarget?.path && (
               <polyline className="navigation-path" points={pathPoints(navigationTarget.path)} />
             )}
-            <polyline
-              className="route-path active"
-              points={pathPoints(activeRoute.path || activeRoute.nodes.map((id) => pointsById.get(id)).filter(Boolean).map(poiToPoint))}
-              stroke={activeRoute.color}
-            />
+            {activeRoute && (
+              <polyline
+                className="route-path active"
+                points={pathPoints(activeRoute.path || activeRoute.nodes.map((id) => pointsById.get(id)).filter(Boolean).map(poiToPoint))}
+                stroke={activeRoute.color}
+              />
+            )}
           </svg>
 
           {mapZones.map((zone) => {
@@ -346,8 +408,7 @@ export default function GuideMap({
             const inRoute = activeRouteIds.has(poi.id);
             const isNavigationTarget = navigationTarget?.toId === poi.id;
             const forced = isMatch || isSelected || isNavigationTarget;
-            const iconOpacity = forced ? 1 : smooth(getThreshold(poi) - 0.25, getThreshold(poi) + 0.32, zoom);
-            const labelOpacity = forced ? 1 : smooth(getLabelThreshold(poi) - 0.2, getLabelThreshold(poi) + 0.4, zoom);
+            const labelVisible = forced || smooth(getLabelThreshold(poi) - 0.15, getLabelThreshold(poi) + 0.25, zoom) >= 0.62;
             const routeNumber = routeIndex.get(poi.id);
             const showRouteNumber = inRoute && zoom <= 1.55;
             return (
@@ -365,9 +426,7 @@ export default function GuideMap({
                 ].join(" ")}
                 style={{
                   left: `${poi.x}%`,
-                  top: `${poi.y}%`,
-                  opacity: iconOpacity,
-                  "--label-opacity": labelOpacity
+                  top: `${poi.y}%`
                 }}
                 onClick={(event) => {
                   event.stopPropagation();
@@ -377,7 +436,7 @@ export default function GuideMap({
                 title={`${poi.name.zh} / ${poi.name.en}`}
               >
                 {showRouteNumber ? <b className="route-node-number">{routeNumber}</b> : <Icon size={poi.distance ? 14 : 16} />}
-                <span>{poi.name[lang]}</span>
+                {labelVisible && <span>{poi.name[lang]}</span>}
               </button>
             );
           })}

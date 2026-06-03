@@ -24,7 +24,7 @@ export default function RoutePanel({
         {routes.map((route) => (
           <button
             key={route.id}
-            className={active.id === route.id ? "route-card active" : "route-card"}
+            className={active?.id === route.id ? "route-card active" : "route-card"}
             onClick={() => setActiveRoute(route)}
             style={{ "--route-color": route.color }}
           >
