@@ -155,7 +155,7 @@ export function normalizeKeywords(keywords) {
 
 export function getReadableType(item, lang, facilityLabels) {
   if (item.distance) return facilityLabels[item.type]?.[lang] || item.type;
-  const firstType = item.type?.split(/[\/_]/)?.[0];
+  const firstType = item.type?.split("/")?.[0];
   return typeDisplayLabels[firstType]?.[lang] || firstType || "";
 }
 
