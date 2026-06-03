@@ -1380,7 +1380,7 @@ button {
 
 .facility-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 124px;
+  grid-template-columns: minmax(0, 1fr) 138px;
   gap: 6px;
   align-items: stretch;
   margin-top: 7px;
@@ -1424,13 +1424,13 @@ button {
   font-weight: 800;
 }
 
-.tiny-nav {
+.facility-list .tiny-nav {
   display: inline-flex;
   grid-template-columns: none;
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-width: 124px;
+  min-width: 138px;
   margin-top: 0;
   padding: 0 12px;
   border-radius: 8px;
@@ -1443,7 +1443,7 @@ button {
   white-space: nowrap;
 }
 
-.tiny-nav svg {
+.facility-list .tiny-nav svg {
   flex: 0 0 auto;
 }
 

@@ -104,7 +104,8 @@ export default function GuideMap({
   currentLocationId,
   isFullscreen,
   onToggleFullscreen,
-  onAskAi
+  onAskAi,
+  onClearMap
 }) {
   const viewportRef = useRef(null);
   const dragRef = useRef(null);
@@ -132,16 +133,16 @@ export default function GuideMap({
     const mapWidth = MAP_SIZE.width * scale;
     const mapHeight = MAP_SIZE.height * scale;
     const edgeSlack = Math.min(170, Math.max(72, Math.min(viewport.width, viewport.height) * 0.2));
-    const clampAxis = (value, viewportSize, mapSize) => {
+    const clampAxis = (value, viewportSize, mapSize, startSlack = edgeSlack, endSlack = edgeSlack) => {
       if (mapSize <= viewportSize) {
         const center = (viewportSize - mapSize) / 2;
-        return Math.min(center + edgeSlack, Math.max(center - edgeSlack, value));
+        return Math.min(center + startSlack, Math.max(center - endSlack, value));
       }
-      return Math.min(edgeSlack, Math.max(viewportSize - mapSize - edgeSlack, value));
+      return Math.min(startSlack, Math.max(viewportSize - mapSize - endSlack, value));
     };
     return {
       x: clampAxis(nextPan.x, viewport.width, mapWidth),
-      y: clampAxis(nextPan.y, viewport.height, mapHeight)
+      y: clampAxis(nextPan.y, viewport.height, mapHeight, edgeSlack * 0.55, edgeSlack * 1.45)
     };
   };
 
@@ -343,7 +344,16 @@ export default function GuideMap({
       <div className="map-toolbar">
         <button onClick={() => zoomBy(0.22)} title="Zoom in"><Plus size={17} /></button>
         <button onClick={() => zoomBy(-0.22)} title="Zoom out"><Minus size={17} /></button>
-        <button onClick={fitMap} title={labels.reset}><RotateCcw size={17} />{labels.reset}</button>
+        <button
+          onClick={() => {
+            onClearMap?.();
+            fitMap();
+          }}
+          title={labels.clearMap}
+        >
+          <RotateCcw size={17} />
+          {labels.clearMap}
+        </button>
         <button onClick={locateMe} title={labels.locateMe}><LocateFixed size={17} />{labels.locateMe}</button>
         <button onClick={onToggleFullscreen} title={isFullscreen ? labels.exitFullscreen : labels.fullscreen}>
           {isFullscreen ? <Minimize2 size={17} /> : <Maximize2 size={17} />}

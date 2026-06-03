@@ -267,6 +267,16 @@ export default function App() {
     requestView({ type: "route", route });
   };
 
+  const handleClearMap = () => {
+    setActiveRoute(null);
+    setSelectedPoi(null);
+    setNavigationTarget(null);
+    setSearchTerm("");
+    setGenerated(null);
+    requestView({ type: "fit-map" });
+    showToast(labels.mapCleared);
+  };
+
   const toggleMapFullscreen = () => {
     setIsMapFullscreen((value) => {
       const next = !value;
@@ -397,6 +407,7 @@ export default function App() {
             isFullscreen={isMapFullscreen}
             onToggleFullscreen={toggleMapFullscreen}
             onAskAi={handleAiEntry}
+            onClearMap={handleClearMap}
           />
           <div className="bottom-dock">
             <Legend labels={labels} />
