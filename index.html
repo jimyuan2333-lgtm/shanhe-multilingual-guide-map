@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>山河古镇多语智慧导览地图</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      window.addEventListener("error", function (event) {
+        document.body.dataset.lastError = event.message || "script error";
+      });
+      window.addEventListener("unhandledrejection", function (event) {
+        document.body.dataset.lastError = String(event.reason || "unhandled rejection");
+      });
+    </script>
+    <script type="module">
+      import("/src/main.js").catch(function (error) {
+        document.body.dataset.lastError = String(error && (error.stack || error.message || error));
+      });
+    </script>
+  </body>
+</html>
